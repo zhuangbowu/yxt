@@ -1,0 +1,60 @@
+<view class='header'>
+  <view>
+    第{{shopData.num}}单
+  </view>
+  <view>
+    <text wx:if="{{shopData.pick_status==0}}">未取货</text>
+    <text wx:if="{{shopData.pick_status==1}}" bindtap='navCode'>已取货</text>
+  </view>
+</view>
+<view class='content' wx:for="{{shopData.product_list}}" wx:key>
+  <view>
+    <image wx:if="{{item.product_swiper[0].types==1}}" src='{{item.product_swiper[0].urlImg}}'></image>
+    <video wx:if="{{item.product_swiper[0].types==2}}" src='{{item.product_swiper[0].urlImg}}'></video>
+  </view>
+  <view>
+    <view>
+      {{item.product_name}}
+    </view>
+    <view>
+      ￥{{item.group_price}} <text>￥{{item.market_price}}</text>
+    </view>
+  </view>
+  <view>
+    ×{{item.num}}
+  </view>
+</view>
+<view class='content-list'>
+  <view>
+    订单编号：{{shopData.order_no}}
+  </view>
+  <view>
+    订单合计：￥{{shopData.order_money}}（已退款：￥{{shopData.refund_money}}）
+  </view>
+  <view>
+    姓名：{{shopData.user_name}}
+  </view>
+  <view>
+    电话：{{shopData.user_telephone}}
+  </view>
+  <view>
+    提货地点：{{shopData.pick_address}}
+  </view>
+  <view>
+    备注：{{shopData.remarks}}
+  </view>
+</view>
+<view class='footer'>
+  <view bindtap='navIndex'>
+    <image src='../../../img/index-img2.png'></image>
+    <view>首页</view>
+  </view>
+  <button open-type="share">
+    分享到微信群
+  </button>
+</view>
+<view class='mask' wx:if="{{imageUrlCk==true}}" bindtap='navckkk'>
+  <view>
+    <image src='{{imageUrl}}'></image>
+  </view>
+</view>

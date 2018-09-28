@@ -1,0 +1,7 @@
+<view class='friends'>
+  <image src='../../../img/header_share.png'></image>
+  <view>来做我的团长，实现双赢</view>
+</view>
+<button class='friends-footer' open-type='share'>
+  发送邀请给好友
+</button>

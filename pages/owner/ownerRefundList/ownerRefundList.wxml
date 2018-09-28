@@ -1,0 +1,70 @@
+<!-- <view class='Invitation'>
+{{userName.product_name}}
+</view> -->
+<view class='Invitation'>
+  -￥{{userName.group_price*userName.sale_amount}}
+</view>
+<view>
+  <view class='Invitation-shop'>
+    <view class='Invitation-shop-title'>
+      {{userName.product_name}}：
+    </view>
+    <view>
+      销售额:￥{{userName.group_price*userName.sale_amount}}
+    </view>
+    <view>
+      佣金比例:{{userName.commission_rate}}%
+    </view>
+    <view>
+      佣金:￥{{((userName.group_price*userName.sale_amount)*userName.commission_rate)/100}}
+    </view>
+  </view>
+</view>
+<view>
+  <view class='Invitation-content-information'>
+    <view>订单编号：</view>
+    <view>{{userName.order_detail.order_no}}</view>
+    <view>团员昵称：</view>
+    <view>{{userName.order_detail.user_name}}</view>
+    <view>联系方式：</view>
+    <view>{{userName.order_detail.user_telephone}}</view>
+    <view>创建时间：</view>
+    <view>{{userName.order_detail.create_time}}</view>
+  </view>
+</view>
+<view class='Invitation-content'>
+  <view class='Invitation-content-information'>
+    <view>团购标题：</view>
+    <view>{{userName.group_detail.title}}</view>
+    <view>团长昵称：</view>
+    <view>{{userName.group_detail.user_name}}</view>
+    <view>联系方式：</view>
+    <view>{{userName.group_detail.telephone}}</view>
+    <view>退款说明：</view>
+    <view>{{userName.group_detail.remarks}}</view>
+    <view wx:if="{{userName.status==2}}">拒绝原因：</view>
+    <view wx:if="{{userName.status==2}}">{{userName.group_detail.refuse_reason}}</view>
+  </view>
+</view>
+<view class='group-fixed' wx:if="{{userName.status==0}}">
+  <view bindtap='wxEject'>
+    拒绝
+  </view>
+  <view bindtap='wxAgree' data-hi='1'>
+    同意
+  </view>
+</view>
+<view class='msak' hidden='{{hiddenmodalput}}'>
+  <view class='msak-no' bindtap='modalinput2'></view>
+  <view class='msak-content'>
+    <view class='msak-title'>拒绝理由</view>
+    <view class='msak-con-content'>
+      <view>输入拒绝理由：</view>
+      <input placeholder='请输入拒绝理由' value="{{inputEject}}" bindinput='inputEject'></input>
+    </view>
+    <view class='msak-btn'>
+      <view bindtap='modalinput2'>取消</view>
+      <view bindtap='modalinput3' data-hi='2'>确定</view>
+    </view>
+  </view>
+</view>

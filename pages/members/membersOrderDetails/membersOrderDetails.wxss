@@ -1,0 +1,140 @@
+.header{
+  display: flex;
+  width: calc(100% - 80rpx);
+  padding: 0rpx 40rpx 30rpx;
+  border-bottom:2rpx solid #e2e2e2;
+}
+.header>view{
+  width: 50%;
+}
+.header>view:nth-child(1){
+  font-size: 60rpx;
+  font-weight: bold;
+  color:#000;
+}
+.header>view:nth-child(2){
+  text-align: right;
+  padding-top: 20rpx;
+}
+.header>view:nth-child(2)>text{
+  padding: 10rpx 16rpx;
+  background-color: #00c15c;
+  color:#fff;
+  border-radius: 10rpx;
+  font-size: 32rpx;
+}
+.content{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: calc(100% - 80rpx);
+  padding: 0rpx 40rpx;
+  border-bottom:2rpx solid #e2e2e2;
+}
+.content>view:nth-child(1){
+  width: 160rpx;
+  height: 160rpx;
+  margin: 20rpx 0rpx;
+}
+.content>view:nth-child(1)>image{
+  width: 160rpx;
+  height: 160rpx;
+}
+.content>view:nth-child(2){
+  width: 560rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+}
+.content>view:nth-child(2)>view:nth-child(1){
+  font-size: 30rox;
+  padding-top: 20rpx;
+  color:#333;
+  width:400rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.content>view:nth-child(2)>view:nth-child(2){
+  font-size: 30rox;
+  padding-top: 20rpx;
+  color:red;
+}
+.content>view:nth-child(2)>view:nth-child(2)>text{
+  color:#666;
+  text-decoration: line-through ;
+}
+.content>view:nth-child(3){
+  width: 80rpx;
+  font-size: 36rpx;
+  color:#333;
+  line-height: 180rpx;
+}
+.content-list{
+  margin-top: 20rpx;
+  width: calc(100% - 80rpx);
+  padding: 0rpx 40rpx;
+  line-height: 40rpx;
+  color:#333;
+  font-size: 32rpx;
+  padding-bottom: 120rpx;
+}
+.content-list>view{
+  padding-top: 30rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.footer{
+  position: fixed;
+  bottom:0rpx;
+  left: 0rpx;
+  width: 100%;
+  height: 100rpx;
+  background-color: #fff;
+  border-top:2rpx solid #ccc;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.footer>view:nth-child(1){
+  width: 180rpx;
+  text-align: center;
+}
+.footer>view:nth-child(1)>image{
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 10rpx;
+}
+.footer>view:nth-child(1)>view{
+  font-size: 28rpx;
+  line-height: 28rpx;
+  color:red;
+}
+.footer>button:nth-child(2){
+  width: 600rpx;
+  text-align: center;
+  background-color: #43a0b6;
+  color:#fff;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  border-radius: 0rpx;
+}
+.mask{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  top:0xp;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mask>view:nth-child(1){
+  width: 500rpx;
+  height: 500px;
+}
+.mask>view:nth-child(1)>image{
+  width: 500rpx;
+  height: 500px;
+}

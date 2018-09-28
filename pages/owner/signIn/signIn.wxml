@@ -1,0 +1,12 @@
+<image src='../../../img/index-head.jpg' class='index-head' mode='widthFix'></image>
+<view class='sign'>
+  <image src='../../../img/user3.png'></image>
+  <input type='text' placeholder='请输入您的账户名' value='' bindinput='name'></input>
+</view>
+<view class='sign'>
+  <image src='../../../img/password.png'></image>
+  <input type='text' placeholder='请输入您的密码' value='' password="true" bindinput='password'></input>
+</view>
+<view class='sign-in' bindtap='sign'>
+登陆
+</view>

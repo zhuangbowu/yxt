@@ -1,0 +1,179 @@
+<view class="body">
+  <view class="nav bc_white">
+    <view class="{{selected?'red':'default'}}" bindtap="selected">团员订单</view>
+    <view class="{{selected1?'red':'default'}}" bindtap="selected1">取货订单</view>
+  </view>
+  <view class="{{selected?'show':'hidden'}}">
+    <view>
+      <!-- 团员 -->
+      <view class='Order'>
+        <view bindtap='controlSwitch'>
+          {{LeagueMembers.orderText}}
+          <image src='../../../img/drop-down.png' wx:if='{{LeagueMembers.controlSwitchSrc}}'></image>
+          <image src='../../../img/drop-down2.png' wx:else></image>
+        </view>
+        <view bindtap='seniorSwit'>
+          高级搜索
+        </view>
+      </view>
+      <view class='drop-down' hidden='{{LeagueMembers.wonerSwitch}}'>
+        <view class='mask' bindtap='controlSwitchNo'></view>
+        <view class='drop-down-choice'>
+          <block wx:for='{{LeagueMembers.choiceOrderText}}' wx:key>
+            <view class='views' bindtap='controlSwitchNo' data-hi='{{index}}'>
+              {{item}}
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class='drop-down' hidden='{{LeagueMembers.seniorSwitch}}'>
+        <view class='mask' bindtap='seniorSwitchNo'></view>
+        <view class='drop-down-choice'>
+          <view class='drop-down-choice-seach'>
+            <input placeholder='请输入团长标题、团长昵称、团长手机号' bindinput='navSeace'></input>
+            <view bindtap='seniorSwitchNo'>搜索</view>
+          </view>
+        </view>
+      </view>
+      <view class='league-bak'>
+        <view class='league-embers' bindtap='navDetails' wx:for="{{listData}}" data-hi='{{index}}' wx:key>
+          <view>
+            <view>
+              状态：
+              <text wx:if="{{item.pick_status==1}}">已取货</text>
+              <text wx:if="{{item.pick_status==0}}">未取货</text>
+            </view>
+            <view>
+              合计：￥{{item.order_money}}
+            </view>
+          </view>
+          <view class='league-content'>
+            <view>
+              <image src='{{item.avatar}}'></image>
+            </view>
+            <view>
+              <view>
+                {{item.user_name}}
+                <image src='../../../img/aaot.png' catchtap="outMessage" class='imagess' data-hi='{{index}}'></image>
+                <image src='../../../img/telephone.png' catchtap="dialTelephone" class='images' data-hi='{{item.user_telephone}}'></image>
+              </view>
+              <view>
+                <view wx:for="{{item.product_list}}" wx:for-item="listSst" wx:key>
+                  <view>
+                    <view>{{listSst.product_name}}</view>
+                    <text wx:if="{{listSst.status==0}}">已付款</text>
+                    <text wx:if="{{listSst.status==1}}">退货中</text>
+                    <text wx:if="{{listSst.status==2}}">已退货</text>
+                    <text wx:if="{{listSst.status==3}}">已完成</text>
+                  </view>
+                  <view>
+                    {{listSst.num}}×{{listSst.group_price}}
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class='league-address'>
+            收货地址：{{item.pick_address}}
+          </view>
+        </view>
+      </view>
+      <view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
+        点击加载更多
+      </view>
+      <view wx:if='{{pageLis==1}}' class='navgengduo'>
+        团员订单已全部加载完成
+      </view>
+      <!-- 团员end -->
+    </view>
+  </view>
+  <view class="{{selected1?'show':'hidden'}}">
+    <view>
+      <!-- 取货 -->
+      <view class='Order'>
+        <view bindtap='controlSwitch2'>
+          {{PickUpGoods.orderText}}
+          <image src='../../../img/drop-down.png' wx:if='{{PickUpGoods.controlSwitchSrc}}'></image>
+          <image src='../../../img/drop-down2.png' wx:else></image>
+        </view>
+        <view bindtap='seniorSwit2'>
+          高级搜索
+        </view>
+      </view>
+      <view class='drop-down' hidden='{{PickUpGoods.wonerSwitch}}'>
+        <view class='mask' bindtap='controlSwitchNo2'></view>
+        <view class='drop-down-choice'>
+          <block wx:for='{{PickUpGoods.choiceOrderText}}' wx:key>
+            <view class='views' bindtap='controlSwitchNo2' data-hi='{{index}}'>
+              {{item}}
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class='drop-down' hidden='{{PickUpGoods.seniorSwitch}}'>
+        <view class='mask' bindtap='seniorSwitchNo2'></view>
+        <view class='drop-down-choice'>
+          <view class='drop-down-choice-seach'>
+            <input placeholder='请输入团长标题、团长昵称、团长手机号' bindinput='navTwo'></input>
+            <view bindtap='seniorSwitchNo2'>搜索</view>
+          </view>
+        </view>
+      </view>
+      <view class='league-bak'>
+        <view class='league-goods2' wx:for="{{goodsData}}" bindtap='navOne' data-hi='{{index}}' wx:key>
+          <view>
+            <view>
+              标题：{{item.title}}
+            </view>
+            <view>
+              <text wx:if="{{item.pick_status==1}}">未取货</text>
+              <text wx:if="{{item.pick_status==2}}">已取货</text>
+            </view>
+          </view>
+          <view>
+            <view wx:for="{{item.product_list}}" wx:for-item="lists" wx:key>
+              <view>
+                商品：{{lists.product_name}}
+              </view>
+              <view>
+                ×{{lists.group_price}}
+              </view>
+            </view>
+          </view>
+          <view>
+            <view>
+              总售量：{{item.Numss}}
+            </view>
+            <view>
+              总销售额：￥{{item.sum_money-item.sum_refund}}
+            </view>
+          </view>
+          <view class='goods-fot'>
+            获得佣金：￥{{item.commissions}}
+          </view>
+        </view>
+      </view>
+      <view class='navgengduo' bindtap='navgengduo1' wx:if='{{pageLis==0}}'>
+        点击加载更多
+      </view>
+      <view wx:if='{{pageLis==1}}' class='navgengduo'>
+        取货订单已全部加载完成
+      </view>
+      <!-- 取货end -->
+    </view>
+  </view>
+</view>
+<view class='footer'>
+  <view bindtap='navIndex'>
+    <image src='../../../img/index-img1.png'></image>
+    <view>首页</view>
+  </view>
+  <view>
+    <image src='../../../img/bill2.png'></image>
+    <view>列表</view>
+  </view>
+  <view bindtap='navgroup'>
+    <image src='../../../img/user1.png'></image>
+    <view>我</view>
+  </view>
+</view>

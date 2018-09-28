@@ -1,0 +1,31 @@
+<view class='refund'>
+  <view>
+    <image src='{{shopContrast.product_img[0].urlImg}}' wx:if="{{shopContrast.product_img[0].types==1}}"></image>
+    <video src='{{shopContrast.product_img[0].urlImg}}' wx:if="{{shopContrast.product_img[0].types==2}}"></video>
+  </view>
+  <view>
+    <view>
+      {{shopContrast.product_name}}
+    </view>
+    <view>
+      ￥{{shopContrast.group_price}} <text>{{shopContrast.market_price}} </text>
+    </view>
+  </view>
+</view>
+<view class='refund-input'>
+  <view wx:if="{{Nums!==''}}">
+    退款金额：　￥{{shopContrast.group_price*Nums}}
+  </view>
+  <view wx:if="{{Nums==''}}">
+    {{shopText}}
+  </view>
+  <view>
+    退款数量：<input type='number' placeholder='必填' bindinput='refundNums'></input>
+  </view>
+  <view>
+    退款说明：<input type='text' placeholder='选填' bindinput='refundTexts'></input>
+  </view>
+</view>
+<view class='refund-fiexd' bindtap='refundSubmission'>
+  提交
+</view>

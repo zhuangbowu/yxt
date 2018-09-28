@@ -1,0 +1,28 @@
+<view class='data-bak'>
+  <checkbox-group bindchange="checkboxChange">
+    <view class='data-list' wx:for="{{shopData}}" wx:key>
+        <view class="checkbox">
+            <checkbox checked="{{item.checked}}" value='{{index}}'/>
+        </view>
+        <view>
+          {{item.user_name}}
+        </view>
+        <view>
+          {{item.title}}
+        </view>
+        <view>
+          {{item.close_time}}
+        </view>
+    </view>
+  </checkbox-group>
+</view>
+<view class='data-fixed'>
+  <checkbox-group bindchange="checkboxChange2" class="checkbox-group">
+    <label class="checkbox" wx:for-items="{{items}}" wx:key>
+        <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+    </label>
+  </checkbox-group>
+  <view bindtap='wholeGrant'>
+    发放
+  </view>
+</view>

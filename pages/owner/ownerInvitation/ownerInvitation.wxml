@@ -1,0 +1,44 @@
+<!-- <view class='Invitation'>
+{{userName.product_name}}
+</view> -->
+<view class='Invitation'>
+  ￥{{shopData.group_price*shopData.sale_amount}}
+</view>
+<view>
+  <view class='Invitation-shop'>
+    <view class='Invitation-shop-title'>
+      {{shopData.product_name}}：
+    </view>
+    <view>
+      销售额:￥{{shopData.group_price*shopData.sale_amount}}
+    </view>
+    <view>
+      佣金比例:{{shopData.commission_rate}}%
+    </view>
+    <view>
+      佣金:￥{{((shopData.group_price*shopData.sale_amount)*shopData.commission_rate)/100}}
+    </view>
+  </view>
+</view>
+<view>
+  <view class='Invitation-content-information'>
+    <view>订单编号：</view>
+    <view>{{shopData.order_detail.order_no}}</view>
+    <view>团员昵称：</view>
+    <view>{{shopData.order_detail.user_name}}</view>
+    <view>联系方式：</view>
+    <view>{{shopData.order_detail.user_telephone}}</view>
+    <view>创建时间：</view>
+    <view>{{shopData.order_detail.create_time}}</view>
+  </view>
+</view>
+<view class='Invitation-content'>
+  <view class='Invitation-content-information'>
+    <view>团购标题：</view>
+    <view>{{shopData.group_detail.title}}</view>
+    <view>团长昵称：</view>
+    <view>{{shopData.group_detail.user_name}}</view>
+    <view>联系方式：</view>
+    <view>{{shopData.group_detail.telephone}}</view>
+  </view>
+</view>

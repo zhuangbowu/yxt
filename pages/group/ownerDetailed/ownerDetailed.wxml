@@ -1,0 +1,20 @@
+<view class='detailed' bindtap='navInvitation' wx:for="{{shopData}}" data-hi='{{index}}' wx:key>
+  <view>
+    <view>
+      {{item.type_desc}}
+    </view>
+    <view>
+      {{item.create_time}}
+    </view>
+  </view>
+  <view>
+    {{item.money}}
+    <image src='../../../img/drop-down3.png' wx:if="{{item.type==1||item.type==2}}"></image>
+  </view>
+</view>
+<view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
+  点击加载更多
+</view>
+<view wx:if='{{pageLis==1}}' class='navgengduo'>
+  列表已全部加载完成 
+</view>

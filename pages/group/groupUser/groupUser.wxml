@@ -1,0 +1,41 @@
+<!--pages/ownerUser/ownerUser.wxml-->
+<view class='userHeader'>
+  <view>
+    <image src='{{userImage}}' mode='aspectFit'></image>
+  </view>
+  <view>
+    您好：{{userNmae}}
+  </view>
+  <view>
+    可提现:￥{{userData.amount_able}} <text bindtap='navForward'>提现</text>
+  </view>
+</view>
+<view class='userUl'>
+  <view class='userList'>
+      <image src='../../../img/balance.png'></image>
+      <view>账户余额</view>
+      <view>￥{{userData.total_money}}</view>
+  </view>
+  <view class='userList' bindtap='uploadDetailed'>
+      <image src='../../../img/Detailed.png'></image>
+      <view>余额明细</view>
+  </view>
+  <view class='userList' bindtap='navRefund'>
+      <image src='../../../img/refund.png'></image>
+      <view>退款列表</view>
+  </view>
+</view>
+<view class='footer'>
+    <view bindtap='navIndex'>
+      <image src='../../../img/index-img1.png'></image>
+      <view>首页</view>
+    </view>
+    <view bindtap='navList'>
+      <image src='../../../img/bill1.png'></image>
+      <view>列表</view>
+    </view>
+    <view>
+      <image src='../../../img/user2.png'></image>
+      <view style='color:#d81e06;'>我</view>
+    </view>
+</view>

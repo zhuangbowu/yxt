@@ -1,0 +1,16 @@
+<view>
+  <view class='Invitation-shop' wx:for="{{shopData}}" wx:key>
+    <view class='Invitation-shop-title'>
+      {{item.product_name}}：
+    </view>
+    <view>
+      销售额:￥{{item.group_price*item.sell_num}}
+    </view>
+    <view>
+      佣金比例:{{item.commission}}%
+    </view>
+    <view>
+      佣金:￥{{((item.group_price*item.sell_num)*item.commission)/100}}
+    </view>
+  </view>
+</view>

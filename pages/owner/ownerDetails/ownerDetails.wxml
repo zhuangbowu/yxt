@@ -1,0 +1,66 @@
+<view class='group-header'>
+  <view>
+    <image src='{{ownerImage}}'></image>
+  </view>
+  <view>
+    <view>昵称</view>
+    <view>{{ownerNmae}}</view>
+  </view>
+  <image src='../../../img/state1.png' wx:if="{{shop.status==0}}"></image>
+  <image src='../../../img/state2.png' wx:if="{{shop.status==1}}"></image>
+  <image src='../../../img/state3.png' wx:if="{{shop.status==2}}"></image>
+</view>
+<view class='group-title'>
+  <view>标题：{{shop.group_title}}</view>
+  <view>共{{shop.product_list.length}}个商品</view>
+</view>
+<view class='group-nocite'>
+  <view>
+    <image src='../../../img/bell.png'></image>
+  </view>
+  <view>公告：{{shop.group_notice}}</view>
+</view>
+<view class='group-content'>
+    <view class='group-content-list' bindtap='navDetails' data-hi='{{index}}' wx:for='{{shop.product_list}}' wx:key>
+      <image src='{{item.img_list[0].urlImg}}' wx:if="{{item.img_list[0].types==1}}"></image>
+      <video src='{{item.img_list[0].urlImg}}' wx:if="{{item.img_list[0].types==2}}"></video>
+      <view>
+        <view><text wx:if="{{item.remain!=-1}}">[限量,剩余{{item.remain}}]</text>{{item.product_name}}</view>
+        <view>{{item.product_desc}}</view>
+        <view>佣金比列：{{item.commission}}%</view>
+        <view class='docc'>市场价：￥{{item.market_price}}</view>
+        <view style='color:red;'>团购价：￥{{item.group_price}}</view>
+        <view>×{{item.sell_num}}</view>
+      </view>
+    </view>
+</view>
+<view class='owner-fixed' bindtap='wxEject' wx:if="{{shop.status==1}}">
+  <image src='../../../img/data2.png'></image>
+</view>
+<view class='group-fixed' wx:if="{{shop.status==0}}">
+  <view bindtap='navEdit'>
+    编辑团购
+  </view>
+  <view bindtap='dataOpen'>
+    开启团购
+  </view>
+</view>
+<view class='group-fixed1' wx:if="{{shop.status==1}}">
+  <view bindtap='navEdit2'>
+    编辑团购
+  </view>
+  <view bindtap='dataDeta'>
+    结束军团
+  </view>
+  <button open-type="share">
+    分享给团长
+  </button>
+</view>
+<view class='group-fixed' wx:if="{{shop.status==2}}">
+  <view bindtap='wxEject'>
+    下载数据
+  </view>
+  <button open-type="share">
+    晒单
+  </button>
+</view>

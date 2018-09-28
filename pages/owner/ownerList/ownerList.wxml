@@ -1,0 +1,91 @@
+<!--pages/ownerList/ownerList.wxml-->
+<view class='Order'>
+  <view bindtap='controlSwitch'>
+    {{orderText}}
+  <image src='../../../img/drop-down.png' wx:if='{{controlSwitchSrc}}'></image>
+  <image src='../../../img/drop-down2.png' wx:else></image>
+  </view>
+  <view bindtap='seniorSwit'>
+    高级搜索
+  </view>
+</view>
+<view class='drop-down' hidden='{{wonerSwitch}}'>
+  <view class='mask' bindtap='controlSwitchNo'></view>
+  <view class='drop-down-choice'>
+    <block wx:for='{{choiceOrderText}}' wx:key>
+      <view class='views' bindtap='controlSwitchNo' data-hi='{{index}}'>
+        {{item}}
+      </view>
+    </block>
+  </view>
+</view>
+<view class='drop-down' hidden='{{seniorSwitch}}'>
+  <view class='mask' bindtap='seniorSwitchNo'></view>
+  <view class='drop-down-choice'>
+    <view class='drop-down-choice-seach'>
+      <input placeholder='请输入关键字' bindinput='keywordsData'></input>
+      <view bindtap='seniorSwitchNo'>搜索</view>
+    </view>
+  </view>
+</view>
+<view class='shopListContent'>
+  <view class='shopList' bindtap='navListDetailed' data-hi='{{index}}' wx:for="{{shopData}}" wx:key>
+    <view class='shopList-one'>
+      <view>
+        <text class='textone' wx:if="{{item.status==1}}">【进行中】</text>
+        <text class='texttwo' wx:if="{{item.status==2}}">【已结束】</text>
+        {{item.group_title}}
+      </view>
+      <view>
+        在线支付
+      </view>
+    </view>
+    <view class='shopList-one'>
+      <view>
+        商品
+      </view>
+      <view>
+        销售数量
+      </view>
+    </view>
+    <view class='shopList-two' wx:for="{{item.product_list}}" wx:for-item="lists" wx:key>
+      <view>
+        {{lists.product_name}}
+      </view>
+      <view>
+        {{lists.sell_num}}
+      </view>
+    </view>
+    <view class='shopList-one'>
+      <view>
+        总销量:{{shopNum[index]}}
+      </view>
+      <view>
+        销售额：￥{{item.sale_detail.sum_money}}
+      </view>
+    </view>
+    <view class='refund'>
+      已退款：￥{{item.sale_detail.sum_refund}}
+    </view>
+  </view>
+</view>
+<view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
+  点击加载更多
+</view>
+<view wx:if='{{pageLis==1}}' class='navgengduo'>
+  订单已全部加载完成
+</view>
+<view class='footer'>
+    <view bindtap='navIndex'>
+      <image src='../../../img/index-img1.png'></image>
+      <view>首页</view>
+    </view>
+    <view>
+      <image src='../../../img/bill2.png'></image>
+      <view style='color:#d81e06;'>列表</view>
+    </view>
+    <view bindtap='navgroup'>
+      <image src='../../../img/user1.png'></image>
+      <view>我</view>
+    </view>
+</view>

@@ -1,0 +1,110 @@
+.detailed{
+  background-color: #fff;
+  padding-bottom: 10rpx;
+  border-bottom:10rpx solid #e2e2e2;
+}
+.detailed>view{
+  width: calc(100% - 40rpx);
+  line-height: 70rpx;
+  font-size: 28rpx;
+  padding: 0rpx 20rpx;
+  color:#666;
+  position: relative;
+}
+.detailed>view>text{
+  color:#333;
+}
+.detailed>view>.body-view{
+  display: block;
+  position: absolute;
+  top: 0rpx;
+  right: 10rpx;
+}
+.details-shop{
+  width: calc(100% - 40rpx);
+  background-color: #fff;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border-bottom:2rpx solid #e2e2e2;
+}
+.details-shop>view:nth-child(1){
+  width: 160rpx;
+  height: 160rpx;
+}
+.details-shop>view:nth-child(1)>image{
+  width: 160rpx;
+  height: 160rpx;
+}
+.details-shop>view:nth-child(1)>video{
+  width: 160rpx;
+  height: 160rpx;
+}
+.details-shop>view:nth-child(2){
+  width: calc(100% - 200rpx);
+  margin-left: 40rpx;
+}
+.details-introduce>view{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.details-introduce>view:nth-child(1){
+  padding-top: 20rpx;
+}
+.details-introduce>view:nth-child(1)>view:nth-child(1){
+  width: 50%;
+  font-size: 28rpx;
+  color:#666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+.details-introduce>view:nth-child(1)>view:nth-child(2){
+  text-align: right;
+  width: 50%;
+  font-size: 28rpx;
+  color:#000;
+}
+.details-introduce>view:nth-child(2){
+  padding-top: 50rpx;
+}
+.details-introduce>view:nth-child(2)>view{
+  width: 33%;
+  font-size: 28rpx;
+}
+.details-introduce>view:nth-child(2)>view:nth-child(1){
+  text-align: left;
+  color:#333;
+}
+.details-introduce>view:nth-child(2)>view:nth-child(2){
+  text-align: left;
+  color:#666;
+  text-decoration: line-through;
+}
+.details-introduce>view:nth-child(2)>view:nth-child(3){
+  text-align: right;
+  color:#333;
+}
+.details-introduce>view:nth-child(2)>view:nth-child(3)>text{
+  padding: 10rpx 16rpx;
+  background-color: #e2e2e2;
+  border-radius: 6rpx;
+}
+.details-foot{
+  margin-top: 60rpx;
+  padding: 0rpx 20rpx;
+}
+.details-foot>view{
+  text-align: right;
+  line-height: 50rpx;
+}
+.details-foot>view:nth-child(1){
+  font-size: 32rpx;
+  color:#333;
+}
+.details-foot>view:nth-child(2){
+  font-size: 28rpx;
+  color:#666;
+}

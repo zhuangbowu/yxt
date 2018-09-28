@@ -1,0 +1,59 @@
+<view class='detailed'>
+  <view>
+    参团方式：<text>在线支付</text>
+  </view>
+  <view>
+    姓名：<text>{{shopData.user_name}}</text>
+  </view>
+  <view>
+    联系方式：<text>{{shopData.user_telephone}}</text>
+  </view>
+  <view>
+    收货地址：<text>{{shopData.pick_address}}</text>
+  </view>
+  <view>
+    备注：<text>{{shopData.remarks}}</text>
+  </view>
+  <view>
+    订单处理：
+    <view class="body-view">
+      <switch checked='{{checkeds}}' bindchange="switch1Change"/>
+    </view>
+  </view>
+</view>
+<view class='listTitle'>
+  商品列表
+</view>
+<view class='details-shop' wx:for="{{shopData.product_list}}" wx:key>
+  <view class='details-introduce'>
+      <view>
+        <view>
+          商品名称：{{item.product_name}}
+        </view>
+        <view>
+          数量：{{item.sum_num}}
+        </view>
+        <view>
+          价格：{{item.group_price}}
+        </view>
+      </view>
+  </view>
+</view>
+<view class='listTitle'>
+  退货列表
+</view>
+<view class='details-shop' wx:for="{{shopData.refund_list}}" wx:key>
+  <view class='details-introduce'>
+      <view>
+        <view>
+          商品名称：{{item.product_name}}
+        </view>
+        <view>
+          数量：{{item.sum_num}}
+        </view>
+        <view>
+          价格：{{item.group_price}}
+        </view>
+      </view>
+  </view>
+</view>

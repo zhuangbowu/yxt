@@ -1,0 +1,154 @@
+<view class='apply-box'>
+  <view class='apply-content'>
+    <view>
+      姓名
+    </view>
+    <view>
+      {{dataApply.name}}
+    </view>
+  </view>
+  <view class='apply-content'>
+    <view>
+      联系方式
+    </view>
+    <view>
+      {{dataApply.telephone}}
+    </view>
+  </view>
+  <view class='apply-content'>
+    <view>
+      所在区域
+    </view>
+    <view>
+      {{dataApply.address}}
+    </view>
+  </view>
+  <view class='apply-content'>
+    <view>
+      所在小区
+    </view>
+    <view>
+      {{dataApply.residential}}
+    </view>
+  </view>
+  <view class='apply-content'>
+    <view>
+      小区户数
+    </view>
+    <view>
+      {{dataApply.neighbours}}
+    </view>
+  </view>
+  <view class='apply-radio'>
+    <view>您是否有自己组建的领居群</view>
+    <radio-group class="radio-group" wx:if="{{dataApply.have_group==1}}">
+        <label class="radio">
+            <radio checked="true" disabled='true' />是
+        </label>
+        <label class="radio">
+            <radio disabled='true' />否
+        </label>
+    </radio-group>
+    <radio-group class="radio-group" wx:if="{{dataApply.have_group==0}}">
+        <label class="radio">
+            <radio disabled='true' />是
+        </label>
+        <label class="radio">
+            <radio checked="true" disabled='true' />否
+        </label>
+    </radio-group>
+  </view>
+  <view class='apply-radio'>
+    <view>您是否有网络销售经验</view>
+    <radio-group class="radio-group" wx:if="{{dataApply.have_sale==1}}">
+        <label class="radio">
+            <radio checked="true" disabled='true' />是
+        </label>
+        <label class="radio">
+            <radio disabled='true' />否
+        </label>
+    </radio-group>
+    <radio-group class="radio-group" wx:if="{{dataApply.have_sale==0}}">
+        <label class="radio">
+            <radio disabled='true' />是
+        </label>
+        <label class="radio">
+            <radio checked="true" disabled='true' />否
+        </label>
+    </radio-group>
+  </view>
+  <view class='apply-radio'>
+    <view>您可以用于团购的时间</view>
+    <radio-group class="radio-group" wx:if="{{dataApply.work_time==0}}">
+        <label class="radio">
+            <radio checked="true" disabled='true' />每天
+        </label>
+        <label class="radio">
+            <radio disabled='true' />周末
+        </label>
+        <label class="radio">
+            <radio disabled='true' />工作空余时间
+        </label>
+    </radio-group>
+    <radio-group class="radio-group" wx:if="{{dataApply.work_time==1}}">
+        <label class="radio">
+            <radio disabled='true' />每天
+        </label>
+        <label class="radio">
+            <radio checked="true" disabled='true' />周末
+        </label>
+        <label class="radio">
+            <radio disabled='true' />工作空余时间
+        </label>
+    </radio-group>
+    <radio-group class="radio-group" wx:if="{{dataApply.work_time==2}}">
+        <label class="radio">
+            <radio disabled='true' />每天
+        </label>
+        <label class="radio">
+            <radio disabled='true' />周末
+        </label>
+        <label class="radio">
+            <radio checked="true" disabled='true' />工作空余时间
+        </label>
+    </radio-group>
+  </view>
+  <view class='apply-content'>
+    <view>
+      其他
+    </view>
+    <view>
+      {{dataApply.other}}
+    </view>
+  </view>
+  <view class='apply-content' wx:if="{{dataApply.status==2}}">
+    <view>
+      拒绝理由
+    </view>
+    <view>
+      {{dataApply.remarks}}
+    </view>
+  </view>
+</view>
+<view class='group-fixed' wx:if="{{dataApply.status==0}}">
+  <view bindtap='wxEject'>
+    拒绝
+  </view>
+  <view bindtap='navAgree'>
+    同意
+  </view>
+</view>
+<view class='msak' hidden='{{hiddenmodalput}}'>
+  <view class='msak-no' bindtap='modalinput2'></view>
+  <view class='msak-content'>
+    <view class='msak-title'>拒绝理由</view>
+    <view class='msak-con-content'>
+      <view>输入拒绝理由：</view>
+      <input placeholder='请输入拒绝理由' value='' bindinput='inputdalput'></input>
+    </view>
+    <view class='msak-btn'>
+      <view bindtap='modalinput2'>取消</view>
+      <view bindtap='modalinput3'>确定</view>
+    </view>
+  </view>
+</view>

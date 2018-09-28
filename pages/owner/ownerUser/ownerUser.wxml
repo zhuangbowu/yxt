@@ -1,0 +1,49 @@
+<!--pages/ownerUser/ownerUser.wxml-->
+<view class='userHeader'>
+  <view bindtap='uploadPhoto'>
+    <image src='{{userName.head_image}}' mode='aspectFit'></image>
+  </view>
+  <view>
+    您好：{{userName.nick_name}}
+  </view>
+  <view>
+    可提现:￥{{userName.amount_able}} <text bindtap='navForward'>提现</text>
+  </view>
+</view>
+<view class='userUl'>
+  <view class='userList'>
+      <image src='../../../img/balance.png'></image>
+      <view>账户余额</view>
+      <view>￥{{userName.amount}}</view>
+  </view>
+  <view class='userList' bindtap='uploadDetailed'>
+      <image src='../../../img/Detailed.png'></image>
+      <view>余额明细</view>
+  </view>
+  <view class='userList' bindtap='uploadFriends'>
+      <image src='../../../img/Invitation.png'></image>
+      <view>邀请好友成为团长</view>
+  </view>
+  <view class='userList' bindtap='uploadmyGroupList'>
+      <image src='../../../img/group.png'></image>
+      <view>我的团长列表</view>
+  </view>
+  <view class='userList' bindtap='navRefund'>
+      <image src='../../../img/refund.png'></image>
+      <view>退款列表</view>
+  </view>
+</view>
+<view class='footer'>
+    <view bindtap='navIndex'>
+      <image src='../../../img/index-img1.png'></image>
+      <view>首页</view>
+    </view>
+    <view bindtap='navList'>
+      <image src='../../../img/bill1.png'></image>
+      <view>列表</view>
+    </view>
+    <view>
+      <image src='../../../img/user2.png'></image>
+      <view style='color:#d81e06;'>我</view>
+    </view>
+</view>

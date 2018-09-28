@@ -1,0 +1,61 @@
+<!-- <wxs module="filters" src="../../../utils/filter.wxs"></wxs> -->
+<view class='owner-content'>
+  <view wx:for='{{owner}}' bindtap='navDetails' data-hi='{{index}}'  wx:if='{{item.status == 1||item.status == 2}}' wx:key>
+    <view class='owner-cont-header'>
+      <image src='{{item.avatar}}'></image>
+      <text>{{item.user_name}}</text>
+    </view>
+    <view class='owner-cont-content2' wx:if='{{item.status === 1}}'>
+        <view class='owner-cont-cont-title'>
+            <view>
+              {{item.title}}
+            </view>
+            <view>【进行中】</view>
+            <image src='../../../img/state2.png' mode='widthFix'></image>
+        </view>
+        <view class='owner-cont-cont-num owner-cont-cont-num2' style='border-top:2rpx solid #18D818;'>
+            <view>
+              <image wx:for="{{item.buyer_list}}" wx:for-item="buyerList" src='{{buyerList.avatar}}' wx:for-index="indexs" wx:if="{{indexs<8}}"  wx:key></image>
+            </view>
+            <view>
+              共{{item.buyer_list.length}}人参团
+            </view>
+        </view>
+    </view>
+    <view class='owner-cont-content3' wx:if='{{item.status === 2}}'>
+        <view class='owner-cont-cont-title'>
+            <view>
+              {{item.title}}
+            </view>
+            <view>【已结束】</view>
+            <image src='../../../img/state3.png' mode='widthFix'></image>
+        </view>
+        <view class='owner-cont-cont-num owner-cont-cont-num3' style='border-top:2rpx solid #b7b7b7;'>
+            <view>
+              <image wx:for="{{item.buyer_list}}" wx:for-item="buyerList" src='{{buyerList.avatar}}' wx:for-index="indexs" wx:if="{{indexs<8}}" wx:key></image>
+            </view>
+            <view>
+              共{{item.buyer_list.length}}人参团
+            </view>
+        </view>
+    </view>
+    <view class='owner-cont-img'>
+      <view wx:for="{{item.product_list}}" wx:for-item="productList" wx:key>
+        <image src='{{productList.product_img[0].urlImg}}' wx:if="{{productList.product_img[0].types==1}}"></image>
+        <video src='{{productList.product_img[0].urlImg}}#t=1'controls wx:if="{{productList.product_img[0].types==2}}"></video>
+        <text>￥{{productList.group_price}}</text>
+      </view>
+    </view>
+    <view class='owner-cont-time'>开团时间：{{item.open_time}}</view>
+  </view>
+</view>
+<view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
+  点击加载更多
+</view>
+<view wx:if='{{pageLis==1}}' class='navgengduo'>
+  商品已全部加载完成
+</view>
+<view class='owner-fixed' bindtap='navOrder'>
+  <image src='../../../img/bill3.png'></image>
+  <view>订单</view>
+</view>

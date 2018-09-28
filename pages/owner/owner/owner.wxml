@@ -1,0 +1,91 @@
+<!-- <wxs module="filters" src="../../../utils/filter.wxs"></wxs> -->
+<view class='search' wx:if="{{condition}}">
+  <icon type='search' size='20'></icon><view bindtap='seachCondTrue'>搜索团购名称</view>
+</view>
+<view class='search' wx:else>
+    <icon type='search' size='20'></icon>
+    <input placeholder='搜索团购名称' type='text' focus='true' bindconfirm="navSearch" bindinput='searchData'></input>
+    <text bindtap='seachCondFalse'>取消</text>
+</view>
+<view class='owner-content'>
+  <view wx:for='{{dataList}}' bindtap='navDetails' data-hi='{{index}}' wx:key>
+    <view class='owner-cont-header'>
+      <image src='{{ownerImage}}'></image>
+      <text>{{ownerNmae}}</text>
+    </view>
+    <view class='owner-cont-content1' wx:if='{{item.status === 0}}'>
+        <view class='owner-cont-cont-title'>
+            <view>
+              {{item.group_title}}
+            </view>
+            <view>【未开始】</view>
+            <image src='../../../img/state1.png' mode='widthFix'></image>
+        </view>
+    </view>
+    <view class='owner-cont-content2' wx:if='{{item.status === 1}}'>
+        <view class='owner-cont-cont-title'>
+            <view>
+              {{item.group_title}}
+            </view>
+            <view>【进行中】</view>
+            <image src='../../../img/state2.png' mode='widthFix'></image>
+        </view>
+        <view class='owner-cont-cont-num owner-cont-cont-num2' wx:if="{{item.status === 1||item.status === 2}}">
+            <view>
+              <image wx:for="{{item.join_list}}" wx:for-item="open_times" src='{{open_times.avatar}}' wx:for-index="indexs" wx:if="{{indexs<8}}"  wx:key></image>
+            </view>
+            <view>
+              共{{item.join_list.length}}人参团
+            </view>
+        </view>
+    </view>
+    <view class='owner-cont-content3' wx:if='{{item.status === 2}}'>
+        <view class='owner-cont-cont-title'>
+            <view>
+              {{item.group_title}}
+            </view>
+            <view>【已结束】</view>
+            <image src='../../../img/state3.png' mode='widthFix'></image>
+        </view>
+        <view class='owner-cont-cont-num owner-cont-cont-num3' wx:if="{{item.status === 1||item.status === 2}}">
+            <view>
+              <image wx:for="{{item.join_list}}" wx:for-item="open_times" src='{{open_times.avatar}}' wx:for-index="indexs" wx:if="{{indexs<8}}"  wx:key></image>
+            </view>
+            <view>
+              共{{item.join_list.length}}人参团
+            </view>
+        </view>
+    </view>
+    <view class='owner-cont-img'>
+      <view wx:for="{{item.product_list}}" wx:for-item="product_lists" wx:key>
+        <image src='{{product_lists.product_img[0].urlImg}}' wx:if="{{product_lists.product_img[0].types==1}}"></image>
+        <video src='{{product_lists.product_img[0].urlImg}}' wx:if="{{product_lists.product_img[0].types==2}}"></video>
+        <text>￥{{product_lists.group_price}}</text>
+      </view>
+    </view>
+    <view class='owner-cont-time' wx:if="{{item.status === 1||item.status === 2}}">开团时间：{{item.open_time}}</view>
+  </view>
+</view>
+<view class='owner-fixed' bindtap='navPage'>
+  <image src='../../../img/Increase.png'></image>
+</view>
+<view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
+  点击加载更多
+</view>
+<view wx:if='{{pageLis==1}}' class='navgengduo'>
+  商品已全部加载完成 
+</view>
+<view class='footer'>
+    <view>
+      <image src='../../../img/index-img2.png'></image>
+      <view style='color:#d81e06;'>首页</view>
+    </view>
+    <view bindtap='navList'>
+      <image src='../../../img/bill1.png'></image>
+      <view>列表</view>
+    </view>
+    <view bindtap='navgroup'>
+      <image src='../../../img/user1.png'></image>
+      <view>我</view>
+    </view>
+</view>

@@ -1,0 +1,62 @@
+<view class='search' wx:if="{{condition}}">
+  <icon type='search' size='20'></icon>
+  <view bindtap='seachCondTrue'>搜索团购名称</view>
+</view>
+<view class='search' wx:else>
+  <icon type='search' size='20'></icon>
+  <input placeholder='搜索团购名称' type='text' focus='true'></input>
+  <text bindtap='seachCondFalse'>取消</text>
+</view>
+
+<radio-group bindchange="checkboxChange">
+  <view class='period' wx:for="{{creat}}" wx:key>
+    <view class='period-list'>
+      <view>
+        <label class="checkbox">
+          <radio value="{{index}}" />
+        </label>
+      </view>
+      <view>
+        <image src='{{item.img_list[0].urlImg}}'></image>
+      </view>
+      <view>
+        <view>
+          {{item.product_name}}
+        </view>
+        <view>
+          {{item.desc}}
+        </view>
+      </view>
+      <view>
+        <view class='period-list-click' bindtap='periodListList' data-hi='{{index}}'>
+          往期
+        </view>
+      </view>
+    </view>
+    <view class='period-list-list' hidden='{{item.shopSelect}}' wx:for='{{item.record_list}}' wx:for-item='itemData' wx:for-index='itemIndex' wx:key>
+      <view>
+        <image src='{{itemData.pastUrl}}'></image>
+      </view>
+      <view>
+        <view>{{itemData.product_name}}</view>
+        <view>原价：￥{{itemData.market_price}}</view>
+        <view>售价：￥{{itemData.group_price}}</view>
+      </view>
+      <view>
+        <label>
+          <radio value="{{index}},{{itemIndex}}" checked="{{itemData.checked}}" />
+        </label>
+      </view>
+    </view>
+  </view>
+</radio-group>
+
+<view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
+  点击加载更多
+</view>
+<view wx:if='{{pageLis==1}}' class='navgengduo'>
+  商品已全部加载完成
+</view>
+<view class='btn' bindtap='navBtnsetStorage'>
+  保存
+</view>

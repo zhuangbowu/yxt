@@ -1,0 +1,165 @@
+<view class='lncrease-hrader lncrease-top'>
+  <view>
+    军团标题
+  </view>
+  <view>{{shopNa.header_group_title}}</view>
+</view>
+<view class='lncrease-hrader'>
+  <view>
+    军团公告
+  </view>
+  <view>
+  {{shopNa.header_group_notice}}
+  </view>
+</view>
+<view class='lncrease-hrader2'>
+  <view>
+    复制军团标题
+  </view>
+  <view bindtap='groupCopy'>
+  复制
+  </view>
+</view>
+<view class='lncrease-hrader'>
+  <view>
+    团长标题
+  </view>
+  <input placeholder='请输入团长标题' type='text' value='{{shopNa.title}}' bindinput='titleInput'></input>
+</view>
+<view class='lncrease-hrader lncrease-bottom'>
+  <view>
+    团长公告
+  </view>
+  <input placeholder='请输入团长公告' type='text' bindinput='noticeNum' value='{{shopNa.notice}}'></input>
+</view>
+<view class='lncrease-bottom lncrease-goods'>
+  <view class='goods-title'>团长取货方式</view>
+  <view class='lncrease-hrader' wx:if="{{shopNa.pick_type==1}}">
+    <view>
+      收货地址
+    </view>
+    <input placeholder='请输入团长收货地址' type='text' value='{{shopNa.pick_address}}' bindinput='titleColle'></input>
+  </view>
+  <view class='collect' wx:if="{{shopNa.pick_type==2}}">
+    <radio-group class="radio-group" bindchange="radioChange3">
+      <label class="radio" wx:for="{{shopNa.leader_address}}" wx:key>
+          <radio value="{{index}}" checked="{{item.checked}}">{{item.name}}： {{item.address}}-{{item.address_det}}</radio>
+      </label>
+    </radio-group>
+  </view>
+</view>
+<!-- <view class='lncrease-goods lncrease-bottom'>
+  <view class='goods-title'>团员支付方式</view>
+  <radio-group class="radio-group" bindchange="radioChange2">
+    <label class="radio" wx:for="{{payment}}" wx:key>
+        <radio value="{{index}}" checked="{{item.checked}}"/>{{item.value}}<text>{{item.judge}}</text>
+    </label>
+  </radio-group>
+</view> -->
+<view class='lncrease-goods lncrease-bottom'>
+  <view class='goods-title'>团员取货方式</view>
+  <radio-group class="radio-group" bindchange="radioChange">
+    <label class="radio" wx:for="{{items}}" wx:key>
+        <radio value="{{index+1}}" checked="{{item.checked}}">{{item.value}}<text>{{item.judge}}</text></radio>
+    </label>
+  </radio-group>
+  <image src='../../../img/Increase2.png' bindtap="modalinput"></image> 
+  <view class='address' wx:if='{{shopNa.dispatch_type==2}}'>
+    <radio-group bindchange="checkboxChange">
+        <label class="checkbox" wx:for-items="{{addressText}}" wx:for-index="indess" wx:key>
+            <radio value="{{indess}}" checked="{{item.checked}}">{{item.name}}：{{item.address}}-{{item.address_det}}</radio>
+            <view>
+              <text catchtap='addressEdit' data-hi='{{indess}}'>编辑</text>
+              <text catchtap='addressNo' data-hi='{{indess}}'>删除</text>
+            </view>
+        </label>
+    </radio-group>
+  </view>
+</view>
+<view>
+  <view class='commodity lncrease-bottom' wx:for="{{shopNa.product_list}}" wx:key>
+    <view class='commodity-num'>
+      <view>商品名称</view>
+      <input type='text' placeholder='请输入商品名称' confirm-type='next' value='{{item.product_name}}' disabled='true'></input>
+    </view>
+    <view class='commodity-num'>
+      <view>团员限购</view>
+      <input type='number' placeholder='请输入团员限购数量' confirm-type='next' value='{{item.self_limit}}' disabled='true'></input>
+    </view>
+    <view class='commodity-num'>
+      <view>零售价</view>
+      <input type='number' placeholder='请输入零售价' confirm-type='next' value='{{item.group_price}}' disabled='true'></input>
+    </view>
+    <view class='commodity-num'>
+      <view>佣金比例</view>
+      <input type='number' placeholder='请输入0.01~100的佣金比例' confirm-type='next' value='{{item.commission}}' disabled='true'></input>
+    </view>
+    <view class='commodity-upload'>
+      <view>图片上传</view>
+      <view>
+        <block wx:for="{{item.product_img}}" wx:for-item="itmes" wx:for-index="in" wx:key>
+          <view class='commodity-upload-addd'>
+            <image src='{{itmes.urlImg}}' wx:if="{{itmes.types==1}}"></image>
+            <video src='{{itmes.urlImg}}' wx:if="{{itmes.types==2}}"></video>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class='commodity-num'>
+      <view>描述</view>
+      <input type='text' placeholder='请输入商品描述' confirm-type='done' value='{{item.product_desc}}' bindinput='bindshopDescribe' data-hi="{{index}}"></input>
+    </view>
+  </view>
+</view>
+<view class='group-fixed'>
+  <view bindtap='Preservation' data-hi='0'>
+    保存团购
+  </view>
+  <view bindtap='immediately' data-hi='1'>
+    立即开团
+  </view>
+</view>
+<view class='msak' hidden='{{hiddenmodalput}}'>
+  <view class='msak-no' bindtap='modalinput2'></view>
+  <view class='msak-content'>
+    <view class='msak-title'>自提点</view>
+    <view class='msak-con-content'>
+      <view>自提点简称：</view>
+      <input placeholder='请输入自提点简称' bindinput='cancelInput'></input>
+    </view>
+    <view class='msak-con-content'>
+      <view>自提点区域：</view>
+      <input placeholder='请输入自提点区域' bindinput='cancelInput2'></input>
+    </view>
+    <view class='msak-con-content'>
+      <view>详细地址：</view>
+      <input placeholder='请输入详细地址' bindinput='confirmInput'></input>
+    </view>
+    <view class='msak-btn'>
+      <view bindtap='cancel'>取消</view>
+      <view catchtap='confirm'>确定</view>
+    </view>
+  </view> 
+</view>
+<view class='msak' hidden='{{addressTextlput}}'>
+  <view class='msak-no' bindtap='addressTextlputt2'></view>
+  <view class='msak-content'>
+    <view class='msak-title'>修改自提点</view>
+    <view class='msak-con-content'>
+      <view>自提点简称：</view>
+      <input placeholder='请输入自提点简称' value='{{addressEdit.name}}' bindinput="addressIifting"></input>
+    </view>
+    <view class='msak-con-content'>
+      <view>自提点区域：</view>
+      <input placeholder='请输入自提点区域' value='{{addressEdit.address}}' bindinput="addressIifting2"></input>
+    </view>
+    <view class='msak-con-content'>
+      <view>详细地址：</view>
+      <input placeholder='请输入详细地址' value='{{addressEdit.address_det}}' bindinput="addressIiftingText"></input>
+    </view>
+    <view class='msak-btn'>
+      <view bindtap='addressCancel'>取消</view>
+      <view catchtap="addressDetermine">确定</view>
+    </view>
+  </view>
+</view>

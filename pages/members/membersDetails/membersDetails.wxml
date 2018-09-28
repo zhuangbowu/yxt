@@ -1,0 +1,113 @@
+<view class='group-header'>
+  <view>
+    <image src='{{shopData.avatar}}'></image>
+  </view>
+  <view>
+    <view>昵称</view>
+    <view>{{shopData.user_name}}</view>
+  </view>
+  <image src='../../../img/state1.png' mode='widthFix' wx:if="{{shopData.status==0}}"></image>
+  <image src='../../../img/state2.png' mode='widthFix' wx:if="{{shopData.status==1}}"></image>
+  <image src='../../../img/state3.png' mode='widthFix' wx:if="{{shopData.status==2}}"></image>
+</view>
+<view class='group-title'>
+  <view>标题：{{shopData.title}}</view>
+  <view>共{{shopData.product_list.length}}个商品</view>
+</view>
+<view class='group-nocite'>
+  <view>
+    <image src='../../../img/bell.png'></image>
+  </view>
+  <view>公告：{{shopData.notice}}</view>
+</view>
+<view class='group-content'>
+  <view class='group-content-list' wx:for='{{shopData.product_list}}' bindtap='navDetails' data-hi='{{index}}' wx:key>
+    <image src='{{item.product_img[0].urlImg}}' wx:if="{{item.product_img[0].types==1}}"></image>
+    <video src='{{item.product_img[0].urlImg}}' wx:if="{{item.product_img[0].types==2}}"></video>
+    <view>
+      <view>{{item.product_name}}</view>
+      <view>{{item.product_desc}}</view>
+      <view class='docc'>市场价：￥{{item.market_price}} </view>
+      <view style='color:red;'>团购价：￥{{item.group_price}}</view>
+      <view class='group-modify' wx:if="{{shopData.status==1}}">
+        <image src='../../../img/WechatIMG20.png' catchtap='shopReduce' data-hi='{{index}}'></image>
+        <view>{{shopNum[index]}}</view>
+        <image src='../../../img/WechatIMG21.png' catchtap='shopPlus' data-hi='{{index}}'></image>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='group-cot' wx:if="{{shopData.sale_detail.is_show==1}}" wx:key>
+  <view>
+    <view>
+      {{shopData.sale_detail.detail.scan_number}}
+    </view>
+    <view>
+      浏览数量
+    </view>
+  </view>
+  <view>
+    <view>
+      {{shopData.sale_detail.detail.order_number}}
+    </view>
+    <view>
+      订单数量
+    </view>
+  </view>
+  <view>
+    <view>
+      {{shopData.sale_detail.detail.order_money}}
+    </view>
+    <view>
+      订单总金额
+    </view>
+  </view>
+</view>
+<view class='record-title' wx:if="{{listData.length>0}}">
+  团购记录
+</view>
+<view class='record-foot'>
+  <view wx:for="{{listData.record_list}}" wx:key style='border-bottom:2rpx solid #e2e2e2;padding-bottom:20rpx;background-color:#fff;'>
+    <view class='record-content'>
+      <view>
+        NO:{{(listData.order_sum)-index}}
+      </view>
+      <view>
+        <image src='{{item.avatar}}'></image>
+      </view>
+      <view>
+        {{item.user_name}}
+      </view>
+      <view>
+        {{item.product_num}}件
+      </view>
+      <view>
+        {{item.create_time}}
+      </view>
+    </view>
+    <view class='contentss'>
+      <text wx:for="{{item.product_list}}" wx:for-item="Datas" wx:key>{{Datas.product_name}}×{{Datas.sum_num}}、</text>
+    </view>
+  </view>
+  <block wx:if="{{listData.order_sum>0}}">
+    <!-- <view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
+      下拉加载更多
+    </view> -->
+    <view wx:if='{{pageLis==1}}' class='navgengduo'>
+      团购记录已全部加载完成
+    </view>  
+  </block>
+</view>
+<view class='group-fixed' wx:if='{{role_status==1}}'>
+  <view bindtap='navMembersTobe'>
+    我要当团长
+  </view>
+  <view bindtap='navMembersPurchase'>
+    立即购买
+  </view>
+</view>
+<view class='group-fixed1' wx:if='{{role_status==2}}'>
+  <view bindtap='navMembersPurchase'>
+    立即购买
+  </view>
+</view>

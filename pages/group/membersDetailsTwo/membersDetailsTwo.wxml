@@ -1,0 +1,67 @@
+<view class='detailed'>
+  <view>
+    参团方式：<text>在线支付</text>
+  </view>
+  <view>
+    订单编号：<text>{{shopData.order_no}}</text>
+  </view>
+  <view>
+    订单合计：<text>￥{{shopData.order_money}}</text>
+  </view>
+  <view>
+    姓名：<text>{{shopData.user_name}}</text>
+  </view>
+  <view>
+    联系方式：<text>{{shopData.user_telephone}}</text>
+  </view>
+  <view>
+    收货地址：<text>{{shopData.pick_address}}</text>
+  </view>
+  <view>
+    备注：<text>{{shopData.remarks}}</text>
+  </view>
+  <view>
+    订单处理：
+    <view class="body-view">
+      <switch checked='{{checkeds}}' bindchange="switch1Change"/>
+    </view>
+  </view>
+</view>
+<view class='details-shop' wx:for="{{shopData.product_list}}" wx:key>
+  <view>
+    <image src='{{item.product_img[0].urlImg}}' wx:if="{{item.product_img[0].types==1}}"></image>
+    <video src='{{item.product_img[0].urlImg}}' wx:if="{{item.product_img[0].types==2}}"></video>
+  </view>
+  <view class='details-introduce'>
+      <view>
+        <view>
+          {{item.product_name}}
+        </view>
+        <view>
+          {{item.num}}
+        </view>
+      </view>
+      <view>
+        <view>
+          ￥{{item.group_price}}
+        </view>
+        <view>
+          ￥{{item.market_price}}
+        </view>
+        <view>
+          <text wx:if="{{item.status==0}}" bindtap='navRefund' data-index='{{index}}'>申请退款</text>
+          <text wx:if="{{item.status==1}}">退货中</text>
+          <text wx:if="{{item.status==2}}">已退货</text>
+          <text wx:if="{{item.status==3}}">已完成</text>
+        </view>
+      </view>
+  </view>
+</view>
+<view class='details-foot'>
+  <view>
+    合计：￥{{shopData.order_money}}
+  </view>
+  <view>
+    退款：￥{{shopData.refund_money}}
+  </view>
+</view>

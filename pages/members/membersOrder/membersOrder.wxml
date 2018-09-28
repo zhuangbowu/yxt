@@ -1,0 +1,19 @@
+<view class='order' bindtap='navOrderDetails' wx:for="{{listData}}" data-h1='{{index}}' wx:key>
+  <view>
+    <view>
+      {{item.title}}
+    </view>
+    <view>
+      参团时间 {{item.create_time}}
+    </view>
+  </view>
+  <view>
+    <view>
+      <text wx:if="{{item.pick_status==0}}">未取货</text>
+      <text wx:if="{{item.pick_status==1}}" class='order-not'>已取货</text>
+    </view>
+    <view>
+      ￥{{item.final_cost}}
+    </view>
+  </view>
+</view>

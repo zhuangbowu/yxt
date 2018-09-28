@@ -1,0 +1,175 @@
+<view class='lncrease-hrader lncrease-top'>
+  <view>
+    城主标题
+  </view>
+  <input placeholder='请输入城主标题' type='text' value='{{mainTitle}}' bindinput='titleInput'></input>
+</view>
+<view class='lncrease-hrader lncrease-bottom'>
+  <view>
+    城主公告
+  </view>
+  <input placeholder='请输入城主公告' type='text' bindinput='noticeNum' value='{{mainNotice}}'></input>
+  <view>
+    {{noticeNum}}/100字
+  </view>
+</view>
+<view class='lncrease-goods lncrease-bottom'>
+  <view class='goods-title'>团长取货方式</view>
+  <radio-group class="radio-group" bindchange="radioChange">
+    <label class="radio" wx:for="{{items}}" wx:key>
+        <radio value="{{index+1}}" checked="{{item.checked}}"/>{{item.value}}<text>{{item.judge}}</text>
+    </label>
+  </radio-group>
+  <image src='../../../img/Increase2.png' bindtap="modalinput"></image> 
+  <view class='address' wx:if='{{modeDistribution==2}}'>
+    <checkbox-group bindchange="checkboxChange">
+        <label class="checkbox" wx:for-items="{{addressText}}" wx:for-index="indess"  wx:key>
+            <checkbox value="{{indess}}" checked="{{item.checked}}"/>{{item.name}}：{{item.address}}-{{item.address_det}}
+            <view>
+              <text catchtap='addressEdit' data-hi='{{indess}}'>编辑</text>
+              <text catchtap='addressNo' data-hi='{{indess}}'>删除</text>
+            </view>
+        </label>
+    </checkbox-group>
+  </view>
+</view>
+<view class='end-group lncrease-bottom'>
+  <view>
+    允许团长结束团购
+  </view>
+  <view class="body-view">
+    <switch checked bindchange="switch1Change" wx:if="{{mainDetailNum==1}}"/>
+    <switch bindchange="switch1Change" wx:if="{{mainDetailNum==0}}"/>
+  </view>
+</view>
+<view class='group-time lncrease-bottom'>
+  <view class='group-time-title'>
+    自动截团时间
+  </view>
+  <view class='group-time-content'>
+    <picker mode="date" value="" start="{{myData}}" end="2080-09-01" bindchange="bindDateChange">
+      <view class='picker'>{{modeDate}}</view>
+    </picker>
+    <picker mode="time" value="{{modeTime}}" start="00:00" end="23:59" bindchange="bindTimeChange">
+      <view class='picker picker-left'>{{modeTime}}</view>
+    </picker>
+  </view>
+</view>
+<view>
+  <view class='commodity lncrease-bottom' wx:for="{{product_list}}" wx:key>
+    <view class='commodity-num'>
+      <view>商品名称</view>
+      <input type='text' placeholder='请输入商品名称' confirm-type='next' value='{{item.product_name}}' bindinput='bindShopName' data-hi='{{index}}'></input>
+      <view class='MoreImage' bindtap='modifyShop' data-hi='{{index}}'>
+        <image src='../../../img/More.png'></image>
+      </view>
+      <view class='More' hidden='{{item.modifyShop}}'>
+        <view hidden='{{product_list.length==1||index==0}}' bindtap='upperSort' data-hi='{{index}}'>上移</view>
+        <view hidden='{{product_list.length==1||index==(product_list.length-1)}}' bindtap='lowerSort' data-hi='{{index}}'>下移</view>
+        <view bindtap='deleteShop' data-hi='{{index}}'>删除</view>
+      </view>
+    </view>
+    <view class='commodity-num'>
+      <view>团限购</view>
+      <input type='number' placeholder='请输入团购数量' confirm-type='next' value='{{item.group_limit}}' bindinput='bindshopGroup' data-hi='{{index}}'></input>
+    </view>
+    <view class='commodity-num'>
+      <view>团员限购</view>
+      <input type='number' placeholder='请输入团员限购数量' confirm-type='next' value='{{item.self_limit}}' bindinput='bindshopGroupMember' data-hi='{{index}}'></input>
+    </view>
+    <view class='commodity-num'>
+      <view>市场价</view>
+      <input type='digit' placeholder='请输入市场价' confirm-type='next' value='{{item.market_price}}' bindinput='bindshopMarket' data-hi='{{index}}'></input>
+    </view>
+    <view class='commodity-num'>
+      <view>进货价</view>
+      <input type='digit' placeholder='请输入进货价' confirm-type='next' value='{{item.purchase_price}}' bindinput='bindshoppurchase' data-hi='{{index}}'></input>
+    </view>
+    <view class='commodity-num'>
+      <view>团购价</view>
+      <input type='digit' placeholder='请输入团购价' confirm-type='next' value='{{item.group_price}}' bindinput='bindshopGroupMarket' data-hi='{{index}}'></input>
+    </view>
+    <view class='commodity-num'>
+      <view>佣金比例</view>
+      <input type='digit' placeholder='请输入0~100的佣金比例' confirm-type='next' value='{{item.commission}}' bindinput='bindshopCommission' data-hi='{{index}}'></input>
+    </view>
+    <view class='commodity-num'>
+      <view>库存</view>
+      <input type='number' placeholder='请输入库存数量' confirm-type='next' value='{{item.remain}}' bindinput='bindshopStock' data-hi='{{index}}'></input>
+    </view>
+    <view class='commodity-upload'>
+      <view>图片上传</view>
+      <view>
+        <block wx:for="{{item.img_list}}" wx:for-item="itmes" wx:for-index="in" wx:key>
+          <view class='commodity-upload-addd'>
+            <image src='{{itmes.urlImg}}' wx:if="{{itmes.types==1}}"></image>
+            <video src='{{itmes.urlImg}}' wx:if="{{itmes.types==2}}"></video>
+            <image src='../../../img/delete.png' bindtap='showImgNone' data-hi="{{in}}" data-hii="{{index}}"></image>
+          </view>
+        </block>
+        <view class='commodity-upload-add'>
+          <image src='../../../img/Increase3.png' bindtap="showImgChoose"  data-hi="{{index}}" mode='widthFix'></image>
+        </view>
+      </view>
+    </view>
+    <view class='commodity-num'>
+      <view>描述</view>
+      <input type='text' placeholder='请输入商品描述' confirm-type='done' value='{{item.product_desc}}' bindinput='bindshopDescribe' data-hi="{{index}}"></input>
+    </view>
+  </view>
+</view>
+<view class='add-list'>
+  <view bindtap='addShop'>添加商品</view>
+</view>
+<view class='group-fixed'>
+  <view bindtap='Preservation' data-hi='0'>
+    保存团购
+  </view>
+  <view bindtap='immediately' data-hi='1'>
+    立即开团
+  </view>
+</view>
+<view class='msak' hidden='{{hiddenmodalput}}'>
+  <view class='msak-no' bindtap='modalinput2'></view>
+  <view class='msak-content'>
+    <view class='msak-title'>自提点</view>
+    <view class='msak-con-content'>
+      <view>自提点简称：</view>
+      <input placeholder='请输入自提点简称' value='{{temporary1}}' bindinput='cancelInput'></input>
+    </view>
+    <view class='msak-con-content'>
+      <view>自提点区域：</view>
+      <input placeholder='请输入自提点区域' value='{{temporary2}}' bindinput='cancelAddress'></input>
+    </view>
+    <view class='msak-con-content'>
+      <view>详细地址：</view>
+      <input placeholder='请输入详细地址' value='{{temporary3}}' bindinput='confirmInput'></input>
+    </view>
+    <view class='msak-btn'>
+      <view bindtap='cancel'>取消</view>
+      <view catchtap='confirm'>确定</view>
+    </view>
+  </view>
+</view>
+<view class='msak' hidden='{{addressTextlput}}'>
+  <view class='msak-no' bindtap='addressTextlputt2'></view>
+  <view class='msak-content'>
+    <view class='msak-title'>修改自提点</view>
+    <view class='msak-con-content'>
+      <view>自提点简称：</view>
+      <input placeholder='请输入自提点简称' value='{{addressEdit.name}}' bindinput="addressIifting"></input>
+    </view>
+    <view class='msak-con-content'>
+      <view>自提点区域：</view>
+      <input placeholder='请输入自提点区域' value='{{addressEdit.address}}' bindinput="addressIifting2"></input>
+    </view>
+    <view class='msak-con-content'>
+      <view>详细地址：</view>
+      <input placeholder='请输入详细地址' value='{{addressEdit.address_det}}' bindinput="addressIiftingText"></input>
+    </view>
+    <view class='msak-btn'>
+      <view bindtap='addressCancel'>取消</view>
+      <view catchtap="addressDetermine">确定</view>
+    </view>
+  </view>
+</view>

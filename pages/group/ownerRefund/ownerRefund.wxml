@@ -1,0 +1,64 @@
+<view class="tab">
+  <view class="tab-left" bindtap="tabFun">
+    <view class="{{tabArr.curHdIndex=='0'? 'active' : ''}}" id="tab-hd01" data-id="0">审核中</view>
+    <view class="{{tabArr.curHdIndex=='1'? 'active' : ''}}" id="tab-hd02" data-id="1">已审核</view>
+    <view class="{{tabArr.curHdIndex=='2'? 'active' : ''}}" id="tab-hd03" data-id="2">已拒绝</view>
+  </view>
+
+  <view class="tab-right">
+    <view class="right-item {{tabArr.curBdIndex=='0'? 'active' : ''}}">
+      <view class='ground-content' bindtap='navRefundList' wx:for="{{userName}}"  data-hi='{{index}}' wx:key>
+        <view>
+          <view>
+            {{item.product_name}}
+          </view>
+          <view>
+            {{item.create_time}}
+          </view>
+        </view>
+      </view>
+      <view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
+        点击加载更多
+      </view>
+      <view wx:if='{{pageLis==1}}' class='navgengduo'>
+        列表已全部加载完成
+      </view>
+    </view>
+    <view class="right-item {{tabArr.curBdIndex=='1'? 'active' : ''}}">
+      <view class='ground-content' bindtap='navRefundList' wx:for="{{userName}}" data-hi='{{index}}' wx:key>
+        <view>
+          <view>
+            {{item.product_name}}
+          </view>
+          <view>
+            {{item.create_time}}
+          </view>
+        </view>
+      </view>
+      <view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
+        点击加载更多
+      </view>
+      <view wx:if='{{pageLis==1}}' class='navgengduo'>
+        列表已全部加载完成
+      </view>
+    </view>
+    <view class="right-item {{tabArr.curBdIndex=='2'? 'active' : ''}}">
+      <view class='ground-content' bindtap='navRefundList' wx:for="{{userName}}" data-hi='{{index}}' wx:key>
+        <view>
+          <view>
+            {{item.product_name}}
+          </view>
+          <view>
+            {{item.create_time}}
+          </view>
+        </view>
+      </view>
+      <view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
+        点击加载更多
+      </view>
+      <view wx:if='{{pageLis==1}}' class='navgengduo'>
+        列表已全部加载完成
+      </view>
+    </view>
+  </view>
+</view>

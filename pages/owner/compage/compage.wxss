@@ -1,0 +1,63 @@
+swiper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+swiper-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top:0rpx;
+  left: 0rpx;
+}
+video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+image {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+.desc {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20rpx;
+  color: #333;
+  font-size: 24rpx;
+  line-height: 36rpx;
+  background: rgba(255,255,255,0.9);
+  box-sizing: border-box;
+  overflow-x: auto;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.descs{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20rpx;
+  color: #333;
+  font-size: 24rpx;
+  line-height: 36rpx;
+  background: rgba(255,255,255,0.9);
+  box-sizing: border-box;
+}

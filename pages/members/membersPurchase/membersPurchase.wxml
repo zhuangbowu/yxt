@@ -1,0 +1,109 @@
+<view class='purchheader'>
+  合计：<text>￥{{dataTotal}}</text>
+</view>
+<view wx:if='{{shopData.dispatch_type==1}}'>
+  <view class='tobe'>
+    <view>
+      取货方式
+    </view>
+    <view>
+      <view>配送</view>
+    </view>
+  </view>
+  <view class='tobe'>
+    <view>
+      姓名
+    </view>
+    <view>
+      <input placeholder='请填写您的姓名' bindinput='username'></input>
+    </view>
+  </view>
+  <view class='tobe'>
+    <view>
+      联系方式
+    </view>
+    <view>
+      <input placeholder='请填写您的联系方式' bindinput='usercntact' type='number'></input>
+    </view>
+  </view>
+  <view class='tobe' bindtap='getLoadtion'>
+    <view>
+      地址
+    </view>
+    <view>
+      <input placeholder='请选择您的所在地区' disabled='true' value='{{userDistribution.myLoadtion}}'></input>
+    </view>
+    <view>
+      <image src='../../../img/drop-down3.png'></image>
+    </view>
+  </view>
+  <view class='tobe'>
+    <view>
+      详细地址
+    </view>
+    <view>
+      <input placeholder='请填写您的详细地址' bindinput='userhouseholds'></input>
+    </view>
+  </view>
+  <view class='tobe' style='margin-bottom:100rpx;'>
+    <view>
+      备注
+    </view>
+    <view>
+      <input placeholder='选填（如有其他要求填入这里）' bindinput='userother'></input>
+    </view>
+  </view>
+  <view class='footer' bindtap='userSubmission'>
+    提交
+  </view>
+</view>
+<view wx:if='{{shopData.dispatch_type==2}}'>
+  <view class='tobe'>
+    <view>
+      取货方式
+    </view>
+    <view>
+      <view>自提</view>
+    </view>
+  </view>
+  <view class='tobe'>
+    <view>
+      姓名
+    </view>
+    <view>
+      <input placeholder='请填写您的姓名' bindinput='username2'></input>
+    </view>
+  </view>
+  <view class='tobe'>
+    <view>
+      联系方式
+    </view>
+    <view>
+      <input placeholder='请填写您的联系方式' bindinput='usercntact2' type='number'></input>
+    </view>
+  </view>
+  <view class='tobe'>
+    <view>
+      地址
+    </view>
+    <view>
+      <view>
+        {{pick_address}}
+      </view>
+    </view>
+    <view>
+      <image src='../../../img/drop-down3.png'></image>
+    </view>
+  </view>
+  <view class='tobe' style='margin-bottom:100rpx;'>
+    <view>
+      备注
+    </view>
+    <view>
+      <input placeholder='选填（如有其他要求填入这里）' bindinput='userother2'></input>
+    </view>
+  </view>
+  <view class='footer' bindtap='userSubmission2'>
+    提交
+  </view>
+</view>

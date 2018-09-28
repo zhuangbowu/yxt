@@ -1,0 +1,30 @@
+<view class='data' wx:for="{{arrData}}" wx:key>
+  <view class='header'>
+    <view>
+      姓名：{{item.user_name}}
+    </view>
+    <view>
+      订单合计：{{item.order_money}}
+    </view>
+  </view>
+  <view class='content' wx:for="{{item.product_list}}" wx:for-item="indexData" wx:key>
+    <view>
+      {{indexData.product_name}}
+    </view>
+    <view>
+      数量：*{{indexData.num}}
+    </view>
+    <view>
+      价格：￥{{indexData.group_price}}
+    </view>
+  </view>
+  <view class='footer'>
+    佣金金额:{{item.commission}}
+  </view>
+</view>
+<view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
+  下拉加载更多
+</view>
+<view wx:if='{{pageLis==1}}' class='navgengduo'>
+  商品已全部加载完成
+</view>

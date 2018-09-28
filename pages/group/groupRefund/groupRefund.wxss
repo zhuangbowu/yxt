@@ -1,0 +1,69 @@
+page{
+  background-color: #f1f1f1;
+}
+.refund{
+  margin-top: 20rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: calc(100% - 40rpx);
+  padding: 20rpx;
+  border-bottom:2rpx solid #e2e2e2;
+}
+.refund>view:nth-child(1){
+  width: 160rpx;
+  height: 160rpx;
+}
+.refund>view:nth-child(1)>image{
+  width: 160rpx;
+  height: 160rpx;
+}
+.refund>view:nth-child(2){
+  width: 560rpx;
+  margin-left: 40rpx;
+}
+.refund>view:nth-child(2)>view:nth-child(1){
+  font-size: 30rpx;
+  padding-top: 30rpx;
+}
+.refund>view:nth-child(2)>view:nth-child(2){
+  font-size: 30rpx;
+  padding-top: 30rpx;
+}
+.refund>view:nth-child(2)>view:nth-child(2)>text{
+  text-decoration: line-through;
+  color:#999;
+  font-size: 28rpx;
+  margin-left: 20rpx;
+}
+.refund-input{
+  background-color: #fff;
+  width: calc(100% - 40rpx);
+  padding: 0rpx 20rpx;
+}
+.refund-input>view{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  font-size: 28rpx;
+  color:#333;
+  line-height: 80rpx;
+}
+.refund-input>view>input{
+  height: 80rpx;
+  margin-left: 20rpx;
+  border-bottom:2rpx soldi #e2e2e2;
+}
+.refund-fiexd{
+  position:fixed;
+  bottom:0rpx;
+  left: 0rpx;
+  width: 100%;
+  height: 100rpx;
+  background-color: #44a0b7;
+  color:#fff;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 32rpx;
+}

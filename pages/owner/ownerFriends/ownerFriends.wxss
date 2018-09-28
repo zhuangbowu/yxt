@@ -1,0 +1,30 @@
+.friends{
+  width: 100%;
+  padding-top: 200rpx;
+}
+.friends>image{
+  display: block;
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 auto;
+}
+.friends>view{
+  font-size: 32rpx;
+  color:#333;
+  text-align: center;
+  line-height: 46rpx;
+  margin-top: 20rpx;
+}
+.friends-footer{
+  position: fixed;
+  bottom:0rpx;
+  left: 0rpx;
+  background-color: #44a0b7;
+  color:#fff;
+  font-size: 28rpx;
+  line-height:80rpx;
+  height: 80rpx; 
+  width: 100%;
+  text-align: center;
+  border-radius:0rpx;
+}

@@ -1,0 +1,81 @@
+<view class='tobe'>
+  <view>
+    姓名
+  </view>
+  <view>
+    <input placeholder='请填写您的姓名' bindinput='username'></input>
+  </view>
+</view>
+<view class='tobe'>
+  <view>
+    联系方式
+  </view>
+  <view>
+    <input placeholder='请填写您的联系方式' bindinput='usercntact'></input>
+  </view>
+</view>
+<view class='tobe' bindtap='getLoadtion'>
+  <view>
+    所在地区
+  </view>
+  <view>
+    <input placeholder='请选择您的所在地区' disabled='true' value='{{myLoadtion}}'></input>
+  </view>
+  <view>
+    <image src='../../../img/drop-down3.png'></image>
+  </view>
+</view>
+<view class='tobe'>
+  <view>
+    所在小区
+  </view>
+  <view>
+    <input placeholder='请填写您的所在小区' bindinput='userresidential'></input>
+  </view>
+</view>
+<view class='tobe'>
+  <view>
+    小区户数
+  </view>
+  <view>
+    <input placeholder='请填写您的小区户数' bindinput='userhouseholds'></input>
+  </view>
+</view>
+  <view class='apply-radio'>
+    <view>您是否有自己组建的领居群</view>
+    <radio-group class="radio-group" bindchange="radioChange1">
+        <label class="radio" wx:for="{{neighbor}}" wx:key>
+            <radio value="{{item.name}}" checked="{{item.checked}}"  />{{item.value}}
+        </label>
+    </radio-group>
+  </view>
+  <view class='apply-radio'>
+    <view>您是否有网络销售经验</view>
+    <radio-group class="radio-group" bindchange="radioChange2">
+        <label class="radio" wx:for="{{Sale}}" wx:key>
+            <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+        </label>
+    </radio-group>
+  </view>
+  <view class='apply-radio'>
+    <view>您可以用于团购的时间</view>
+    <radio-group class="radio-group" bindchange="radioChange3">
+        <label class="radio" wx:for="{{times}}" wx:key>
+            <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+        </label>
+    </radio-group>
+  </view>
+<view class='tobe' style='margin-bottom:100rpx;'>
+  <view>
+    其他
+  </view>
+  <view>
+    <input placeholder='选填' bindinput='userother'></input>
+  </view>
+</view>
+<view class='footer' bindtap='userSubmission' wx:if="{{hrader_num==1}}">
+  接受邀请
+</view>
+<view class='footer' bindtap='userSubmission' wx:if="{{hrader_num==2}}">
+  发送申请
+</view>

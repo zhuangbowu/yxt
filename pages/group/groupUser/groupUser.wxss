@@ -1,0 +1,90 @@
+/* pages/ownerUser/ownerUser.wxss */
+.userHeader{
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  background-color: #08c4d7;
+  width: 100%;
+}
+.userHeader>view:nth-child(1){
+  margin: 0 auto 30rpx;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius:80rpx;
+  background-color: #fff;
+  overflow: hidden;
+}
+.userHeader>view:nth-child(1)>image{
+  width: 160rpx;
+  height:160rpx;
+}
+.userHeader>view:nth-child(2){
+  text-align: center;
+  font-size: 32rpx;
+  line-height: 32rpx;
+}
+.userHeader>view:nth-child(3){
+  text-align: center;
+  font-size: 32rpx;
+  margin-top: 30rpx;
+}
+.userHeader>view:nth-child(3)>text{
+  display: inline-block;
+  padding: 6rpx 14rpx;
+  background-color: #ffce00;
+  color:#fff;
+  border-radius:5rpx;
+  margin-left: 10rpx;
+}
+.userUl{
+  margin-bottom: 100rpx;
+}
+.userList{
+  width: 100%;
+  height: 80rpx;
+  line-height:80rpx;
+  position: relative; 
+  border-bottom: 2rpx solid #e2e2e2;
+}
+.userList>image{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top:20rpx;
+  left: 20rpx;
+}
+.userList>view:nth-child(2){
+  padding-left: 80rpx;
+  font-size: 32rpx;
+  color:#333;
+}
+.userList>view:nth-child(3){
+  position: absolute;
+  font-size: 32rpx;
+  color:#333;
+  top:0rpx;
+  right: 20rpx;
+}
+.footer{
+  position: fixed;
+  bottom:0rpx;
+  left: 0rpx;
+  width: 100%;
+  height: 100rpx;
+  background: #fff;
+  display: flex;
+  flex-grow: wrap;
+  justify-content: space-around;
+  text-align: center;
+}
+.footer>view{
+  width: calc(100% / 3);
+}
+.footer>view>view{
+  font-size: 28rpx;
+  line-height: 28rpx;
+}
+.footer>view>image{
+  width: 50rpx;
+  height: 50rpx;
+  padding-top: 10rpx;
+}

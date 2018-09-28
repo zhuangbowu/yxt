@@ -1,0 +1,30 @@
+<view class='edit'>
+  <view>
+    头像
+  </view>
+  <image src='{{userName.head_image}}' class='edit-img' bindtap='changImage' mode='aspectFill'></image>
+  <image class='edit-right' src='../../../img/drop-down3.png'></image>
+</view>
+<view class='edit-name'>
+  <view>
+    昵称
+  </view>
+  <view bindtap='wxEject'>
+    {{userName.nick_name}}
+  </view>
+    <image class='edit-name-right' src='../../../img/drop-down3.png'></image>
+</view>
+<view class='msak' hidden='{{hiddenmodalput}}'>
+  <view class='msak-no' bindtap='modalinput2'></view>
+  <view class='msak-content'>
+    <view class='msak-title'>修改昵称</view>
+    <view class='msak-con-content'>
+      <view>输入新昵称：</view>
+      <input placeholder='默认昵称' value='' bindinput='hiddenName'></input>
+    </view>
+    <view class='msak-btn'>
+      <view bindtap='modalinput2'>取消</view>
+      <view bindtap='modalinput'>确定</view>
+    </view>
+  </view>
+</view>

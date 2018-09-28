@@ -1,0 +1,74 @@
+page{
+  width: 100%;
+  height: 100%;
+}
+.index-link{
+  width: 560rpx;
+  margin: 0 auto;
+}
+.index-logo{
+  margin-left: 10%;
+  margin-top: 60rpx;
+  width: 240rpx;
+}
+.index-head{
+  width:100%;
+  display: block;
+  margin: 80rpx auto 50rpx;
+}
+.index-link>view{
+  border-radius: 14rpx;
+  margin: 20rpx auto;
+  font-weight: bold;
+  width: 560rpx;
+  height: 100rpx;
+  text-align: center;
+  font-size: 35rpx;
+  line-height: 100rpx;
+  color:#333;
+}
+.index-owner{
+  background-color:#01bbec; 
+}
+.index-group{
+  background-color: #fcef17;
+}
+.index-members{
+  background-color: #7ecdf4;
+}
+.mask{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0px;
+  left: 0px;
+}
+.model{
+  position: fixed;
+  width: 600rpx;
+  background-color: #fff;
+  left: 50%;
+  top:200rpx;
+  z-index: 1;
+  border-radius: 20rpx;
+  margin-left: -300rpx;
+}
+.modelTitle{
+  font-size: 38rpx;
+  font-weight: bold;
+  color:#000;
+  line-height: 100rpx;
+  border-bottom: 2rpx solid #e2e2e2;
+  text-align: center;
+}
+.modelBody{
+  padding: 30rpx 20rpx;
+  font-size: 32rpx;
+  color:#666;
+  line-height: 48rpx;
+}
+.agree{
+  color:#01bbec;
+  font-size: 42rpx;
+}
