@@ -27,7 +27,6 @@ Page({
       },
       success: res => {
         if (res.data.code == 1) {
-          console.log(res);
           thad.setData({
             shopData:res.data.data
           })
@@ -91,6 +90,7 @@ Page({
   },
   navDdelallsda:function(){
     var id=this.data.id;
+    
     wx.redirectTo({
       url: '../membersSee/membersSee?id='+id,
     })

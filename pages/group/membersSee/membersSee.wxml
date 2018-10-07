@@ -1,30 +1,49 @@
-<view class='data' wx:for="{{arrData}}" wx:key>
-  <view class='header'>
+<view class='league-bak'>
+  <view class='league-embers' bindtap='navDetails' wx:for="{{listData}}" data-hi='{{index}}' wx:key>
     <view>
-      姓名：{{item.user_name}}
+      <view>
+        状态：
+        <text wx:if="{{item.pick_status==1}}">已取货</text>
+        <text wx:if="{{item.pick_status==0}}">未取货</text>
+      </view>
+      <view>
+        合计：￥{{item.order_money}}
+      </view>
     </view>
-    <view>
-      订单合计：{{item.order_money}}
+    <view class='league-content'>
+      <view>
+        <image src='{{item.avatar}}'></image>
+      </view>
+      <view>
+        <view>
+          {{item.user_name}}
+          <image src='../../../img/aaot.png' catchtap="outMessage" class='imagess' data-hi='{{index}}'></image>
+          <image src='../../../img/telephone.png' catchtap="dialTelephone" class='images' data-hi='{{item.user_telephone}}'></image>
+        </view>
+        <view>
+          <view wx:for="{{item.product_list}}" wx:for-item="listSst" wx:key>
+            <view>
+              <view>{{listSst.product_name}}</view>
+              <text wx:if="{{listSst.status==0}}">已付款</text>
+              <text wx:if="{{listSst.status==1}}">退货中</text>
+              <text wx:if="{{listSst.status==2}}">已退货</text>
+              <text wx:if="{{listSst.status==3}}">已完成</text>
+            </view>
+            <view>
+              {{listSst.num}}×{{listSst.group_price}}
+            </view>
+          </view>
+        </view>
+      </view>
     </view>
-  </view>
-  <view class='content' wx:for="{{item.product_list}}" wx:for-item="indexData" wx:key>
-    <view>
-      {{indexData.product_name}}
+    <view class='league-address'>
+      收货地址：{{item.pick_address}}
     </view>
-    <view>
-      数量：*{{indexData.num}}
-    </view>
-    <view>
-      价格：￥{{indexData.group_price}}
-    </view>
-  </view>
-  <view class='footer'>
-    佣金金额:{{item.commission}}
   </view>
 </view>
 <view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
-  下拉加载更多
+  点击加载更多
 </view>
 <view wx:if='{{pageLis==1}}' class='navgengduo'>
-  商品已全部加载完成
+  团员订单已全部加载完成
 </view>

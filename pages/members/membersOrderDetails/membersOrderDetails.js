@@ -1,4 +1,5 @@
 var app = getApp();
+import Card from '../../../palette/card';
 // pages/members/membersOrderDetails/membersOrderDetails.js
 Page({
 
@@ -6,9 +7,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    template: {},
     shopData: new Object(),
     imageUrl: '',
-    imageUrlCk: false
+    imageUrlCk: false,
+    order: '',
+    imagePath: '',
+    imageUrls: ''
   },
 
   /**
@@ -17,17 +22,62 @@ Page({
   onLoad: function(options) {
     var order = options.order;
     var thad = this;
+    thad.setData({
+      order: options.order
+    })
+    wx.showLoading({
+      title: '分享中',
+    })
     wx.request({
       url: app.globalData.networkAddress + '/wapp/User/getOrderDetail',
       method: "post",
       data: {
         "user_id": app.globalData.information.id,
-        "order_no": order
+        "order_no": thad.data.order
       },
       success: res => {
         if (res.data.code == 1) {
           thad.setData({
             shopData: res.data.data
+          })
+          var aaaa = thad.data.shopData;
+          thad.setData({
+            template: new Card().palette(aaaa),
+          });
+          wx.hideLoading();
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+      }
+    })
+  },
+  onImgOK(e) {
+    wx.showLoading({
+      title: '分享中',
+    })
+    this.data.imagePath = e.detail.path;
+    this.setData({
+      imagePath: e.detail.path
+    })
+    var thad = this;
+    wx.uploadFile({
+      url: app.globalData.networkAddress + '/wapp/Pub/uploadImg',
+      method: "post",
+      filePath: thad.data.imagePath,
+      name: 'file',
+      formData: {
+        "order_no": thad.data.order,
+        'user': 'test'
+      },
+      success: res => {
+        wx.hideLoading();
+        var data = JSON.parse(res.data);
+        if (data.code == 1) {
+          thad.setData({
+            imageUrls: data.data.img_url
           })
         } else {
           wx.showToast({
@@ -35,9 +85,9 @@ Page({
             icon: 'none'
           })
         }
-
       }
     })
+    wx.hideLoading();
   },
 
   /** 
@@ -50,41 +100,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    // var thad = this;
-    // setTimeout(function() {
-    //   var aaa = thad.data.shopData.product_list;
-    //   const ctx = wx.createCanvasContext('ttcanvas'); 
-    //   var Top = 10;
-    //   var Left = 80; 
-    //   // canvas 背景颜色设置不成功，只好用白色背景图
-    //   ctx.drawImage('../../../img/WechatIMG92.jpeg', 0, 0, 400, 800);
-    //   for (var i = 0; i < aaa.length;i++){
-    //     // ctx.drawImage(aaa[i].product_swiper[0].urlImg, 10, Top, 160, 160);
-    //     ctx.drawImage('http://www.ybt9.com/upload/20180926/ea281900a8203beae726fb0144266cc7.jpg', 10, Top, 160, 160);
-    //     ctx.save()
-    //     ctx.setFontSize(32)
-    //     ctx.setFillStyle("#000")
-    //     ctx.fillText(aaa[i].product_name, 200, Left);
-    //     ctx.setFillStyle("red")
-    //     ctx.fillText(aaa[i].group_price, 200, (Left+60));
-    //     ctx.setFillStyle("red")
-    //     ctx.fillText('x' + aaa[i].num, 280, (Left + 60));
-    //     Top = Top+180;
-    //     Left = Left + 160;
-    //   };
-    //   setTimeout(function () {
-    //     ctx.draw()
-    //     wx.canvasToTempFilePath({
-    //       canvasId: 'ttcanvas',
-    //       success: function (res) {
-    //         console.log(res.tempFilePath);
-    //         thad.setData({
-    //           locolurl: res.tempFilePath
-    //         })
-    //       }
-    //     })
-    //   }, 1000);
-    // }, 500)
+
   },
 
   /**
@@ -119,11 +135,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    // var aaa = this.data.locolurl;
-    var group_id = this.data.shopData.group_id;
+    var thad=this;
+    var group_id = thad.data.shopData.group_id;
     return {
       title: '优鲜团-优先天下鲜，美味任你团',
-      path: '/pages/members/membersDetails/membersDetails?id=' + group_id
+      path: '/pages/members/membersDetails/membersDetails?id=' + group_id,
+      imageUrl: thad.data.imageUrls,
     }
   },
   navIndex: function() {
@@ -134,16 +151,16 @@ Page({
   navCode: function() {
     var thad = this;
     wx.request({
-      url: app.globalData.networkAddress + '/wapp/User/getOrderDetail',
+      url: app.globalData.networkAddress + '/wapp/User/getPickQrcode',
       method: "post",
       data: {
-        "scene": thad.data.order_no,
+        "scene": thad.data.order,
         "page": 'pages/members/membersDetailsTwo/membersDetailsTwo'
       },
       success: res => {
         if (res.data.code == 1) {
           thad.setData({
-            imageUrl: res.data.data,
+            imageUrl: res.data.data.data,
             imageUrlCk: true
           })
         } else {

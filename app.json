@@ -35,6 +35,7 @@
     "pages/owner/orderListDetailed/orderListDetailed",
     "pages/owner/orderList/orderList",
     "pages/owner/ownerForward/ownerForward",
+    "pages/group/ownerForward/ownerForward",
     "pages/group/ownerDetailed/ownerDetailed",
     "pages/owner/ownerUser/ownerUser",
     "pages/owner/ownerRefundList/ownerRefundList",

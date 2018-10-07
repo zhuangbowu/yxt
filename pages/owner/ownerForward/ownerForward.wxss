@@ -43,11 +43,6 @@
   line-height: 60rpx;
 }
 .fowar-form{
-  width: 100%;
-  height: 100rpx;
-  margin-top: 40rpx;
-}
-.fowar-form>view{
   width: 80%;
   height: 100rpx;
   line-height: 100rpx;

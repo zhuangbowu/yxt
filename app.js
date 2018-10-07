@@ -21,7 +21,7 @@ App({
   },
   globalData: {
     appCode:null,
-    networkAddress: 'https://www.ybt9.com',
+    networkAddress: 'http://192.168.3.64',
     openId:null,
     information: new Object(),
     owner:new Object()

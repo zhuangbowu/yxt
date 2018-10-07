@@ -120,7 +120,7 @@
   width: 180rpx;
   position: absolute;
   bottom:-22rpx;
-  right:-26rpx;
+  right:-14rpx;
 }
 .owner-cont-cont-num2{
   border-top:2rpx solid #7cd69a;

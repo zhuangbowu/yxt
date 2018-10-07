@@ -2,14 +2,14 @@ var app=getApp();
 // pages/group/membersSee/membersSee.js
 Page({
 
-  /**
+  /** 
    * 页面的初始数据
    */
   data: {
     page: 0,
     num: 20,
     pageLis: 0,
-    arrData:new Array(),
+    listData:new Array(),
     groud:''
   },
 
@@ -23,11 +23,12 @@ Page({
       groud: groud
     })
     wx.request({
-      url: app.globalData.networkAddress + '/wapp/Leader/getGroupOrder',
+      url: app.globalData.networkAddress + '/wapp/Leader/getGroupOrderNew',
       method: 'post',
       data: {
         "leader_id": app.globalData.information.id,
         "group_id": thad.data.groud,
+        "keywords":'',
         "page": thad.data.page,
         "page_num": thad.data.num
       },
@@ -40,7 +41,7 @@ Page({
             })
           }
           thad.setData({
-            arrData: res.data.data
+            listData: res.data.data
           })
         } else {
           wx.showToast({
@@ -96,7 +97,7 @@ Page({
       page: thad.data.page + 1
     })
     wx.request({
-      url: app.globalData.networkAddress + '/wapp/Leader/getGroupOrder',
+      url: app.globalData.networkAddress + '/wapp/Leader/getGroupOrderNew',
       method: 'post',
       data: {
         "leader_id": app.globalData.information.id,
@@ -112,9 +113,9 @@ Page({
               pageLis: 1
             })
           }
-          var aaa = thad.data.arrData.concat(res.data.data);
+          var aaa = thad.data.listData.concat(res.data.data);
           thad.setData({
-            arrData: aaa
+            listData: aaa
           })
         } else {
           wx.showToast({
@@ -166,5 +167,89 @@ Page({
     //     }
     //   }
     // })
+  },
+  navDetails: function (e) {
+    var indexs = e.currentTarget.dataset.hi;
+    var order = this.data.listData[indexs].order_no;
+    wx.navigateTo({
+      url: '../membersDetails/membersDetails?order=' + order,
+    })
+  },outMessage: function(e) {
+    var order = this.data.listData[e.currentTarget.dataset.hi].order_no;
+    wx.showModal({
+      title: '确认框',
+      content: '是否确定发送按钮',
+      success: function(res) {
+        if (res.confirm) {
+          wx.request({
+            url: app.globalData.networkAddress + '/wapp/Leader/sendSms',
+            method: 'post',
+            data: {
+              "leader_id": app.globalData.information.id,
+              "order_no": order
+            },
+            success: res => {
+              if (res.data.code == 1) {
+                wx.showToast({
+                  title: res.data.msg,
+                })
+              } else {
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'none'
+                })
+              }
+            }
+          })
+        } else if (res.cancel) {
+          wx.showToast({
+            title: '已取消发送短信',
+            icon:'none'
+          })
+        }
+      }
+    })
+  },
+  outMessage: function (e) {
+    var order = this.data.listData[e.currentTarget.dataset.hi].order_no;
+    wx.showModal({
+      title: '确认框',
+      content: '是否确定发送按钮',
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            url: app.globalData.networkAddress + '/wapp/Leader/sendSms',
+            method: 'post',
+            data: {
+              "leader_id": app.globalData.information.id,
+              "order_no": order
+            },
+            success: res => {
+              if (res.data.code == 1) {
+                wx.showToast({
+                  title: res.data.msg,
+                })
+              } else {
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'none'
+                })
+              }
+            }
+          })
+        } else if (res.cancel) {
+          wx.showToast({
+            title: '已取消发送短信',
+            icon: 'none'
+          })
+        }
+      }
+    })
+  },
+  dialTelephone: function (e) {
+    var Numbers = e.currentTarget.dataset.hi;
+    wx.makePhoneCall({
+      phoneNumber: Numbers
+    })
   },
 })

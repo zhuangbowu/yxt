@@ -22,8 +22,8 @@
 </view>
 <view class='group-content'>
   <view class='group-content-list' wx:for='{{shopData.product_list}}' bindtap='navDetails' data-hi='{{index}}' wx:key>
-    <image src='{{item.product_img[0].urlImg}}' wx:if="{{item.product_img[0].types==1}}"></image>
-    <video src='{{item.product_img[0].urlImg}}' wx:if="{{item.product_img[0].types==2}}"></video>
+    <image src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==1}}"></image>
+    <video src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==2}}"></video>
     <view>
       <view>{{item.product_name}}</view>
       <view>{{item.product_desc}}</view>

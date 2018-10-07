@@ -9,7 +9,9 @@ Page({
     wholeFprwar:false,
     wholeText:'啊啊啊啊',
     wholeMoney:0,
-    inputMoney:''
+    inputMoney:'',
+    wholetrue:false,
+    token:''
   },
 
   /**
@@ -20,6 +22,27 @@ Page({
     this.setData({
       wholeMoney: num
     });
+    var thad=this;
+    wx.request({
+      url: app.globalData.networkAddress +'/wapp/Pub/getToken',
+      method:'post',
+      data:{
+        "user_id": app.globalData.owner.header_id,
+        "type": 1
+      },
+      success:res=>{
+        if(res.data.code==1){
+          thad.setData({
+            token:res.data.data
+          })
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+      }
+    })
   },
 
   /**
@@ -80,8 +103,8 @@ Page({
         wholeFprwar: true
       })
     } else {
-      var numMoney=Number(this.data.wholeMoney)*0.01;
-      var texts = '扣除￥' + numMoney +'手续费（费率1%）'
+      var numMoney=Number(this.data.wholeMoney)*0.006;
+      var texts = '扣除￥' + numMoney +'手续费（费率0.6%）'
       this.setData({
         inputMoney: wholeMoney,
         wholeText: texts,
@@ -113,16 +136,24 @@ Page({
         icon: 'none'
       })
     }else{
+      var thad=this;
+      thad.setData({
+        wholetrue: true
+      })
       wx.request({
         url: app.globalData.networkAddress + '/wapp/Header/withDraw',
         method:'post',
         data:{
           "header_id": app.globalData.owner.header_id,
-          "money": inputValue
+          "money": inputValue,
+          "token":thad.data.token
         },
         success: res => {
           console.log(res);
           if(res.data.code==1){
+            wx.showToast({
+              title: '提现成功',
+            })
             wx.redirectTo({
               url: '../ownerUser/ownerUser',
             })
@@ -141,7 +172,10 @@ Page({
                       "open_id": developer
                     },
                     success:res=>{
-                      if(res.data.code==1){
+                      if (res.data.code == 1) {
+                        thad.setData({
+                          wholetrue: false
+                        })
                         wx.showToast({
                           title: '绑定成功',
                         })
@@ -154,7 +188,10 @@ Page({
                     }
                   })
                 }
-                if(res.cancel){
+                if (res.cancel) {
+                  thad.setData({
+                    wholetrue: false
+                  })
                   wx.showToast({
                     title: '取消绑定微信号',
                     icon:'none'
@@ -162,7 +199,10 @@ Page({
                 }
               }
             })
-          }else{
+          } else {
+            thad.setData({
+              wholetrue: false
+            })
             wx.showToast({
               title: res.data.msg,
               icon:'none'

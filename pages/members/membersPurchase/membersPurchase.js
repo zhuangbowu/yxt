@@ -24,7 +24,8 @@ Page({
       userHouseholds: '',
       userName: '',
       userOther: ''
-    }
+    },
+    Nums: false
   },
 
   /**
@@ -59,6 +60,7 @@ Page({
             var ccc = thad.data.shopData.product_list[i].group_price;
             dataTotal += bbb * ccc;
           }
+          dataTotal=dataTotal.toFixed(2);
           thad.setData({
             dataTotal: dataTotal
           })
@@ -72,7 +74,6 @@ Page({
           thad.setData({
             ['shopData.product_list']: arrList
           })
-          console.log(thad.data.shopData);
           if (thad.data.shopData.dispatch_type == 2) {
             wx.request({
               url: app.globalData.networkAddress + '/wapp/User/getDispatchSites',
@@ -206,230 +207,235 @@ Page({
     })
   },
   userSubmission: function() {
-    var Nums = 1
-    if (Nums = 1) {
-      Nums = 2
-      var objj = this.data.userDistribution;
-      if (this.data.dataTotal <= 0) {
-        wx.showToast({
-          title: '商品数量不能为空',
-          icon: 'none'
-        })
-      } else if (objj.userName == '') {
-        wx.showToast({
-          title: '请输入您的姓名',
-          icon: 'none'
-        })
-      } else if (objj.userContact == '') {
-        wx.showToast({
-          title: '请输入您的联系方式',
-          icon: 'none'
-        })
-      } else if (!(/^1[34578]\d{9}$/.test(objj.userContact))) {
-        wx.showToast({
-          title: '请输入正确的联系方式',
-          icon: 'none'
-        })
-      } else if (objj.myLoadtion == '') {
-        wx.showToast({
-          title: '请选择您的所在地区',
-          icon: 'none'
-        })
-      } else if (objj.userHouseholds == '') {
-        wx.showToast({
-          title: '请输入您的详细地址',
-          icon: 'none'
-        })
-      } else {
-        var thad = this.data;
-        var objjs = new Object();
-        objjs = {
-          "user_id": app.globalData.information.id,
-          "header_id": thad.shopData.header_id,
-          "leader_id": thad.shopData.leader_id,
-          "header_group_id": thad.shopData.header_group_id,
-          "group_id": thad.group_id,
-          "pick_type": thad.shopData.dispatch_type,
-          "pick_address": objj.myLoadtion + ' ' + objj.userHouseholds,
-          "pay_type": 1,
-          "user_name": objj.userName,
-          "user_telephone": objj.userContact,
-          "remarks": objj.userOther,
-          "product_list": thad.shopData.product_list
-        }
-        wx.request({
-          url: app.globalData.networkAddress + '/wapp/User/makeOrder',
-          method: 'post',
-          data: objjs,
-          success: res => {
-            if (res.data.code == 1) {
-              var appid = res.data.data.appId;
-              var nonceStr = res.data.data.nonceStr;
-              var packages = res.data.data.package;
-              var sign = res.data.data.sign;
-              var signType = res.data.data.signType;
-              var timeStamp = res.data.data.timeStamp;
-              var bbb = res.data.data.order_no;
-              wx.requestPayment({
-                'timeStamp': timeStamp + '',
-                'nonceStr': nonceStr,
-                'package': packages,
-                'signType': signType,
-                'paySign': sign,
-                'success': function(res) {
-                  wx.showToast({
-                    title: '支付成功',
-                  })
-                  var aaa = app.globalData.information.role_status;
-                  if (aaa == 1) {
-                    wx.redirectTo({
-                      url: '../../group/membersOrderDetails/membersOrderDetails?order=' + bbb,
-                    })
-                  } else if (aaa == 2) {
-                    wx.redirectTo({
-                      url: '../membersOrderDetails/membersOrderDetails?order=' + bbb,
-                    })
-                  }
-                },
-                'fail': function (res) {
-                  Nums = 1;
-                  if (res.requestPayment == 'fail cancel') {
-                    wx.showToast({
-                      title: res.errMsg,
-                      icon: 'none'
-                    })
-                  } else {
-                    wx.showToast({
-                      title: res.errMsg,
-                      icon: 'none'
-                    })
-                  }
-                },
-                'complete': function(res) {
+    this.setData({
+      Nums: true
+    })
 
-                }
-              })
-            } else {
-              Nums = 1;
-              wx.showToast({
-                title: res.data.msg,
-                icon: 'none'
-              })
-            }
-          }
-        })
-      }
+    var objj = this.data.userDistribution;
+    if (this.data.dataTotal <= 0) {
+      wx.showToast({
+        title: '商品数量不能为空',
+        icon: 'none'
+      })
+    } else if (objj.userName == '') {
+      wx.showToast({
+        title: '请输入您的姓名',
+        icon: 'none'
+      })
+    } else if (objj.userContact == '') {
+      wx.showToast({
+        title: '请输入您的联系方式',
+        icon: 'none'
+      })
+    } else if (!(/^1[34578]\d{9}$/.test(objj.userContact))) {
+      wx.showToast({
+        title: '请输入正确的联系方式',
+        icon: 'none'
+      })
+    } else if (objj.myLoadtion == '') {
+      wx.showToast({
+        title: '请选择您的所在地区',
+        icon: 'none'
+      })
+    } else if (objj.userHouseholds == '') {
+      wx.showToast({
+        title: '请输入您的详细地址',
+        icon: 'none'
+      })
     } else {
+      var thad = this.data;
+      var tad = this;
+      var objjs = new Object();
+      objjs = {
+        "user_id": app.globalData.information.id,
+        "header_id": thad.shopData.header_id,
+        "leader_id": thad.shopData.leader_id,
+        "header_group_id": thad.shopData.header_group_id,
+        "group_id": thad.group_id,
+        "pick_type": thad.shopData.dispatch_type,
+        "pick_address": objj.myLoadtion + ' ' + objj.userHouseholds,
+        "pay_type": 1,
+        "user_name": objj.userName,
+        "user_telephone": objj.userContact,
+        "remarks": objj.userOther,
+        "product_list": thad.shopData.product_list
+      }
+      wx.request({
+        url: app.globalData.networkAddress + '/wapp/User/makeOrder',
+        method: 'post',
+        data: objjs,
+        success: res => {
+          if (res.data.code == 1) {
+            var appid = res.data.data.appId;
+            var nonceStr = res.data.data.nonceStr;
+            var packages = res.data.data.package;
+            var sign = res.data.data.sign;
+            var signType = res.data.data.signType;
+            var timeStamp = res.data.data.timeStamp;
+            var bbb = res.data.data.order_no;
+            wx.requestPayment({
+              'timeStamp': timeStamp + '',
+              'nonceStr': nonceStr,
+              'package': packages,
+              'signType': signType,
+              'paySign': sign,
+              'success': function(res) {
+                wx.showToast({
+                  title: '支付成功',
+                })
+                var aaa = app.globalData.information.role_status;
+                if (aaa == 1) {
+                  wx.redirectTo({
+                    url: '../../group/membersOrderDetails/membersOrderDetails?order=' + bbb,
+                  })
+                } else if (aaa == 2) {
+                  wx.redirectTo({
+                    url: '../membersOrderDetails/membersOrderDetails?order=' + bbb,
+                  })
+                }
+              },
+              'fail': function(res) {
+                tad.setData({
+                  Nums: false
+                })
+                if (res.requestPayment == 'fail cancel') {
+                  wx.showToast({
+                    title: res.errMsg,
+                    icon: 'none'
+                  })
+                } else {
+                  wx.showToast({
+                    title: res.errMsg,
+                    icon: 'none'
+                  })
+                }
+              },
+              'complete': function(res) {
 
+              }
+            })
+          } else {
+            tad.setData({
+              Nums: false
+            })
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+          }
+        }
+      })
     }
   },
   userSubmission2: function() {
-    var Nums = 1
-    if (Nums = 1) {
-      Nums = 2
-      var objj = this.data.userSelflifting;
-      if (this.data.dataTotal <= 0) {
-        wx.showToast({
-          title: '商品数量不能为空',
-          icon: 'none'
-        })
-      } else if (objj.userName == '') {
-        wx.showToast({
-          title: '请输入您的姓名',
-          icon: 'none'
-        })
-      } else if (objj.userContact == '') {
-        wx.showToast({
-          title: '请输入您的联系方式',
-          icon: 'none'
-        })
-      } else if (!(/^1[34578]\d{9}$/.test(objj.userContact))) {
-        wx.showToast({
-          title: '请输入正确的联系方式',
-          icon: 'none'
-        })
-      } else {
-        var thad = this.data;
-        var objjs = new Object();
-        objjs = {
-          "user_id": app.globalData.information.id,
-          "header_id": thad.shopData.header_id,
-          "leader_id": thad.shopData.leader_id,
-          "header_group_id": thad.shopData.header_group_id,
-          "group_id": thad.group_id,
-          "pick_type": thad.shopData.dispatch_type,
-          "pick_address": thad.pick_address,
-          "pay_type": 1,
-          "user_name": objj.userName,
-          "user_telephone": objj.userContact,
-          "remarks": objj.userOther,
-          "product_list": thad.shopData.product_list
-        }
-        wx.request({
-          url: app.globalData.networkAddress + '/wapp/User/makeOrder',
-          method: 'post',
-          data: objjs,
-          success: res => {
-            if (res.data.code == 1) {
-              var appid = res.data.data.appId;
-              var nonceStr = res.data.data.nonceStr;
-              var packages = res.data.data.package;
-              var sign = res.data.data.sign;
-              var signType = res.data.data.signType;
-              var timeStamp = res.data.data.timeStamp;
-              var bbb = res.data.data.order_no;
-              wx.requestPayment({
-                'timeStamp': timeStamp + '',
-                'nonceStr': nonceStr,
-                'package': packages,
-                'signType': signType,
-                'paySign': sign,
-                'success': function(res) {
-                  wx.showToast({
-                    title: '支付成功',
-                  })
-                  var aaa = app.globalData.information.role_status;
-                  if (aaa == 1) {
-                    wx.redirectTo({
-                      url: '../../group/membersOrderDetails/membersOrderDetails?order=' + bbb,
-                    })
-                  } else if (aaa == 2) {
-                    wx.redirectTo({
-                      url: '../membersOrderDetails/membersOrderDetails?order=' + bbb,
-                    })
-                  }
-
-                },
-                'fail': function(res) {
-                  Nums=1;
-                  if (res.requestPayment == 'fail cancel') {
-                    wx.showToast({
-                      title: res.errMsg,
-                      icon: 'none'
-                    })
-                  } else {
-                    wx.showToast({
-                      title: res.errMsg,
-                      icon: 'none'
-                    })
-                  }
-                },
-                'complete': function(res) {
-
-                }
-              })
-            } else {
-              Nums = 1;
-              wx.showToast({
-                title: res.data.msg,
-                icon: 'none'
-              })
-            }
-          }
-        })
-      }
+    this.setData({
+      Nums: true
+    })
+    var objj = this.data.userSelflifting;
+    if (this.data.dataTotal <= 0) {
+      wx.showToast({
+        title: '商品数量不能为空',
+        icon: 'none'
+      })
+    } else if (objj.userName == '') {
+      wx.showToast({
+        title: '请输入您的姓名',
+        icon: 'none'
+      })
+    } else if (objj.userContact == '') {
+      wx.showToast({
+        title: '请输入您的联系方式',
+        icon: 'none'
+      })
+    } else if (!(/^1[34578]\d{9}$/.test(objj.userContact))) {
+      wx.showToast({
+        title: '请输入正确的联系方式',
+        icon: 'none'
+      })
     } else {
+      var thad = this.data;
+      var tad = this;
+      var objjs = new Object();
+      objjs = {
+        "user_id": app.globalData.information.id,
+        "header_id": thad.shopData.header_id,
+        "leader_id": thad.shopData.leader_id,
+        "header_group_id": thad.shopData.header_group_id,
+        "group_id": thad.group_id,
+        "pick_type": thad.shopData.dispatch_type,
+        "pick_address": thad.pick_address,
+        "pay_type": 1,
+        "user_name": objj.userName,
+        "user_telephone": objj.userContact,
+        "remarks": objj.userOther,
+        "product_list": thad.shopData.product_list
+      }
+      wx.request({
+        url: app.globalData.networkAddress + '/wapp/User/makeOrder',
+        method: 'post',
+        data: objjs,
+        success: res => {
+          if (res.data.code == 1) {
+            var appid = res.data.data.appId;
+            var nonceStr = res.data.data.nonceStr;
+            var packages = res.data.data.package;
+            var sign = res.data.data.sign;
+            var signType = res.data.data.signType;
+            var timeStamp = res.data.data.timeStamp;
+            var bbb = res.data.data.order_no;
+            wx.requestPayment({
+              'timeStamp': timeStamp + '',
+              'nonceStr': nonceStr,
+              'package': packages,
+              'signType': signType,
+              'paySign': sign,
+              'success': function(res) {
+                wx.showToast({
+                  title: '支付成功',
+                })
+                var aaa = app.globalData.information.role_status;
+                if (aaa == 1) {
+                  wx.redirectTo({
+                    url: '../../group/membersOrderDetails/membersOrderDetails?order=' + bbb,
+                  })
+                } else if (aaa == 2) {
+                  wx.redirectTo({
+                    url: '../membersOrderDetails/membersOrderDetails?order=' + bbb,
+                  })
+                }
 
+              },
+              'fail': function(res) {
+                tad.setData({
+                  Nums: false
+                })
+                if (res.requestPayment == 'fail cancel') {
+                  wx.showToast({
+                    title: res.errMsg,
+                    icon: 'none'
+                  })
+                } else {
+                  wx.showToast({
+                    title: res.errMsg,
+                    icon: 'none'
+                  })
+                }
+              },
+              'complete': function(res) {
+
+              }
+            })
+          } else {
+            tad.setData({
+              Nums: false
+            })
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+          }
+        }
+      })
     }
 
   }

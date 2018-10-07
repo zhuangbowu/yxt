@@ -1,1 +1,65 @@
-/* pages/group/ownerForward/ownerForward.wxss */
+.fowar{
+  font-size: 28rpx;
+  line-height: 60rpx;
+  color:#333;
+  text-align: left;
+  text-indent: 40rpx;
+}
+.fowar-value{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 600rpx;
+  margin: 0 auto;
+  height: 120rpx;
+  border-bottom:2rpx solid #e2e2e2;
+  margin-bottom: 20rpx;
+}
+.fowar-value>view:nth-child(1){
+  font-size: 60rpx;
+  line-height: 120rpx;
+  width: 80rpx;
+}
+.fowar-value>input:nth-child(2){
+  width: 540rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  font-size: 60rpx;
+}
+.whole{
+  font-size: 28rpx;
+  text-indent: 40rpx;
+  color:#333;
+  line-height: 60rpx;
+}
+.whole>text{
+  color:#629FEE;
+  padding-left: 20rpx;
+}
+.whole2{
+  font-size: 28rpx;
+  text-indent: 40rpx;
+  color:red;
+  line-height: 60rpx;
+}
+.fowar-form{
+  width: 80%;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #ffcd00;
+  color:#fff;
+  font-size: 36rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  margin: 0 auto;
+}
+.cash-text{
+  width: calc(100% - 60rpx);
+  padding: 0rpx 30rpx;
+  font-size: 28rpx;
+  margin-top: 60rpx;
+  color:#999;
+}
+.cash-text>text{
+  display: block;
+}

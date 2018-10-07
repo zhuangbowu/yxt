@@ -6,14 +6,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    name:'yxt',
-    password:'123456'
+    name:'',
+    password:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.setStorageSync('name', '2222');
+    var names = (wx.getStorageSync('name'));
+    console.log(names);
     wx.hideShareMenu();
   },
 
@@ -106,7 +109,9 @@ Page({
             wx.showToast({
               title: '登陆成功'
             })
-            app.globalData.owner = objs.data
+            app.globalData.owner = objs.data;
+            wx.setStorageSync('name', objj.name);
+            wx.setStorageSync('password', objj.password);
             wx.redirectTo({
               url: '../owner/owner',
             })

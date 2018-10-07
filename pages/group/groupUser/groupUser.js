@@ -102,7 +102,7 @@ Page({
   navForward: function () {
     var day = this.data.userData.amount_able;
     wx.navigateTo({
-      url: '../../owner/ownerForward/ownerForward?forward=' + day,
+      url: '../ownerForward/ownerForward?forward=' + day,
     })
   },
   uploadDetailed() {

@@ -10,11 +10,9 @@
     <view class='whole2' hidden='{{!wholeFprwar}}'>
       {{wholeText}}
     </view>
-    <view class='fowar-form'>
-      <view bindtap='formMoney'>
+      <button class='fowar-form' bindtap='formMoney' disabled='{{wholetrue}}'>
         提交
-      </view>
-    </view>
+      </button>
     <view class="cash-text">
       <text class="explain">提现说明</text>
       <text class="explain">1.每日累计额度不超过2万元；</text>

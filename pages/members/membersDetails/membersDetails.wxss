@@ -50,7 +50,7 @@ page{
 .group-title>view:nth-child(1){
   padding: 6rpx 10rpx;
   border-radius: 4rpx;
-  background-color:#18D818;
+  background-color:#44a0b7;
   color:#fff;
   font-size: 28rpx;
   margin-left: 20rpx;
@@ -91,6 +91,7 @@ page{
   left: 20rpx;
 }
 .group-nocite>view:nth-child(2){
+  width: calc(100% - 90rpx);
   overflow: hidden;
   white-space: nowrap;
   animation:myfirst 10s linear infinite;
@@ -137,7 +138,7 @@ page{
 }
 .group-content-list>view:nth-child(2)>view:nth-child(2){
   color:#999;
-  font-size: 32rpx;
+  font-size: 28rpx;
 }
 .group-content-list>view:nth-child(2)>view:nth-child(2){
   width: 100%;
@@ -151,7 +152,7 @@ page{
   position: absolute;
   bottom: 0rpx;
   right: 20rpx;
-  color:#18D818;
+  color:#44a0b7;
   font-size: 32rpx;
 }
 .group-fixed{
@@ -173,7 +174,7 @@ page{
   width: 50%;
 }
 .group-fixed>view:nth-child(1){
-  background-color:#18D818;
+  background-color:#44a0b7;
   color: #fff;
 }
 .group-fixed>view:nth-child(2){
@@ -288,7 +289,7 @@ page{
   font-size: 36rpx;
 }
 .group-fixed1>view{
-  background-color:#18D818;
+  background-color:#44a0b7;
   color: #fff;
   width: 100%;
 }

@@ -4,7 +4,7 @@
   </view>
   <view>
     <text wx:if="{{shopData.pick_status==0}}">未取货</text>
-    <text wx:if="{{shopData.pick_status==1}}" bindtap='navCode'>已取货</text>
+    <text wx:if="{{shopData.pick_status==1}}">已取货</text>
   </view>
 </view>
 <view class='content' wx:for="{{shopData.product_list}}" wx:key>

@@ -1,6 +1,8 @@
 <image src='../../img/index-head.jpg' class='index-head' mode='widthFix'></image>
 <view class='index-link'>
   <view class='index-owner' open-type="getUserInfo" bindtap='navOwner'>城主</view>
-  <view class='index-group' open-type="getUserInfo" bindtap='navGroup' wx:if="{{indexDataL.role_status==2}}">团长</view>
-  <view class='index-members' open-type="getUserInfo" bindtap='navMembers' wx:if="{{indexDataL.role_status==1}}">团员</view>
+  <!-- <view class='index-group' open-type="getUserInfo" bindtap='navGroup' wx:if="{{indexDataL.role_status==2}}">团长</view>
+  <view class='index-members' open-type="getUserInfo" bindtap='navMembers' wx:if="{{indexDataL.role_status==1}}">团员 -->
+  <view class='index-group' open-type="getUserInfo" bindtap='navGroup'>团长</view>
+  <view class='index-members' open-type="getUserInfo" bindtap='navMembers'>团员</view>
 </view>

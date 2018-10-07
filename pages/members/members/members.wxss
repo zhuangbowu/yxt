@@ -115,10 +115,10 @@
   width: 180rpx;
   position: absolute;
   bottom:-22rpx;
-  right:-26rpx;
+  right:-14rpx;
 }
 .owner-cont-content2{
-  border:2rpx solid #18D818;
+  border:2rpx solid #1aad19;
   border-radius: 10rpx;
   margin-left: 100rpx;
 }

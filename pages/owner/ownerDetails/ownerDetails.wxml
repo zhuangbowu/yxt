@@ -22,8 +22,8 @@
 </view>
 <view class='group-content'>
     <view class='group-content-list' bindtap='navDetails' data-hi='{{index}}' wx:for='{{shop.product_list}}' wx:key>
-      <image src='{{item.img_list[0].urlImg}}' wx:if="{{item.img_list[0].types==1}}"></image>
-      <video src='{{item.img_list[0].urlImg}}' wx:if="{{item.img_list[0].types==2}}"></video>
+      <image src='{{item.img_list[0].urlImg}}' mode='aspectFill' wx:if="{{item.img_list[0].types==1}}"></image>
+      <video src='{{item.img_list[0].urlImg}}' mode='aspectFill' wx:if="{{item.img_list[0].types==2}}"></video>
       <view>
         <view><text wx:if="{{item.remain!=-1}}">[限量,剩余{{item.remain}}]</text>{{item.product_name}}</view>
         <view>{{item.product_desc}}</view>
