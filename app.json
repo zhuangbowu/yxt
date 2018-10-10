@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/purposeshare/purposeshare",
     "pages/group/groupshares/groupshares",
     "pages/group/membersSee/membersSee",
     "pages/group/membersSeeOne/membersSeeOne",

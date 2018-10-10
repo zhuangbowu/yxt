@@ -308,16 +308,19 @@ Page({
                 wx.showToast({
                   title: '支付成功',
                 })
-                var aaa = app.globalData.information.role_status;
-                if (aaa == 1) {
-                  wx.redirectTo({
-                    url: '../../group/membersOrderDetails/membersOrderDetails?order=' + bbb,
-                  })
-                } else if (aaa == 2) {
-                  wx.redirectTo({
-                    url: '../membersOrderDetails/membersOrderDetails?order=' + bbb,
-                  })
-                }
+                wx.redirectTo({
+                  url: '../../purposeshare/purposeshare?order=' + bbb,
+                })
+                // var aaa = app.globalData.information.role_status;
+                // if (aaa == 1) {
+                //   wx.redirectTo({
+                //     url: '../../group/membersOrderDetails/membersOrderDetails?order=' + bbb,
+                //   })
+                // } else if (aaa == 2) {
+                //   wx.redirectTo({
+                //     url: '../membersOrderDetails/membersOrderDetails?order=' + bbb,
+                //   })
+                // }
               },
               'fail': function(res) {
                 wx.navigateBack();
@@ -420,17 +423,19 @@ Page({
                 wx.showToast({
                   title: '支付成功',
                 })
-                var aaa = app.globalData.information.role_status;
-                if (aaa == 1) {
-                  wx.redirectTo({
-                    url: '../../group/membersOrderDetails/membersOrderDetails?order=' + bbb,
-                  })
-                } else if (aaa == 2) {
-                  wx.redirectTo({
-                    url: '../membersOrderDetails/membersOrderDetails?order=' + bbb,
-                  })
-                }
-
+                wx.redirectTo({
+                  url: '../../purposeshare/purposeshare?order=' + bbb,
+                })
+                // var aaa = app.globalData.information.role_status;
+                // if (aaa == 1) {
+                //   wx.redirectTo({
+                //     url: '../../group/membersOrderDetails/membersOrderDetails?order=' + bbb,
+                //   })
+                // } else if (aaa == 2) {
+                //   wx.redirectTo({
+                //     url: '../membersOrderDetails/membersOrderDetails?order=' + bbb,
+                //   })
+                // }
               },
               'fail': function(res) {
                 wx.navigateBack();

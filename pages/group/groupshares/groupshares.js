@@ -85,7 +85,6 @@ Page({
    */
   onShareAppMessage: function () {
     var shop_id = this.data.shop.group_id;
-    console.log(shop_id);
     return {
       title: '分享优鲜团',
       path: 'pages/members/membersDetails/membersDetails?id=' + shop_id

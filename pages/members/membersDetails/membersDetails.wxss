@@ -317,3 +317,15 @@ page{
   font-size: 26rpx;
   color:#999;
 }
+.post{
+  position: fixed;
+  width: 120rpx;
+  height: 120rpx;
+  bottom: 200rpx;
+  left: 20rpx;
+  border-radius: 60rpx;
+}
+.post>image{
+  width: 100%;
+  height: 100%;
+}

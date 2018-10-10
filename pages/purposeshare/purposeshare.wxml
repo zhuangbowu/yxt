@@ -1,0 +1,38 @@
+<view class='content'>
+  <view class='contentList' wx:if="{{shopData.product_list.length==1}}" wx:for="{{shopData.product_list}}" wx:key>
+    <image src='{{item.product_swiper[0].urlImg}}' class='contentList-image'></image>
+    <view class='contentList-right'>
+      <view>
+        {{item.product_name}}
+      </view>
+      <view>
+        ￥{{item.group_price}}×1{{item.num}}
+      </view>
+    </view>
+  </view>
+  <view class='contentList2' wx:if="{{shopData.product_list.length==2}}" wx:for="{{shopData.product_list}}" wx:key>
+    <image src='{{item.product_swiper[0].urlImg}}' class='contentList-image2'></image>
+    <view class='contentList-right2'>
+      <view>
+        {{item.product_name}}
+      </view>
+      <view>
+        ￥{{item.group_price}}×1{{item.num}}
+      </view>
+    </view>
+  </view>
+  <view class='contentList3' wx:if="{{shopData.product_list.length>2}}" wx:for="{{shopData.product_list}}" wx:key>
+    <image src='{{item.product_swiper[0].urlImg}}' class='contentList-image3'></image>
+    <view class='contentList-right3'>
+      <view>
+        {{item.product_name}}
+      </view>
+      <view>
+        ￥{{item.group_price}}×1{{item.num}}
+      </view>
+    </view>
+  </view>
+</view>
+<button class='post' open-type='share'>
+  点击分享至好友或群
+</button>

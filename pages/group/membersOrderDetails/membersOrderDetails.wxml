@@ -35,13 +35,13 @@
     姓名：{{shopData.user_name}}
   </view>
   <view>
-    电话：{{shopData.user_telephone}}
-  </view>
-  <view>
     提货地点：{{shopData.pick_address}}
   </view>
   <view>
     备注：{{shopData.remarks}}
+  </view>
+  <view>
+    电话：{{shopData.user_telephone}}
   </view>
 </view>
 <view class='footer'>

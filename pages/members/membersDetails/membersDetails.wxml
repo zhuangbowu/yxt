@@ -98,6 +98,9 @@
     </view>  
   </block>
 </view>
+<view class='post' bindtap='navDingdan'>
+  <image src='../../../img/userdingdan.png'></image>
+</view>
 <view class='group-fixed' wx:if='{{role_status==1}}'>
   <view bindtap='navMembersTobe'>
     我要当团长

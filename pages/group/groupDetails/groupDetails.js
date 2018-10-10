@@ -6,22 +6,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-    group_id:'',
+    group_id: '',
     userNmae: '',
     userImage: '',
     template: {},
-    imagePath:'',
-    imageUrls:'',
+    imagePath: '',
+    imageUrls: '',
     contents: 'file:///D:/zbw/2018-8-27/p1D6701192A1534724919345-1535426211/index.html#screen=sE3EDE298971534988187802',
-    shopListL:new Object(),
-    mysrc:new Array(),
-    userImages:''
+    shopListL: new Object(),
+    mysrc: new Array(),
+    userImages: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.setData({
       group_id: options.id
     })
@@ -49,88 +49,75 @@ Page({
       }
     })
   },
-  
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     wx.hideShareMenu();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
+  onReachBottom: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-   
+  onShareAppMessage: function() {
+
   },
-  navDetails: function (e) {
+  navDetails: function(e) {
     var shop_id = this.data.shopListL.group_id;
     var group_id = e.currentTarget.dataset.hi;
     wx.navigateTo({
       url: '../compage/compage?shop_id=' + shop_id + '&group_id=' + group_id
     })
   },
-  navEdit: function () {
+  navEdit: function() {
     var shop_id = this.data.shopListL.group_id;
     wx.navigateTo({
       url: '../groupEdits/groupEdits?id=' + shop_id
     })
   },
-  navShow:function(){
-    wx.showActionSheet({
-      itemList: ['查看订单','代下单'],
-      success:res=>{
-        if(res.tapIndex==0){
-          var thad = this;
-          wx.redirectTo({
-            url: '../membersSeeOne/membersSeeOne?id=' + thad.data.group_id,
-          })
-        }
-        if(res.tapIndex==1){
-          var thad=this;
-          wx.redirectTo({
-            url: '../../members/membersDetails/membersDetails?id='+thad.data.group_id,
-          })
-        }
-      }
+  navShow: function() {
+    var thad = this;
+    wx.redirectTo({
+      url: '../../members/membersDetails/membersDetails?id=' + thad.data.group_id,
     })
   },
-  openGroup: function () {
+  openGroup: function() {
     var leader_id = app.globalData.information.id;
     var thad = this;
     wx.request({
@@ -153,14 +140,14 @@ Page({
       }
     })
   },
-  noGroup: function () {
+  noGroup: function() {
     var leader_id = app.globalData.information.id;
     var thad = this;
     wx.showModal({
       title: '结束团购',
       content: '是否确认结束团购',
-      success:res=>{
-        if(res.confirm){
+      success: res => {
+        if (res.confirm) {
           wx.request({
             url: app.globalData.networkAddress + '/wapp/Leader/closeGroup',
             method: 'get',
@@ -182,10 +169,10 @@ Page({
             }
           })
         }
-        if(res.cancel){
+        if (res.cancel) {
           wx.showToast({
             title: '已取消操作',
-            icon:'none'
+            icon: 'none'
           })
         }
       }
@@ -193,18 +180,18 @@ Page({
 
   },
 
-  wxEject: function (e) {
+  wxEject: function(e) {
     let thas = this;
     wx.showModal({
       title: '下载数据',
       content: this.data.contents,
-      success: function (res) {
+      success: function(res) {
         if (res.confirm) {
           wx.setClipboardData({
             data: thas.data.contents,
-            success: function (res) {
+            success: function(res) {
               wx.getClipboardData({
-                success: function (res) {
+                success: function(res) {
                   wx.showToast({
                     title: '已复制到剪切板',
                     icon: 'success',
@@ -224,13 +211,13 @@ Page({
       }
     })
   },
-  navDingdan:function(){
+  navDingdan: function() {
     var thad = this;
     wx.redirectTo({
       url: '../membersSeeOne/membersSeeOne?id=' + thad.data.group_id,
     })
   },
-  shares:function(){
+  shares: function() {
     wx.navigateTo({
       url: '../groupshares/groupshares?groupId=' + this.data.group_id,
     })

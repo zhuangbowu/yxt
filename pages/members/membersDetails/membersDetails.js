@@ -370,7 +370,6 @@ Page({
         },
         success: res => {
           if (res.data.code == 1) {
-            console.log(res.data.data.order_no)
             wx.navigateTo({
               url: '../membersPurchase/membersPurchase?group_id=' + thad.data.group_id + '&num=' + thad.data.shopNum + '&order=' + res.data.data.order_no,
             })
@@ -418,5 +417,10 @@ Page({
     //     }
     //   }
     // })
-  }
+  },
+  navDingdan:function(){ 
+    wx.navigateTo({
+      url: '../membersOrder/membersOrder'
+    })
+  },
 })

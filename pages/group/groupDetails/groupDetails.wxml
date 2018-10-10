@@ -48,9 +48,12 @@
       </view>
     </view>
 </view>
+<view class='post' bindtap='navDingdan'>
+  <image src='../../../img/userdingdan.png'></image>
+</view>
 <view class='group-fixed' wx:if="{{shopListL.status==1}}">
   <view bindtap='navShow'>
-    操作
+    代下单
   </view>
   <view bindtap='noGroup'>
     结束团购
@@ -60,9 +63,6 @@
   </button>
 </view>
 <view class='group-fixed' wx:if="{{shopListL.status==2}}">
-  <view class='btn3' bindtap='navDingdan'>
-    查看订单
-  </view>
   <button class='btn2' bindtap="shares">
     晒单
   </button>
