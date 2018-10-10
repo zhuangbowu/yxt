@@ -20,15 +20,13 @@
   </view>
   <view>公告：{{shopListL.notice}}</view>
 </view>
-<view class='group-amount'>
+
+
+<!-- <view class='group-amount'>
   <view>
     <view>{{shopListL.sale_detail.detail.total_order}}</view>
     <view>总单量</view>
   </view>
-  <!-- <view>
-    <view>{{shopListL.sale_detail.detail.total_order}}</view>
-    <view>客单价</view>
-  </view> -->
   <view>
     <view>{{shopListL.sale_detail.detail.total_sale}}</view>
     <view>总销售</view>
@@ -37,7 +35,7 @@
     <view>{{shopListL.sale_detail.detail.total_money}}</view>
     <view>销售总额</view>
   </view>
-</view>
+</view> -->
 <view class='group-content'>
     <view class='group-content-list' wx:for='{{shopListL.product_list}}' bindtap='navDetails' data-hi='{{index}}' wx:key>
       <image src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==1}}"></image>
@@ -57,7 +55,7 @@
   <view bindtap='noGroup'>
     结束团购
   </view>
-  <button class='btn1' open-type="share">
+  <button class='btn1' bindtap="shares">
     分享
   </button>
 </view>
@@ -65,7 +63,7 @@
   <view class='btn3' bindtap='navDingdan'>
     查看订单
   </view>
-  <button class='btn2' open-type="share">
+  <button class='btn2' bindtap="shares">
     晒单
   </button>
 </view>

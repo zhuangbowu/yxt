@@ -11,7 +11,7 @@ Page({
     wholeMoney:0,
     inputMoney:'',
     wholetrue:false,
-    token:''
+    token:'',
   },
 
   /**
@@ -22,18 +22,18 @@ Page({
     this.setData({
       wholeMoney: num
     });
-    var thad=this;
+    var thad = this;
     wx.request({
-      url: app.globalData.networkAddress +'/wapp/Pub/getToken',
-      method:'post',
-      data:{
+      url: app.globalData.networkAddress + '/wapp/Pub/getToken',
+      method: 'post',
+      data: {
         "user_id": app.globalData.owner.header_id,
         "type": 1
       },
-      success:res=>{
-        if(res.data.code==1){
+      success: res => {
+        if (res.data.code == 1) {
           thad.setData({
-            token:res.data.data
+            token: res.data.data
           })
         } else {
           wx.showToast({
@@ -103,8 +103,8 @@ Page({
         wholeFprwar: true
       })
     } else {
-      var numMoney=Number(this.data.wholeMoney)*0.006;
-      var texts = '扣除￥' + numMoney +'手续费（费率0.6%）'
+      var numMoney = (Number(wholeMoney) * 0.6)/100;
+      var texts = '扣除￥' + numMoney.toFixed(2) +'手续费（费率0.6%）'
       this.setData({
         inputMoney: wholeMoney,
         wholeText: texts,
@@ -142,36 +142,36 @@ Page({
       })
       wx.request({
         url: app.globalData.networkAddress + '/wapp/Header/withDraw',
-        method:'post',
-        data:{
+        method: 'post',
+        data: {
           "header_id": app.globalData.owner.header_id,
           "money": inputValue,
-          "token":thad.data.token
+          "token": thad.data.token
         },
         success: res => {
           console.log(res);
-          if(res.data.code==1){
+          if (res.data.code == 1) {
             wx.showToast({
               title: '提现成功',
             })
             wx.redirectTo({
               url: '../ownerUser/ownerUser',
             })
-          }else if(res.data.code==2){
+          } else if (res.data.code == 2) {
             wx.showModal({
               title: '绑定微信',
               content: '确认绑定微信号',
-              success:res=>{
-                if(res.confirm){
+              success: res => {
+                if (res.confirm) {
                   var developer = (wx.getStorageSync('openId') || []);
                   wx.request({
                     url: app.globalData.networkAddress + '/wapp/Header/setOpenId',
-                    method:'post',
-                    data:{
+                    method: 'post',
+                    data: {
                       "header_id": app.globalData.owner.header_id,
                       "open_id": developer
                     },
-                    success:res=>{
+                    success: res => {
                       if (res.data.code == 1) {
                         thad.setData({
                           wholetrue: false
@@ -179,10 +179,10 @@ Page({
                         wx.showToast({
                           title: '绑定成功',
                         })
-                      }else{
+                      } else {
                         wx.showToast({
                           title: res.data.msg,
-                          icon:'none'
+                          icon: 'none'
                         })
                       }
                     }
@@ -194,7 +194,7 @@ Page({
                   })
                   wx.showToast({
                     title: '取消绑定微信号',
-                    icon:'none'
+                    icon: 'none'
                   })
                 }
               }
@@ -205,12 +205,11 @@ Page({
             })
             wx.showToast({
               title: res.data.msg,
-              icon:'none'
+              icon: 'none'
             })
           }
         }
       })
-     
     }
   },
   fowarMoney:function(){

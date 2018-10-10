@@ -73,7 +73,7 @@ page{
   border-bottom: 6rpx solid #e2e2e2;
   position: relative;
   font-size: 32rpx;
-  width: 100%;
+  width: calc(100% - 40rpx);
 }
 .group-nocite>view:nth-child(1){
   position: absolute;

@@ -1,5 +1,4 @@
 var app = getApp();
-import Card from '../../../palette/card';
 // pages/members/membersOrderDetails/membersOrderDetails.js
 Page({
 
@@ -13,7 +12,8 @@ Page({
     imageUrlCk: false,
     order: '',
     imagePath: '',
-    imageUrls: ''
+    imageUrls: '',
+    mysrc:new Array()
   },
 
   /**
@@ -24,9 +24,6 @@ Page({
     var thad = this;
     thad.setData({
       order: options.order
-    })
-    wx.showLoading({
-      title: '分享中',
     })
     wx.request({
       url: app.globalData.networkAddress + '/wapp/User/getOrderDetail',
@@ -40,11 +37,6 @@ Page({
           thad.setData({
             shopData: res.data.data
           })
-          var aaaa = thad.data.shopData;
-          thad.setData({
-            template: new Card().palette(aaaa),
-          });
-          wx.hideLoading();
         } else {
           wx.showToast({
             title: res.data.msg,
@@ -54,42 +46,6 @@ Page({
       }
     })
   },
-  onImgOK(e) {
-    wx.showLoading({
-      title: '分享中',
-    })
-    this.data.imagePath = e.detail.path;
-    this.setData({
-      imagePath: e.detail.path
-    })
-    var thad = this;
-    wx.uploadFile({
-      url: app.globalData.networkAddress + '/wapp/Pub/uploadImg',
-      method: "post",
-      filePath: thad.data.imagePath,
-      name: 'file',
-      formData: {
-        "order_no": thad.data.order,
-        'user': 'test'
-      },
-      success: res => {
-        wx.hideLoading();
-        var data = JSON.parse(res.data);
-        if (data.code == 1) {
-          thad.setData({
-            imageUrls: data.data.img_url
-          })
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none'
-          })
-        }
-      }
-    })
-    wx.hideLoading();
-  },
-
   /** 
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -135,7 +91,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    var thad=this;
+    var thad = this;
     var group_id = thad.data.shopData.group_id;
     return {
       title: '优鲜团-优先天下鲜，美味任你团',
@@ -155,7 +111,7 @@ Page({
       method: "post",
       data: {
         "scene": thad.data.order,
-        "page": 'pages/members/membersDetailsTwo/membersDetailsTwo'
+        "page": 'pages/group/membersDetailsTwo/membersDetailsTwo'
       },
       success: res => {
         if (res.data.code == 1) {

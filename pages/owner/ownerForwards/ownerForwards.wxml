@@ -1,0 +1,50 @@
+<view>
+  <view class='fowar'>提现金额</view>
+  <view class='fowar-value'>
+    <view>￥</view>
+    <input bindinput='userFprwar' type='digit' value='{{inputMoney}}' focus='true'></input>
+  </view>
+    <view class='whole' hidden='{{wholeFprwar}}'>
+      可提现金额￥{{wholeMoney}} <text bindtap='fowarMoney' wx:if="{{wholeMoney>10}}">全部提现</text>
+    </view>
+    <view class='whole2' hidden='{{!wholeFprwar}}'>
+      {{wholeText}}
+    </view>
+      <button class='fowar-form' bindtap='formMoney' disabled='{{wholetrue}}'>
+        提交
+      </button>
+    <view class="cash-text">
+      <text class="explain">提现说明</text>
+      <text class="explain">1.每日累计额度不超过2万元；</text>
+      <text class="explain">2.每日单笔最低金额1000元；</text>
+      <text class="explain">3.实名提现，请确保提现微信号已实名认证【若未实名制，请按照以下步骤操作：微信下面菜单“我“_“我的钱包”_点右上角四个方块的图标_“支付管理”_“实名认证”】；</text>
+      <text class="explain">4.提现费率为0.1%,提现最低手续费1元；</text>
+    </view>
+</view>
+<view class='msak' hidden='{{addressTextlput}}'>
+  <view class='msak-no' bindtap='addressTextlputt2'></view>
+  <view class='msak-content'>
+    <view class='msak-title'>绑定银行卡</view>
+    <view class='msak-con-content'>
+      <view>姓名：</view>
+      <input placeholder='请输入姓名' value='' bindinput="addressIifting"></input>
+    </view>
+    <view class='msak-con-content'>
+      <view>请选择银行：</view>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{bankArrs}}">
+        <view class="picker">
+          {{bankArrs[index]}}
+        </view>
+    </picker>
+      <image src='../../../img/drop-down.png'></image>
+    </view>
+    <view class='msak-con-content'>
+      <view>银行卡号：</view>
+      <input placeholder='请输入银行卡号' type='number' value='' bindinput="addressIiftings"></input>
+    </view>
+    <view class='msak-btn'>
+      <view bindtap='addressCancel'>取消</view>
+      <view catchtap="addressDetermine">确定</view>
+    </view>
+  </view>
+</view>

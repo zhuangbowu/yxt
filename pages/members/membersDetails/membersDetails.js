@@ -10,7 +10,10 @@ Page({
     num: 10,
     pageLis: 0,
     group_id: 22, 
+    newNum:0,
     shopData: new Object(),
+    objects:0,
+    objectsIndex:new Number(),
     shopNum: [
 
     ],
@@ -170,7 +173,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    if (this.data.objects==0){
+      // console.log('返回数量为0，不渲染');
+    }else{
+      var thad = this;
+      var objss = thad.data.objects;
+      var aaa = 'shopNum[' + thad.data.objectsIndex + ']';
+      thad.setData({
+        [aaa]: thad.data.objects
+      })
+      var newNum = 0;
+      for (var i = 0; i < thad.data.shopNum.length; i++) {
+        newNum += thad.data.shopNum[i] * thad.data.shopData.product_list[i].group_price
+      }
+      newNum = newNum.toFixed(2)
+      thad.setData({
+        newNum: newNum
+      })
+    }
   },
 
   /**
@@ -255,10 +275,11 @@ Page({
     var indexs=e.currentTarget.dataset.hi;
     var thad=this;
     wx.navigateTo({
-      url: '../compage/compage?group_id=' + indexs + '&shop_id=' + thad.data.group_id,
+      url: '../compage/compage?group_id=' + indexs + '&shop_id=' + thad.data.group_id + '&nums=' + thad.data.shopNum[indexs],
     })
   },
   shopReduce: function(e) {
+    var thad=this;
     var indexss = e.currentTarget.dataset.hi;
     var Num = Number(this.data.shopNum[indexss]);
     var shop = 'shopNum[' + indexss + ']';
@@ -266,6 +287,14 @@ Page({
       --Num;
       this.setData({
         [shop]: Num
+      })
+      var newNum = 0;
+      for (var i = 0; i < thad.data.shopNum.length; i++) {
+        newNum += thad.data.shopNum[i] * thad.data.shopData.product_list[i].group_price
+      }
+      newNum = newNum.toFixed(2)
+      thad.setData({
+        newNum: newNum
       })
     } else if (Num == 0) {
       this.setData({
@@ -290,8 +319,16 @@ Page({
       },
       success: res => {
         if (res.data.code == 1) {
-          this.setData({
+          thad.setData({
             [shop]: Num
+          })
+          var newNum=0;
+          for(var i=0;i<thad.data.shopNum.length;i++){
+            newNum += thad.data.shopNum[i] * thad.data.shopData.product_list[i].group_price
+          }
+          newNum = newNum.toFixed(2)
+          thad.setData({
+            newNum: newNum
           })
         }else{
           wx.showToast({
@@ -311,9 +348,40 @@ Page({
   },
   navMembersPurchase: function () {
     var thad = this;
-    wx.navigateTo({
-      url: '../membersPurchase/membersPurchase?group_id=' + thad.data.group_id + '&num=' + thad.data.shopNum,
-    })
+    var product_list=new Array();
+    for(var i=0;i<thad.data.shopData.product_list.length;i++){
+      thad.data.shopData.product_list[i].num=thad.data.shopNum[i];
+      if (thad.data.shopData.product_list[i].num>0){
+        product_list.push(thad.data.shopData.product_list[i]);
+      }
+    }
+    if (product_list.length==0){
+      wx.showToast({
+        title: '请选择商品',
+        icon:'none'
+      })
+    }else{
+      wx.request({
+        url: app.globalData.networkAddress + '/wapp/User/checkOrder',
+        method: 'post',
+        data: {
+          "user_id": app.globalData.information.id,
+          "product_list": product_list
+        },
+        success: res => {
+          if (res.data.code == 1) {
+            console.log(res.data.data.order_no)
+            wx.navigateTo({
+              url: '../membersPurchase/membersPurchase?group_id=' + thad.data.group_id + '&num=' + thad.data.shopNum + '&order=' + res.data.data.order_no,
+            })
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+            })
+          }
+        }
+      })
+    }
   },
   navgengduo: function () {
     // var thad = this;

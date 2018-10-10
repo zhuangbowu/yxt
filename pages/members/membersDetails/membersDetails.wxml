@@ -103,11 +103,11 @@
     我要当团长
   </view>
   <view bindtap='navMembersPurchase'>
-    立即购买
+    立即购买 (￥{{newNum}})
   </view>
 </view>
 <view class='group-fixed1' wx:if='{{role_status==2}}'>
   <view bindtap='navMembersPurchase'>
-    立即购买
+    立即购买 (￥{{newNum}})
   </view>
 </view>

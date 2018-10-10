@@ -63,3 +63,18 @@
 .cash-text>text{
   display: block;
 }
+.btn{
+  width: calc(100% - 80rpx);
+  margin: 0 40rpx;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 60rpx;
+}
+.btn>text{
+  padding: 6rpx 8rpx;
+  margin-left: 10rpx;
+  border-radius:5rpx;
+  border:2rpx solid #629FEE;
+  font-size: 28rpx;
+  color: #333;
+}

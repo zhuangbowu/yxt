@@ -1,3 +1,6 @@
+<view class='descstop'>
+  {{shop.product_name}}
+</view>
 <swiper indicator-dots="{{indicatorDots}}" class='banner' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
   <block wx:for="{{shop.img_list}}" wx:key>
     <swiper-item wx:if='{{item.types===1}}'>

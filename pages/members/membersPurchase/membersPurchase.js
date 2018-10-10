@@ -9,6 +9,7 @@ Page({
     dataTotal: '',
     userstate: 1,
     group_id: 0,
+    order:'',
     shopData: new Object(),
     pick_address: '',
     userDistribution: {
@@ -31,12 +32,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     var group_id = options.group_id;
+    var order = options.order;
     var num = options.num.split(',');
     var thad = this;
     thad.setData({
-      group_id: group_id
+      group_id: group_id,
+      order: order
     });
     wx.request({
       url: app.globalData.networkAddress + '/wapp/User/getGroupDetail',
@@ -48,7 +51,7 @@ Page({
       success: res => {
         if (res.data.code == 1) {
           thad.setData({
-            shopData: res.data.data
+            shopData: res.data.data     
           })
           var dataTotal = 0;
           for (var i = 0; i < num.length; i++) {
@@ -87,6 +90,28 @@ Page({
                   var aaa = res.data.data[0].address + ' ' + res.data.data[0].address_det;
                   thad.setData({
                     pick_address: aaa
+                  })
+                  wx.request({
+                    url: app.globalData.networkAddress + '/wapp/User/getLastAddress',
+                    method: 'post',
+                    data: {
+                      "user_id": app.globalData.information.id
+                    },
+                    success: res => {
+                      if (res.data.code == 1) {
+                        thad.setData({
+                          ['userDistribution.userName']: res.data.data.user_name,
+                          ['userSelflifting.userName']: res.data.data.user_name,
+                          ['userDistribution.userContact']: res.data.data.user_telephone,
+                          ['userSelflifting.userContact']: res.data.data.user_telephone,
+                        })
+                      } else {
+                        wx.showToast({
+                          title: res.data.msg,
+                          icon: 'none'
+                        })
+                      }
+                    }
                   })
                 } else {
                   wx.showToast({
@@ -207,10 +232,6 @@ Page({
     })
   },
   userSubmission: function() {
-    this.setData({
-      Nums: true
-    })
-
     var objj = this.data.userDistribution;
     if (this.data.dataTotal <= 0) {
       wx.showToast({
@@ -249,6 +270,7 @@ Page({
       objjs = {
         "user_id": app.globalData.information.id,
         "header_id": thad.shopData.header_id,
+        "order_no": thad.order,
         "leader_id": thad.shopData.leader_id,
         "header_group_id": thad.shopData.header_group_id,
         "group_id": thad.group_id,
@@ -260,6 +282,9 @@ Page({
         "remarks": objj.userOther,
         "product_list": thad.shopData.product_list
       }
+      this.setData({
+        Nums: true
+      })
       wx.request({
         url: app.globalData.networkAddress + '/wapp/User/makeOrder',
         method: 'post',
@@ -295,20 +320,21 @@ Page({
                 }
               },
               'fail': function(res) {
-                tad.setData({
-                  Nums: false
-                })
-                if (res.requestPayment == 'fail cancel') {
-                  wx.showToast({
-                    title: res.errMsg,
-                    icon: 'none'
-                  })
-                } else {
-                  wx.showToast({
-                    title: res.errMsg,
-                    icon: 'none'
-                  })
-                }
+                wx.navigateBack();
+                // tad.setData({
+                //   Nums: false
+                // })
+                // if (res.requestPayment == 'fail cancel') {
+                //   wx.showToast({
+                //     title: res.errMsg,
+                //     icon: 'none'
+                //   })
+                // } else {
+                //   wx.showToast({
+                //     title: res.errMsg,
+                //     icon: 'none'
+                //   })
+                // }
               },
               'complete': function(res) {
 
@@ -359,6 +385,7 @@ Page({
       objjs = {
         "user_id": app.globalData.information.id,
         "header_id": thad.shopData.header_id,
+        "order_no": thad.order,
         "leader_id": thad.shopData.leader_id,
         "header_group_id": thad.shopData.header_group_id,
         "group_id": thad.group_id,
@@ -406,20 +433,21 @@ Page({
 
               },
               'fail': function(res) {
-                tad.setData({
-                  Nums: false
-                })
-                if (res.requestPayment == 'fail cancel') {
-                  wx.showToast({
-                    title: res.errMsg,
-                    icon: 'none'
-                  })
-                } else {
-                  wx.showToast({
-                    title: res.errMsg,
-                    icon: 'none'
-                  })
-                }
+                wx.navigateBack();
+                // tad.setData({
+                //   Nums: false
+                // })
+                // if (res.requestPayment == 'fail cancel') {
+                //   wx.showToast({
+                //     title: res.errMsg,
+                //     icon: 'none'
+                //   })
+                // } else {
+                //   wx.showToast({
+                //     title: res.errMsg,
+                //     icon: 'none'
+                //   })
+                // }
               },
               'complete': function(res) {
 

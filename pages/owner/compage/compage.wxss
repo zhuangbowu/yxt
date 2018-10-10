@@ -61,3 +61,17 @@ image {
   background: rgba(255,255,255,0.9);
   box-sizing: border-box;
 }
+.descstop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 32rpx;
+  line-height: 42rpx;
+  background: rgba(0, 0, 0, 0.9);
+  box-sizing: border-box;
+  z-index: 2;
+}

@@ -15,7 +15,7 @@
       姓名
     </view>
     <view>
-      <input placeholder='请填写您的姓名' bindinput='username'></input>
+      <input placeholder='请填写您的姓名' bindinput='username' value='{{userDistribution.userName}}'></input>
     </view>
   </view>
   <view class='tobe'>
@@ -23,7 +23,7 @@
       联系方式
     </view>
     <view>
-      <input placeholder='请填写您的联系方式' bindinput='usercntact' type='number'></input>
+      <input placeholder='请填写您的联系方式' bindinput='usercntact' type='number' value='{{userDistribution.userContact}}'></input>
     </view>
   </view>
   <view class='tobe' bindtap='getLoadtion'>
@@ -71,7 +71,7 @@
       姓名
     </view>
     <view>
-      <input placeholder='请填写您的姓名' bindinput='username2'></input>
+      <input placeholder='请填写您的姓名' bindinput='username2' value='{{userSelflifting.userName}}'></input>
     </view>
   </view>
   <view class='tobe'>
@@ -79,7 +79,7 @@
       联系方式
     </view>
     <view>
-      <input placeholder='请填写您的联系方式' bindinput='usercntact2' type='number'></input>
+      <input placeholder='请填写您的联系方式' bindinput='usercntact2' type='number' value='{{userSelflifting.userContact}}'></input>
     </view>
   </view>
   <view class='tobe'>

@@ -96,8 +96,20 @@ Page({
   },
   navForward:function(){
     var objj = this.data.userName.amount_able;
-    wx.navigateTo({
-      url: '../ownerForward/ownerForward?forward=' + objj,
+    wx.showActionSheet({
+      itemList: ['提现到微信余额','提现到银行卡'],
+      success:res=>{
+        if(res.tapIndex==0){
+          wx.navigateTo({
+            url: '../ownerForward/ownerForward?forward=' + objj,
+          })
+        }
+        if (res.tapIndex == 1){
+          wx.navigateTo({
+            url: '../ownerForwards/ownerForwards?forward=' + objj,
+          })
+        }
+      }
     })
   },
   uploadPhoto() {

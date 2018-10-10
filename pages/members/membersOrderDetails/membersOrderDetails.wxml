@@ -9,8 +9,8 @@
 </view>
 <view class='content' wx:for="{{shopData.product_list}}" wx:key>
   <view>
-    <image wx:if="{{item.product_swiper[0].types==1}}" src='{{item.product_swiper[0].urlImg}}'></image>
-    <video wx:if="{{item.product_swiper[0].types==2}}" src='{{item.product_swiper[0].urlImg}}'></video>
+    <image wx:if="{{item.product_swiper[0].types==1}}" mode='aspectFill' src='{{item.product_swiper[0].urlImg}}'></image>
+    <video wx:if="{{item.product_swiper[0].types==2}}" mode='aspectFill' src='{{item.product_swiper[0].urlImg}}'></video>
   </view>
   <view>
     <view>
@@ -36,13 +36,13 @@
     姓名：{{shopData.user_name}}
   </view>
   <view>
-    电话：{{shopData.user_telephone}}
-  </view>
-  <view>
     提货地点：{{shopData.pick_address}}
   </view>
   <view>
     备注：{{shopData.remarks}}
+  </view>
+  <view>
+    电话：{{shopData.user_telephone}}
   </view>
 </view>
 <view class='footer'>
@@ -60,4 +60,3 @@
     <image src='{{imageUrl}}'></image>
   </view>
 </view>
-<painter customStyle='margin-left:40rpx' palette="{{template}}" bind:imgOK="onImgOK" class="painter" />

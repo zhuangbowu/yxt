@@ -1,0 +1,12 @@
+<view class='content'>
+  <image src='../../../img/backgrod.png' mode='widthFix'></image>
+  <view class='navImage'>
+    <image src='{{userImg}}'></image>
+  </view>
+  <view class='shopImage'>
+    <image wx:for="{{shop.product_list}}" wx:if="{{index<3}}" src='{{item.product_img[0].urlImg}}' wx:key></image>
+  </view>
+</view>
+<button class='post' open-type='share'>
+  点击分享至好友或群
+</button>

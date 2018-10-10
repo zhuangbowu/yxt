@@ -56,8 +56,8 @@
     </view>
     <view class='owner-cont-img'>
       <view wx:for="{{item.product_list}}" wx:for-item="groupnums" wx:key>
-        <image src='{{groupnums.product_img[0].urlImg}}' wx:if="{{groupnums.product_img[0].types==1}}"></image>
-        <video src='{{groupnums.product_img[0].urlImg}}' wx:if="{{groupnums.product_img[0].types==2}}"></video>
+        <image src='{{groupnums.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{groupnums.product_img[0].types==1}}"></image>
+        <video src='{{groupnums.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{groupnums.product_img[0].types==2}}"></video>
         <text>￥{{groupnums.group_price}}</text>
       </view>
     </view>

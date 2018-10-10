@@ -1,0 +1,49 @@
+.content{
+  width: 100%;
+  position: relative;
+}
+.content>image{
+  width: 100%;
+}
+.navImage{
+  position: absolute;
+  top:0rpx;
+  left: 0rpx;
+  width: 110rpx;
+  height:110rpx;
+  border-radius: 55rpx;
+  overflow: hidden;
+}
+.navImage>image{
+  width: 110rpx;
+  height: 110rpx;
+}
+.shopImage{
+  position: absolute;
+  width: calc(100% - 20rpx);
+  bottom: 100rpx;
+  left: 0rpx;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.shopImage>image{
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 20rpx;
+  margin-right: 20rpx;
+  overflow: hidden;
+}
+.post{
+  position: fixed;
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  color: #fff;
+  background-color: #ffcd00;
+  text-align: center;
+  left: 0rpx;
+  bottom: 0rpx;
+}

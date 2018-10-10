@@ -140,13 +140,9 @@ page{
 }
 .mask>view:nth-child(1){
   width: 500rpx;
-  height: 500px;
+  height: 500rpx;
 }
 .mask>view:nth-child(1)>image{
   width: 500rpx;
-  height: 500px;
-}
-.painter{
-  position: absolute;
-  top:-9999999rpx;
+  height: 500rpx;
 }

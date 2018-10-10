@@ -1,12 +1,27 @@
+<view class='descstop'>
+  {{shop.product_name}}
+</view>
 <swiper indicator-dots="{{indicatorDots}}" class='banner' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
   <block wx:for="{{shop.product_img}}" wx:key>
     <swiper-item wx:if='{{item.types===1}}'>
-        <image src='{{item.urlImg}}' mode="widthFix"></image>
+      <image src='{{item.urlImg}}' mode="widthFix"></image>
     </swiper-item>
     <swiper-item wx:elif='{{item.types===2}}'>
-        <video src='{{item.urlImg}}'></video>
+      <video src='{{item.urlImg}}'></video>
     </swiper-item>
   </block>
 </swiper>
-<view class='desc' bindtap='switchsFalse' wx:if="{{switchs}}">{{shop.product_desc}}</view>
-<view class='descs' bindtap='switchsTrue' wx:else>{{shop.product_desc}}</view>
+<view class='descs'>
+  <view>
+  {{shop.product_desc}}
+  </view>
+  <view class='fonterUp'>
+    <view>
+      <image src='../../../img/WechatIMG20.png' catchtap='shopReduce'></image>
+    </view>
+    <view>{{num}}</view>
+    <view>
+      <image src='../../../img/WechatIMG21.png' catchtap='shopPlus'></image>
+    </view>
+  </view>
+</view>

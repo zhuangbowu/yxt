@@ -8,7 +8,8 @@ Page({
   data: {
     checkeds:false,
     shopData:new Object(),
-    id:''
+    id:'',
+    group_id:''
   },
 
   /**
@@ -17,9 +18,11 @@ Page({
   onLoad: function (options) {
     var id = options.id;
     var leader_id = options.leader_id;
+    var group_id = options.group_id;
     var thad = this;
     thad.setData({
-      id: id
+      id: id,
+      group_id: group_id
     })
     wx.request({
       url: app.globalData.networkAddress + '/wapp/Leader/getMyOrderDetail',
@@ -29,12 +32,10 @@ Page({
         "group_id": thad.data.id
       },
       success: res => {
-        console.log(res);
         if (res.data.code == 1) {
           thad.setData({
             shopData: res.data.data
           })
-          console.log(thad.data.shopData);
           if (thad.data.shopData.pick_status==1){
             thad.setData({
               checkeds:true
@@ -116,7 +117,7 @@ Page({
               success: res => {
                 if (res.data.code == 1) {
                   wx.redirectTo({
-                    url: '../ownerList/ownerList',
+                    url: '../orderList/orderList?id=' + thad.data.group_id,
                   })
                 } else {
                   wx.showToast({

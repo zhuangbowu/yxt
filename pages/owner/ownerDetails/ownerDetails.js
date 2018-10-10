@@ -1,4 +1,4 @@
-var app=getApp();
+var app = getApp();
 // pages/ownerDetails/ownerDetails.js
 Page({
 
@@ -8,7 +8,7 @@ Page({
   data: {
     ownerNmae: '',
     ownerImage: '',
-    shop:new Object(),
+    shop: new Object(),
     contents:'http://group.com/wapp/Pub/getGroupData/group_id/129',
     group_id:''
   },
@@ -46,7 +46,6 @@ Page({
       }
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -96,7 +95,7 @@ Page({
     var group_id = this.data.group_id;
     return {
       title: '优鲜团',
-      path: '/pages/group/groupEdit/groupEdit?group_id='+group_id
+      path: '/pages/group/groupEdit/groupEdit?group_id=' + group_id
     }
   },
   wxEject:function(e){

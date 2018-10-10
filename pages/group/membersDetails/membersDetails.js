@@ -15,6 +15,7 @@ Page({
    */
   onLoad: function (options) {
     var order = options.order;
+    console.log(order);
     var thad = this;
     wx.request({
       url: app.globalData.networkAddress + '/wapp/Leader/getUserOrderDet',
@@ -109,7 +110,7 @@ Page({
               success: res => {
                 if (res.data.code == 1) {
                   wx.redirectTo({
-                    url: '../group/group',
+                    url: '../groupList/groupList',
                   })
                 } else {
                   wx.showToast({

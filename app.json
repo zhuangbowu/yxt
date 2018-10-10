@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/group/groupshares/groupshares",
     "pages/group/membersSee/membersSee",
     "pages/group/membersSeeOne/membersSeeOne",
     "pages/group/ownerRefundList/ownerRefundList",
@@ -35,6 +36,7 @@
     "pages/owner/orderListDetailed/orderListDetailed",
     "pages/owner/orderList/orderList",
     "pages/owner/ownerForward/ownerForward",
+    "pages/owner/ownerForwards/ownerForwards",
     "pages/group/ownerForward/ownerForward",
     "pages/group/ownerDetailed/ownerDetailed",
     "pages/owner/ownerUser/ownerUser",

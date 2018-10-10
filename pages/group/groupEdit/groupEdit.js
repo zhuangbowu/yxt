@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    group_id: 0,
+    group_id: 32,
     shopNa: new Object(),
     shopregiment: 0,
     mainTitle: '这是城主标题',
@@ -129,13 +129,12 @@ Page({
                           "group_id": thad.data.group_id
                         },
                         success: res => {
-                          console.log(res);
                           if (res.data.code == 1) {
                             var data = res.data.data;
                             thad.setData({
                               shopNa: data
                             })
-                            if (thad.data.shopNa.pick_type == 1) {
+                            if (thad.data.shopNa.dispatch_type == 1) {
                               wx.request({
                                 url: app.globalData.networkAddress + '/wapp/Leader/getLastAddress',
                                 method: 'post',
@@ -143,7 +142,6 @@ Page({
                                   "leader_id": app.globalData.information.id
                                 },
                                 success: res => {
-                                  console.log(res);
                                   if (res.data.code == 1) {
                                     var data = res.data.data;
                                     thad.setData({
@@ -558,7 +556,6 @@ Page({
         "status": thad.shopregiment,
         "product_list": thad.shopNa.product_list
       }
-      console.log(datas);
     } else if (oObjj == 2) {
       var datas = new Object();
       datas = {
@@ -625,7 +622,6 @@ Page({
         "status": thad.shopregiment,
         "product_list": thad.shopNa.product_list
       }
-      console.log(datas);
     } else if (oObjj == 2) {
       var datas = new Object();
       datas = {

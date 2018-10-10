@@ -16,7 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var id=options.id;
+    var id = options.id;
     var thad = this;
     thad.setData({
       id:id
@@ -105,8 +105,8 @@ Page({
   navDetailed:function(e){
     var id=this.data.shopData[e.currentTarget.dataset.hi].id;
     var leader_id = this.data.shopData[e.currentTarget.dataset.hi].leader_id;
-    wx.navigateTo({
-      url: '../orderListDetailed/orderListDetailed?id=' + id + "&leader_id=" + leader_id,
+    wx.redirectTo({
+      url: '../orderListDetailed/orderListDetailed?id=' + id + "&leader_id=" + leader_id + "&group_id=" + this.data.id,
     })
   },
   navPage: function () {

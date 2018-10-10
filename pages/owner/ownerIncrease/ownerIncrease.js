@@ -112,7 +112,6 @@ Page({
    */
   onShow: function() {
     var objss = this.data.objects;
-    console.log(objss);
     var that = this;
     if (JSON.stringify(objss) == '{}') {
       // console.log('无数据不渲染');
@@ -228,7 +227,6 @@ Page({
   showImgChoose: function(event) {
     var indexs = event.currentTarget.dataset.hi;
     var that = this;
-    console.log(indexs);
     wx.showActionSheet({
       itemList: ['上传图片', '上传视频（20秒以内）'],
       success: function(res) {

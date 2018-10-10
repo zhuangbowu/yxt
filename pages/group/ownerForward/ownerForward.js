@@ -103,8 +103,8 @@ Page({
         wholeFprwar: true
       })
     } else {
-      var numMoney = Number(this.data.wholeMoney) * 0.006;
-      var texts = '扣除￥' + numMoney + '手续费（费率0.6%）'
+      var numMoney = Number(wholeMoney) * 0.006;
+      var texts = '扣除￥' + numMoney.toFixed(2) + '手续费（费率0.6%）'
       this.setData({
         inputMoney: wholeMoney,
         wholeText: texts,

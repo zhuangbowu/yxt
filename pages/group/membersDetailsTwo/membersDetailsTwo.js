@@ -7,7 +7,8 @@ Page({
    */
   data: {
     checkeds: false,
-    shopData: new Object()
+    shopData: new Object(),
+    order:''
   },
 
   /**
@@ -15,6 +16,10 @@ Page({
    */
   onLoad: function (options) {
     var order = decodeURIComponent(options.scene);
+    console.log(order);
+    this.setData({
+      order: order
+    })
     var thad = this;
     wx.getUserInfo({
       withCredentials: true,
@@ -59,7 +64,7 @@ Page({
                 method: 'post',
                 data: {
                   "leader_id": app.globalData.information.id,
-                  "order_no": order
+                  "order_no": thad.data.order
                 },
                 success: res => {
                   if (res.data.code == 1) {
@@ -74,7 +79,6 @@ Page({
                   }
                 }
               })
-
             } else {
               wx.showToast({
                 title: res.data.msg,

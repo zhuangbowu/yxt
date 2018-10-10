@@ -1,4 +1,4 @@
-var app=getApp();
+var app = getApp();
 // pages/groupDetails/groupDetails.js
 Page({
 
@@ -9,8 +9,13 @@ Page({
     group_id:'',
     userNmae: '',
     userImage: '',
+    template: {},
+    imagePath:'',
+    imageUrls:'',
     contents: 'file:///D:/zbw/2018-8-27/p1D6701192A1534724919345-1535426211/index.html#screen=sE3EDE298971534988187802',
-    shopListL:new Object()
+    shopListL:new Object(),
+    mysrc:new Array(),
+    userImages:''
   },
 
   /**
@@ -44,7 +49,7 @@ Page({
       }
     })
   },
-
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -91,11 +96,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    var shop_id = this.data.shopListL.group_id;
-    return {
-      title: '分享优鲜团',
-      path: 'pages/members/membersDetails/membersDetails?id=' + shop_id
-    }
+   
   },
   navDetails: function (e) {
     var shop_id = this.data.shopListL.group_id;
@@ -227,6 +228,11 @@ Page({
     var thad = this;
     wx.redirectTo({
       url: '../membersSeeOne/membersSeeOne?id=' + thad.data.group_id,
+    })
+  },
+  shares:function(){
+    wx.navigateTo({
+      url: '../groupshares/groupshares?groupId=' + this.data.group_id,
     })
   }
 })
