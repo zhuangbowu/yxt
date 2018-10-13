@@ -26,9 +26,10 @@
     <video src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==2}}"></video>
     <view>
       <view>{{item.product_name}}</view>
-      <view>{{item.product_desc}}</view>
-      <view class='docc'>市场价：￥{{item.market_price}} </view>
-      <view style='color:red;'>团购价：￥{{item.group_price}}</view>
+      <!-- <view>{{item.product_desc}}</view> -->
+      <view style='color:red;'>￥{{item.group_price}}
+        <text class='docc'> ￥{{item.market_price}} </text>
+      </view>
       <view class='group-modify' wx:if="{{shopData.status==1}}">
         <image src='../../../img/WechatIMG20.png' catchtap='shopReduce' data-hi='{{index}}'></image>
         <view>{{shopNum[index]}}</view>
@@ -95,7 +96,7 @@
     </view> -->
     <view wx:if='{{pageLis==1}}' class='navgengduo'>
       团购记录已全部加载完成
-    </view>  
+    </view>
   </block>
 </view>
 <view class='post' bindtap='navDingdan'>
@@ -105,12 +106,16 @@
   <view bindtap='navMembersTobe'>
     我要当团长
   </view>
-  <view bindtap='navMembersPurchase'>
-    立即购买 (￥{{newNum}})
-  </view>
+  <form bindsubmit="navMembersPurchase" report-submit='true'>
+    <button form-type="submit">
+      立即购买 (￥{{newNum}})
+    </button>
+  </form>
 </view>
 <view class='group-fixed1' wx:if='{{role_status==2}}'>
-  <view bindtap='navMembersPurchase'>
-    立即购买 (￥{{newNum}})
-  </view>
+  <form bindsubmit="navMembersPurchase" report-submit='true'>
+    <button form-type="submit">
+      立即购买 (￥{{newNum}})
+    </button>
+  </form>
 </view>

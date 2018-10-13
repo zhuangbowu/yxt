@@ -208,12 +208,12 @@ Page({
   },
   addressTextlputt2:function(){
     this.setData({
-      addressTextlputt:false
+      addressTextlput:false
     })
   },
   addressCancel: function () {
     this.setData({
-      addressTextlputt: false
+      addressTextlput: false
     })
   },
   addressIifting2:function(){
@@ -262,12 +262,22 @@ Page({
           "bank_no": thad.card
         },
         success: res => {
+          console.log(res);
           if (res.data.code == 1) {
+            wx.showToast({
+              title: '绑定成功',
+            })
             that.setData({
-              addressTextlputt: false,
+              addressTextlput: true,
               wholetrue: false
             })
+            // wx.redirectTo({
+            //   url: '../ownerUser/ownerUser',
+            // })
           } else {
+            that.setData({
+              addressTextlput: true
+            })
             wx.showToast({
               title: res.data.msg,
               icon: 'none'

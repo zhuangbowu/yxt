@@ -34,9 +34,9 @@
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{bankArrs}}">
         <view class="picker">
           {{bankArrs[index]}}
+          <image src='../../../img/drop-down.png'></image>
         </view>
-    </picker>
-      <image src='../../../img/drop-down.png'></image>
+      </picker>
     </view>
     <view class='msak-con-content'>
       <view>银行卡号：</view>

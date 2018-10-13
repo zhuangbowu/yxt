@@ -346,7 +346,8 @@ Page({
       url: '../membersTobe/membersTobe?id=' + header_id + '&num=' + 2,
     })
   },
-  navMembersPurchase: function () {
+  navMembersPurchase: function (e) {
+    var formId=e.detail.formId;
     var thad = this;
     var product_list=new Array();
     for(var i=0;i<thad.data.shopData.product_list.length;i++){
@@ -374,10 +375,23 @@ Page({
               url: '../membersPurchase/membersPurchase?group_id=' + thad.data.group_id + '&num=' + thad.data.shopNum + '&order=' + res.data.data.order_no,
             })
           } else {
-            wx.showToast({
-              title: res.data.msg,
+            wx.showModal({
+              title: '库存提示',
+              content: res.data.msg,
+              showCancel:false
             })
           }
+        }
+      })
+      wx.request({
+        url: app.globalData.networkAddress + '/wapp/User/setFormId',
+        method: 'post',
+        data: {
+          "user_id": app.globalData.information.id,
+          "form_id": formId,
+        },
+        success: res => {
+          // console.log(res);
         }
       })
     }

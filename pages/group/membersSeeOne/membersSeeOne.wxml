@@ -1,26 +1,88 @@
-<view bindtap='navDdelallsda'>
-<view class='title'>
-  <view>
-    商品
+<view class="tab">
+  <view class="tab-left" bindtap="tabFun">
+    <view class="{{tabArr.curHdIndex=='0'? 'active' : ''}}" id="tab-hd01" data-id="0">审核中</view>
+    <view class="{{tabArr.curHdIndex=='1'? 'active' : ''}}" id="tab-hd02" data-id="1">已审核</view>
   </view>
-  <view>
-    销量
+
+  <view class="tab-right">
+    <view class="right-item {{tabArr.curBdIndex=='0'? 'active' : ''}}">
+      <view bindtap='navDdelallsda'>
+        <view class='title'>
+          <view>
+            商品
+          </view>
+          <view>
+            销量
+          </view>
+        </view>
+        <view class='contnent' wx:for="{{shopData.product_list}}" wx:key>
+          <view>
+            {{item.product_name}}
+          </view>
+          <view>
+            ×{{item.sell_num}}
+          </view>
+        </view>
+        <view class='footer'>
+          <view>
+            总销售额：￥{{shopData.sum_money}}
+          </view>
+          <view>
+            提成:￥{{shopData.commission_money}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="right-item {{tabArr.curBdIndex=='1'? 'active' : ''}}">
+      <view class='league-bak'>
+        <view class='league-embers' bindtap='navDetails' wx:for="{{listData}}" data-hi='{{index}}' wx:key>
+          <view>
+            <view>
+              状态：
+              <text wx:if="{{item.pick_status==1}}">已取货</text>
+              <text wx:if="{{item.pick_status==0}}">未取货</text>
+            </view>
+            <view>
+              合计：￥{{item.order_money}}
+            </view>
+          </view>
+          <view class='league-content'>
+            <view>
+              <image src='{{item.avatar}}'></image>
+            </view>
+            <view>
+              <view>
+                {{item.user_name}}
+                <image src='../../../img/aaot.png' catchtap="outMessage" class='imagess' data-hi='{{index}}'></image>
+                <image src='../../../img/telephone.png' catchtap="dialTelephone" class='images' data-hi='{{item.user_telephone}}'></image>
+              </view>
+              <view>
+                <view wx:for="{{item.product_list}}" wx:for-item="listSst" wx:key>
+                  <view>
+                    <view>{{listSst.product_name}}</view>
+                    <text wx:if="{{listSst.status==0}}">已付款</text>
+                    <text wx:if="{{listSst.status==1}}">退货中</text>
+                    <text wx:if="{{listSst.status==2}}">已退货</text>
+                    <text wx:if="{{listSst.status==3}}">已完成</text>
+                  </view>
+                  <view>
+                    {{listSst.num}}×{{listSst.group_price}}
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class='league-address'>
+            收货地址：{{item.pick_address}}
+          </view>
+        </view>
+      </view>
+      <view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
+        下滑加载更多
+      </view>
+      <view wx:if='{{pageLis==1}}' class='navgengduo'>
+        团员订单已全部加载完成
+      </view>
+    </view>
   </view>
-</view>
-<view class='contnent' wx:for="{{shopData.product_list}}" wx:key>
-  <view>
-    {{item.product_name}}
-  </view>
-  <view>
-    ×{{item.sell_num}}
-  </view>
-</view>
-<view class='footer'>
-  <view>
-    总销售额：￥{{shopData.sum_money}}
-  </view>
-  <view>
-    提成:￥{{shopData.commission_money}}
-  </view>
-</view>
 </view>

@@ -131,9 +131,14 @@
 .msak-con-content>picker{
   font-size: 28rpx;
   float: left;
-  padding: 20rpx 10rpx;
   height: 30rpx;
   line-height: 30rpx;
+}
+.msak-con-content .picker{
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
 }
 .msak-con-content>input{
   width: 340rpx;
@@ -150,10 +155,11 @@
   padding: 19rpx 10rpx;
 }
 .msak-con-content image{
-  margin-top: 26rpx;
+  margin-left: 28rpx;
   width: 28rpx;
   height: 28rpx;
   margin-right: 180rpx;
+  z-index: -1;
 }
 .msak-btn{
   position: absolute;

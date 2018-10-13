@@ -7,7 +7,9 @@ Page({
    */
   data: {
     order: '201809291643494605971',
-    shopData: new Object()
+    shopData: new Object(),
+    envelopes:'../../img/envelopes1.png',
+    envelopesOff:true
   },
 
   /**
@@ -23,6 +25,7 @@ Page({
       method: "post",
       data: {
         "user_id": app.globalData.information.id,
+        // "user_id": 221,
         "order_no": thad.data.order
       },
       success: res => {
@@ -85,32 +88,95 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-    var thad = this;
-    var group_id = thad.data.shopData.group_id;
-    return {
-      title: '优鲜团-优先天下鲜，美味任你团',
-      path: '/pages/members/membersDetails/membersDetails?id=' + group_id,
-    }
-  },
+  // onShareAppMessage: function() {
+  //   var thad = this;
+  //   var group_id = thad.data.shopData.group_id;
+  //   return {
+  //     title: '优鲜团-优先天下鲜，美味任你团',
+  //     path: '/pages/members/membersDetails/membersDetails?id=' + group_id,
+  //   }
+  // },
   onShareAppMessage: function(options) {
     var that = this;
     var group_id = that.data.shopData.group_id;
     var shareObj = {
       title: "优鲜团-优先天下鲜，美味任你团",
       path: '/pages/members/membersDetails/membersDetails?id=' + group_id,
-      success: function(res) {
+      success: function (res) {
+        console.log(res);
         if (res.errMsg == 'shareAppMessage:ok') {
-          wx.redirectTo({
-            url: '/pages/members/membersDetails/membersDetails?id=' + group_id,
+          that.setData({
+            envelopesOff:false,
+            envelopes:'../../img/envelopes1.png'
           })
+          // wx.redirectTo({
+          //   url: '/pages/members/membersDetails/membersDetails?id=' + group_id,
+          // })
         }
       },
+      fail: res => {
+        console.log('222' +res);
+      },
+      complete:res=>{
+        console.log('111'+res);
+      }
     };
     // 来自页面内的按钮的转发
     if (options.from == 'button') {
       shareObj.path = '/pages/members/membersDetails/membersDetails?id=' + group_id;
     }
     return shareObj;
+  },
+  btnEnvelopeOff:function(){
+    this.setData({
+      envelopesOff: true
+    })
+  },
+  btnEnvelope:function(){
+    var thad = this;
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.request({
+      url: app.globalData.networkAddress + '/wapp/User/getCoupon',
+      method: "post",
+      data: {
+        "user_id": app.globalData.information.id,
+        // "user_id": 221,
+        "order_no": thad.data.order
+      },
+      success: res => {
+        wx.hideLoading(); 
+        if (res.data.code == 1) {
+          thad.setData({
+            envelopes:'../../img/envelopes2.png'
+          })
+          wx.showModal({
+            title: '提示框',
+            content: '红包获取成功',
+            showCancel:false,
+            success:res=>{
+              thad.setData({
+                envelopesOff: true
+              })
+            }
+          })
+        } else {
+          thad.setData({
+            envelopes: '../../img/envelopes2.png'
+          })
+          wx.showModal({
+            title: '提示框',
+            content: res.data.msg,
+            showCancel: false,
+            success: res => {
+              thad.setData({
+                envelopesOff: true
+              })
+            }
+          })
+        }
+      }
+    })
   }
 })

@@ -105,7 +105,7 @@ Page({
         if (res.data.code == 1) {
           var data = res.data.data;
           var nnmm = data.length;
-          if (nnmm < 5) {
+          if (nnmm < 5) {                            
             thad.setData({
               pageLis: 1
             })

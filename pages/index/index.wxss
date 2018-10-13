@@ -72,3 +72,23 @@ page{
   color:#01bbec;
   font-size: 42rpx;
 }
+.btn{
+  width: 1rpx;
+  height: 1rpx;
+  margin: 0;
+  padding: 0;
+  /* position: fixed; */
+  /* top: 150rpx; */
+  border-color:transparent;
+  border:none;
+  background-color:transparent;
+}
+.aa{
+  height:68rpx;
+  width:156rpx;
+  position:fixed;
+  top: 150rpx;
+}
+button::after{
+  border: none;
+}

@@ -21,7 +21,6 @@ Page({
    */
   onLoad: function(options) {
     var order = options.order;
-    console.log(order);
     var thad = this;
     thad.setData({
       order: options.order
@@ -132,6 +131,12 @@ Page({
   navckkk: function() {
     this.setData({
       imageUrlCk: false
+    })
+  },
+  navCanvas:function(){
+    var order = this.data.order;
+    wx.navigateTo({
+      url: '../../purposeshare/purposeshare?order=' + order,
     })
   }
 })

@@ -41,14 +41,15 @@
       <image src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==1}}"></image>
       <video src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==2}}"></video>
       <view>
-        <view>{{item.product_name}}</view>
-        <view>{{item.product_desc}}</view>
-        <view class='docc'>市场价：￥{{item.market_price}}</view>
-        <view style='color:red;'>团购价：￥{{item.group_price}}</view>
+        <view class='docName'>{{item.product_name}}</view>
+        <!-- <view>{{item.product_desc}}</view> -->
+        <view style='color:red;'>￥{{item.group_price}} <text class='docc'>￥{{item.market_price}}</text></view>
+        <!-- <view class='docc'>￥{{item.market_price}}</view> -->
       </view>
     </view>
 </view>
 <view class='post' bindtap='navDingdan'>
+  <view>{{shopData.num}}</view>
   <image src='../../../img/userdingdan.png'></image>
 </view>
 <view class='group-fixed' wx:if="{{shopListL.status==1}}">

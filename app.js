@@ -24,6 +24,6 @@ App({
     networkAddress: 'http://192.168.3.64',
     openId:null,
     information: new Object(),
-    owner:new Object()
+    owner:new Object(),
   }
 })

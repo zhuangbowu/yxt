@@ -50,17 +50,17 @@ Page({
             country: data.country
           },
           success: function(res) {
-            if(res.data.code==1){
+            if (res.data.code == 1) {
               app.globalData.information = res.data.data;
               thad.setData({
                 indexDataL: res.data.data
               })
               wx.hideLoading();
-            }else{
+            } else {
               wx.hideLoading();
               wx.showToast({
                 title: res.data.msg,
-                icon:'none'
+                icon: 'none'
               })
             }
 
@@ -129,7 +129,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    
+
   },
   // 用户点击跳转
   navOwner: function() {
@@ -146,5 +146,5 @@ Page({
     wx.navigateTo({
       url: '../members/members/members',
     });
-  }
+  },
 })

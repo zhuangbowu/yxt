@@ -15,7 +15,6 @@ Page({
    */
   onLoad: function (options) {
     var order = options.order;
-    console.log(order);
     var thad = this;
     wx.request({
       url: app.globalData.networkAddress + '/wapp/Leader/getUserOrderDet',

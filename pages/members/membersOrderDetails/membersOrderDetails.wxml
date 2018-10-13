@@ -50,8 +50,8 @@
     <image src='../../../img/index-img2.png'></image>
     <view>首页</view>
   </view>
-  <button open-type="share">
-  <!-- <button bindtap='navCanvas'> -->
+  <!-- <button open-type="share"> -->
+  <button bindtap='navCanvas'>
     分享到微信群
   </button>
 </view>

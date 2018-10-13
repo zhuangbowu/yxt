@@ -323,7 +323,14 @@ Page({
                 // }
               },
               'fail': function(res) {
-                wx.navigateBack();
+                wx.showModal({
+                  title: '提示框',
+                  content: '订单已超时或取消请重新下单',
+                  showCancel: false,
+                  success:res=>{
+                    wx.navigateBack();
+                  }
+                })
                 // tad.setData({
                 //   Nums: false
                 // })
@@ -437,8 +444,15 @@ Page({
                 //   })
                 // }
               },
-              'fail': function(res) {
-                wx.navigateBack();
+              'fail': function (res) {
+                wx.showModal({
+                  title: '提示框',
+                  content: '订单已超时或取消请重新下单',
+                  showCancel: false,
+                  success: res => {
+                    wx.navigateBack();
+                  }
+                })
                 // tad.setData({
                 //   Nums: false
                 // })

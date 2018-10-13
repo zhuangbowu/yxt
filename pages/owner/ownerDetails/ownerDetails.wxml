@@ -21,18 +21,20 @@
   <view>公告：{{shop.group_notice}}</view>
 </view>
 <view class='group-content'>
-    <view class='group-content-list' bindtap='navDetails' data-hi='{{index}}' wx:for='{{shop.product_list}}' wx:key>
-      <image src='{{item.img_list[0].urlImg}}' mode='aspectFill' wx:if="{{item.img_list[0].types==1}}"></image>
-      <video src='{{item.img_list[0].urlImg}}' mode='aspectFill' wx:if="{{item.img_list[0].types==2}}"></video>
+  <view class='group-content-list' bindtap='navDetails' data-hi='{{index}}' wx:for='{{shop.product_list}}' wx:key>
+    <image src='{{item.img_list[0].urlImg}}' mode='aspectFill' wx:if="{{item.img_list[0].types==1}}"></image>
+    <video src='{{item.img_list[0].urlImg}}' mode='aspectFill' wx:if="{{item.img_list[0].types==2}}"></video>
+    <view>
       <view>
-        <view><text wx:if="{{item.remain!=-1}}">[限量,剩余{{item.remain}}]</text>{{item.product_name}}</view>
-        <view>{{item.product_desc}}</view>
-        <view>佣金比列：{{item.commission}}%</view>
-        <view class='docc'>市场价：￥{{item.market_price}}</view>
-        <view style='color:red;'>团购价：￥{{item.group_price}}</view>
-        <view>×{{item.sell_num}}</view>
+        <text wx:if="{{item.remain!=-1}}">[限量,剩余{{item.remain}}]</text>{{item.product_name}}</view>
+      <!-- <view>{{item.product_desc}}</view> -->
+      <view>佣金比列：{{item.commission}}%</view>
+      <view style='color:red;'>￥{{item.group_price}}
+        <text class='docc'> ￥{{item.market_price}}</text>
       </view>
+      <view>×{{item.sell_num}}</view>
     </view>
+  </view>
 </view>
 <view class='owner-fixed' bindtap='wxEject' wx:if="{{shop.status==1}}">
   <image src='../../../img/data2.png'></image>

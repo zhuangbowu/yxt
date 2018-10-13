@@ -15,7 +15,8 @@ Page({
     contents: 'file:///D:/zbw/2018-8-27/p1D6701192A1534724919345-1535426211/index.html#screen=sE3EDE298971534988187802',
     shopListL: new Object(),
     mysrc: new Array(),
-    userImages: ''
+    userImages: '',
+    shopData:new Object(),
   },
 
   /**
@@ -40,6 +41,26 @@ Page({
             userNmae: app.globalData.information.user_name,
             userImage: app.globalData.information.avatar
           })
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+      }
+    })
+    wx.request({
+      url: app.globalData.networkAddress + '/wapp/Leader/getGroupOrderNum',
+      data: {
+        "leader_id": app.globalData.information.id,
+        "group_id": thad.data.group_id
+      },
+      success: res => {
+        if (res.data.code == 1) {
+          thad.setData({
+            shopData: res.data.data
+          })
+          console.log(thad.data.shopData);
         } else {
           wx.showToast({
             title: res.data.msg,

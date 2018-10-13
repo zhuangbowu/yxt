@@ -413,7 +413,7 @@ Page({
           })
         } else if (res.data.code == -1) {
           wx.showToast({
-            title: '删除失败',
+            title: res.data.msg,
             icon: 'success',
             duration: 2000
           })
@@ -534,7 +534,7 @@ Page({
                 })
               } else if (num == -1) {
                 wx.showToast({
-                  title: '删除失败',
+                  title: res.data.msg,
                   icon: 'none'
                 })
               }

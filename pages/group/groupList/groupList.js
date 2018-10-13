@@ -243,17 +243,20 @@ Page({
       var thad = this;
       if (e.target.dataset.hi == 0) {
         thad.setData({
-          navDingdan:''
+          navDingdan: '',
+          page: 0
         })
       }
       if (e.target.dataset.hi == 1) {
         thad.setData({
-          navDingdan:0
+          navDingdan: 0,
+          page: 0
         })
       }
       if (e.target.dataset.hi == 2) {
         thad.setData({
-          navDingdan: 1
+          navDingdan: 1,
+          page:0
         })
       }
       wx.request({
@@ -370,17 +373,20 @@ Page({
       var thad = this;
       if (e.target.dataset.hi == 0) {
         thad.setData({
-          navDingdanTwo: ''
+          navDingdanTwo: '',
+          page:0
         })
       }
       if (e.target.dataset.hi == 1) {
         thad.setData({
-          navDingdanTwo: 1
+          navDingdanTwo: 1,
+          page: 0
         })
       }
       if (e.target.dataset.hi == 2) {
         thad.setData({
-          navDingdanTwo: 2
+          navDingdanTwo: 2,
+          page: 0
         })
       }
       wx.request({

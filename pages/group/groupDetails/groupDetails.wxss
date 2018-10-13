@@ -72,6 +72,7 @@ page{
   border-bottom: 6rpx solid #e2e2e2;
   position: relative;
   font-size: 32rpx;
+  overflow: hidden;
 }
 .group-nocite>view:nth-child(1){
   position: absolute;
@@ -145,31 +146,40 @@ page{
   width: calc(100% - 240rpx);
   margin-left: 240rpx;
   position: relative;
+  height: 240rpx;
 }
 .group-content-list>view:nth-child(2)>view:nth-child(1){
-  white-space: nowrap;
+  /* white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; */
 }
-.group-content-list>view:nth-child(2)>view{
-  font-size: 28rpx;
-  color:#333;
-  line-height: 44rpx;
+.docName{
+  font-size: 36rpx;
+  color:#000;
+  line-height: 36rpx;
+  font-weight: bold;
 }
-.group-content-list>view:nth-child(2)>view>text{
+/* .group-content-list>view:nth-child(2)>view>text{
   font-size: 34rpx;
   color:#999;
   display: inline-block;
   margin-left: 20rpx;
   text-decoration:line-through;
-}
+} */
 .group-content-list>view:nth-child(2)>view:nth-child(2){
+  position: absolute;
+  left: 0rpx;
+  bottom: 20rpx;
+  font-size: 40rpx;
   width: 100%;
-  text-overflow:ellipsis;
+  line-height: 40rpx;
+  font-style: italic;
+  font-weight: bold;
+  /* text-overflow:ellipsis;
   overflow:hidden;
   display:-webkit-box;
   -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
+  -webkit-box-orient:vertical; */
 }
 .group-fixed{
   position: fixed;
@@ -250,9 +260,12 @@ page{
   color: #fff;
 }
 .docc{
+  display: inline-block;
   text-decoration:line-through;
   color:#999;
-  font-size: 28rpx;
+  font-size: 24rpx;
+  font-weight: normal;
+  line-height: 24rpx;
 }
 .post{
   position: fixed;
@@ -260,9 +273,21 @@ page{
   height: 120rpx;
   bottom: 200rpx;
   left: 20rpx;
-  border-radius: 60rpx;
+}
+.post>view{
+  position: absolute;
+  left: 90rpx;
+  top:-10rpx;
+  border:2rpx solid #44a0b7;
+  background-color: #fff;
+  color:#44a0b7;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  height: 40rpx;
+  padding:0rpx 10rpx;
+  border-radius: 20rpx;
 }
 .post>image{
-  width: 100%;
-  height: 100%;
+  width: 120rpx;
+  height: 120rpx;
 }
