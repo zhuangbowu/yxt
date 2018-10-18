@@ -48,6 +48,9 @@
       </view>
     </view>
 </view>
+<view class='posts' bindtap='navDingdan2'>
+  <image src='../../../img/userdingdan2.png'></image>
+</view>
 <view class='post' bindtap='navDingdan'>
   <view>{{shopData.num}}</view>
   <image src='../../../img/userdingdan.png'></image>

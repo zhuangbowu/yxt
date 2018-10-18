@@ -1,7 +1,7 @@
 <view class="tab">
   <view class="tab-left" bindtap="tabFun">
-    <view class="{{tabArr.curHdIndex=='0'? 'active' : ''}}" id="tab-hd01" data-id="0">审核中</view>
-    <view class="{{tabArr.curHdIndex=='1'? 'active' : ''}}" id="tab-hd02" data-id="1">已审核</view>
+    <view class="{{tabArr.curHdIndex=='0'? 'active' : ''}}" id="tab-hd01" data-id="0">我的订单</view>
+    <view class="{{tabArr.curHdIndex=='1'? 'active' : ''}}" id="tab-hd02" data-id="1">团员订单</view>
   </view>
 
   <view class="tab-right">

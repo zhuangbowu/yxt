@@ -291,3 +291,14 @@ page{
   width: 120rpx;
   height: 120rpx;
 }
+.posts{
+  position: fixed;
+  width: 120rpx;
+  height: 120rpx;
+  bottom: 400rpx;
+  left: 20rpx;
+}
+.posts>image{
+  width: 120rpx;
+  height: 120rpx;
+}

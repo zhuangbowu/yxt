@@ -42,7 +42,7 @@
   </view>
 </view>
   <view class='apply-radio'>
-    <view>您是否有自己组建的领居群</view>
+    <view>您是否有自己组建的邻居群</view>
     <radio-group class="radio-group" bindchange="radioChange1">
         <label class="radio" wx:for="{{neighbor}}" wx:key>
             <radio value="{{item.name}}" checked="{{item.checked}}"  />{{item.value}}

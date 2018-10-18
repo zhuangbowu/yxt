@@ -103,8 +103,8 @@ Page({
         wholeFprwar: true
       })
     } else {
-      var numMoney = (Number(wholeMoney) * 0.6)/100;
-      var texts = '扣除￥' + numMoney.toFixed(2) +'手续费（费率0.6%）'
+      // var numMoney = (Number(wholeMoney) * 0.6)/100;
+      var texts = '提现' + wholeMoney + ''
       this.setData({
         inputMoney: wholeMoney,
         wholeText: texts,
@@ -213,8 +213,25 @@ Page({
     }
   },
   fowarMoney:function(){
-    this.setData({
-      inputMoney: this.data.wholeMoney
-    })
+    var wholeMoney = this.data.wholeMoney;
+    if (wholeMoney < 10) {
+      var texts = '可提现金额最低额度为￥10.00'
+      this.setData({
+        inputMoney: wholeMoney,
+        wholeText: texts,
+        wholeFprwar: true
+      })
+    } else {
+      // var numMoney = (Number(wholeMoney) * 0.6) / 100;
+      var texts = '提现' + wholeMoney + ''
+      this.setData({
+        inputMoney: wholeMoney,
+        wholeText: texts,
+        wholeFprwar: true
+      })
+    }
+    // this.setData({
+    //   inputMoney: this.data.wholeMoney
+    // })
   }
 })

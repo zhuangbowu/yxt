@@ -34,6 +34,12 @@ Page({
                   url: '../index/index',
                 })
               }
+              if (res.cancel) {
+                wx.showToast({
+                  title: '登陆失败',
+                  icon: 'none'
+                })
+              }
             }
           })
           return;
@@ -75,6 +81,14 @@ Page({
             if (res.confirm) {
               wx.navigateTo({
                 url: '../tologin/tologin',
+              })
+            }
+            if (res.cancel) {
+              // thad.onLoad();
+              wx.showModal({
+                title: '提示框',
+                content: '对不起您已取消授权登录信息，无法进行下一步操作',
+                showCancel: false
               })
             }
           }

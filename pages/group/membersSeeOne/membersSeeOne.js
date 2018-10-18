@@ -209,7 +209,8 @@ Page({
         }
       })
     }
-  }, navDetails: function (e) {
+  },
+  navDetails: function (e) {
     var indexs = e.currentTarget.dataset.hi;
     var order = this.data.listData[indexs].order_no;
     wx.navigateTo({

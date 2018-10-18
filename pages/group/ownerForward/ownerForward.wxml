@@ -18,6 +18,6 @@
       <text class="explain">1.每日累计额度不超过2万元；</text>
       <text class="explain">2.每日单笔最低金额10.00元；</text>
       <text class="explain">3.实名提现，请确保提现微信号已实名认证【若未实名制，请按照以下步骤操作：微信下面菜单“我“_“我的钱包”_点右上角四个方块的图标_“支付管理”_“实名认证”】；</text>
-      <text class="explain">4.提现费率为0.6%；</text>
+      <!-- <text class="explain">4.提现费率为0.6%；</text> -->
     </view>
 </view>

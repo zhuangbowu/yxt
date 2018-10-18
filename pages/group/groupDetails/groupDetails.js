@@ -60,7 +60,6 @@ Page({
           thad.setData({
             shopData: res.data.data
           })
-          console.log(thad.data.shopData);
         } else {
           wx.showToast({
             title: res.data.msg,
@@ -236,6 +235,12 @@ Page({
     var thad = this;
     wx.redirectTo({
       url: '../membersSeeOne/membersSeeOne?id=' + thad.data.group_id,
+    })
+  },
+  navDingdan2: function () {
+    var thad = this;
+    wx.redirectTo({
+      url: '../browse/browse?id=' + thad.data.group_id,
     })
   },
   shares: function() {

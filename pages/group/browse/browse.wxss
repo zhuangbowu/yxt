@@ -1,0 +1,83 @@
+.tab-left{
+    width:100%;
+    line-height: 100rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.tab-left view{
+    width: calc(100% / 2);
+    text-align: center;
+    border-bottom: 2rpx solid #e2e2e2;
+}
+.tab-left .active{
+    color: #3ea0b7;
+    border-bottom: 2rpx solid #3ea0b7;
+}
+.tab-right .right-item{
+    display: none;
+}
+.tab-right .right-item.active{
+    display: block;
+}
+.navgengduo{
+  padding-bottom: 180rpx;
+  font-size: 32rpx;
+  color:#333;
+  line-height: 80rpx;
+  height: 80rpx;
+  text-align: center;
+  width: 100%;
+}
+.league-bak{
+  width: clac(100% - 40rpx);
+  margin: 0 20rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+.title{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  border-bottom: 2rpx solid #e2e2e2;
+}
+.title>view{
+  width: calc(100% / 3);
+  text-align: center;
+  line-height: 100rpx;
+}
+.content{
+  width: 100%;
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.content>view{
+  width: calc(100% / 3);
+  text-align: center;
+}
+.content>view{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content:center;
+  align-items: center;
+}
+.content>view:nth-child(1)>text{
+  display: inline-block;
+  text-align: left;
+  line-height: 40rpx;
+  margin-left: 8rpx;
+}
+.content>view:nth-child(1)>image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+}
+.content>view:nth-child(3)>image{
+  width: 40rpx;
+  height: 40rpx;
+}

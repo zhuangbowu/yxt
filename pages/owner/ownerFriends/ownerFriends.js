@@ -62,6 +62,7 @@ Page({
    */
   onShareAppMessage: function (res) {
     var objjs = app.globalData.owner.header_id;
+    console.log(objjs);
     return {
       title: '欢迎加入优鲜团',
       path: '/pages/members/membersTobe/membersTobe?id=' + objjs+'&num='+1,

@@ -1,0 +1,69 @@
+<view class="tab">
+  <view class="tab-left" bindtap="tabFun">
+    <view class="{{tabArr.curHdIndex=='0'? 'active' : ''}}" id="tab-hd01" data-id="0">浏览({{shopbrowse.look_num}})</view>
+    <view class="{{tabArr.curHdIndex=='1'? 'active' : ''}}" id="tab-hd02" data-id="1">参团({{shopbrowse.buy_num}})</view>
+  </view>
+
+  <view class="tab-right">
+    <view class="right-item {{tabArr.curBdIndex=='0'? 'active' : ''}}">
+      <view class='league-bak'>
+        <view class='title'>
+          <view>到访</view>
+          <view>来源</view>
+          <view>是否参见团购</view>
+        </view>
+        <view class='content' wx:for="{{shopbrowse.list}}" wx:key>
+          <view>
+            <image src='{{item.avatar}}' mode='widthFix'></image>
+            <text>{{item.user_name}}</text>
+          </view>
+          <view wx:if="{{item.src_id==1||item.src_id==2}}">
+            老王八
+          </view>
+          <view wx:if="{{item.src_id==0}}">
+            <open-data type="groupName" open-gid="{{item.openGId}}"></open-data>
+          </view>
+          <view>
+            <image src='../../../img/queding.png' wx:if="{{item.status==1}}"></image>
+          </view>
+        </view>
+      </view>
+      <view class='navgengduo' wx:if='{{pageLis==0}}'>
+        下滑加载更多
+      </view>
+      <view wx:if='{{pageLis==1}}' class='navgengduo'>
+        浏览记录已全部加载完成
+      </view>
+    </view>
+    <view class="right-item {{tabArr.curBdIndex=='1'? 'active' : ''}}">
+      <view class='league-bak'>
+        <view class='title'>
+          <view>到访</view>
+          <view>来源</view>
+          <view>是否参见团购</view>
+        </view>
+        <view class='content' wx:for="{{shopbrowse.list}}" wx:key>
+          <view>
+            <image src='{{item.avatar}}' mode='widthFix'></image>
+            <text>{{item.user_name}}</text>
+          </view>
+          <view wx:if="{{item.src_id==1||item.src_id==2}}">
+            老王八
+          </view>
+          <view wx:if="{{item.src_id==0}}">
+            <open-data type="groupName" open-gid="{{item.openGId}}"></open-data>
+          </view>
+          <view>
+            <image src='../../../img/queding.png'></image>
+          </view>
+        </view>
+      </view>
+      <view class='navgengduo' wx:if='{{pageLis==0}}'>
+        下滑加载更多
+      </view>
+      <view wx:if='{{pageLis==1}}' class='navgengduo'>
+        参团记录已全部加载完成
+      </view>
+    </view>
+  </view>
+</view>

@@ -87,18 +87,26 @@ Page({
         var developer = (wx.getStorageSync('openId'));
         if (typeof developer != 'string' || developer == '' || developer == null || developer == '[]') {
           wx.hideLoading();
+          console.log(222);
           wx.showModal({
             title: '登录失败',
             content: '用户登录失败点击确定重新登录',
             success: res => {
+              console.log(res);
               if (res.confirm) {
                 wx.redirectTo({
                   url: '../membersTobe/membersTobe',
                 })
               }
+              if(res.cancel){
+                wx.showToast({
+                  title: '登陆失败',
+                  icon:'none'
+                })
+              }
             }
           })
-        } 
+        }
         wx.request({
           url: app.globalData.networkAddress + '/wapp/Pub/loginByWapp',
           data: {
@@ -135,7 +143,15 @@ Page({
           success: function(res) {
             if (res.confirm) {
               wx.navigateTo({
-                url: '../tologin/tologin',
+                url: '../../tologin/tologin',
+              })
+            }
+            if (res.cancel){
+              // thad.onLoad();
+              wx.showModal({
+                title: '提示框',
+                content: '对不起您已取消授权登录信息，无法进行下一步操作',
+                showCancel: false
               })
             }
           }

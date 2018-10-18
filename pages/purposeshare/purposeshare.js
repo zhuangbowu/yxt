@@ -99,20 +99,22 @@ Page({
   onShareAppMessage: function(options) {
     var that = this;
     var group_id = that.data.shopData.group_id;
+    setTimeout(function(){
+      that.setData({
+        envelopesOff: false,
+        envelopes: '../../img/envelopes1.png'
+      })
+    },1000)
     var shareObj = {
       title: "优鲜团-优先天下鲜，美味任你团",
       path: '/pages/members/membersDetails/membersDetails?id=' + group_id,
       success: function (res) {
-        console.log(res);
-        if (res.errMsg == 'shareAppMessage:ok') {
-          that.setData({
-            envelopesOff:false,
-            envelopes:'../../img/envelopes1.png'
-          })
+        // console.log(res);
+        // if (res.errMsg == 'shareAppMessage:ok') {
           // wx.redirectTo({
           //   url: '/pages/members/membersDetails/membersDetails?id=' + group_id,
           // })
-        }
+        // }
       },
       fail: res => {
         console.log('222' +res);
@@ -153,7 +155,7 @@ Page({
           })
           wx.showModal({
             title: '提示框',
-            content: '红包获取成功',
+            content: res.data.msg,
             showCancel:false,
             success:res=>{
               thad.setData({

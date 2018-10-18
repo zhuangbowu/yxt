@@ -42,7 +42,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    wx.hideShareMenu();
+    // wx.hideShareMenu();
   },
 
   /**
@@ -84,10 +84,16 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    wx.showShareMenu({
+      withShareTicket: true
+    })
     var shop_id = this.data.shop.group_id;
     return {
       title: '分享优鲜团',
-      path: 'pages/members/membersDetails/membersDetails?id=' + shop_id
+      path: 'pages/members/membersDetails/membersDetails?id=' + shop_id,
+      success:function(res){
+        console.log(res);
+      }
     } 
   }
 })

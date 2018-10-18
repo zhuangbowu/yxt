@@ -16,7 +16,6 @@ Page({
    */
   onLoad: function (options) {
     var order = decodeURIComponent(options.scene);
-    console.log(order);
     this.setData({
       order: order
     })
@@ -40,6 +39,12 @@ Page({
               if (res.confirm) {
                 wx.redirectTo({
                   url: '../membersDetailsTwo/membersDetailsTwo',
+                })
+              }
+              if (res.cancel) {
+                wx.showToast({
+                  title: '登陆失败',
+                  icon: 'none'
                 })
               }
             }
@@ -96,7 +101,15 @@ Page({
           success: function (res) {
             if (res.confirm) {
               wx.navigateTo({
-                url: '../tologin/tologin',
+                url: '../../tologin/tologin',
+              })
+            }
+            if (res.cancel) {
+              // thad.onLoad();
+              wx.showModal({
+                title: '提示框',
+                content: '对不起您已取消授权登录信息，无法进行下一步操作',
+                showCancel: false
               })
             }
           }

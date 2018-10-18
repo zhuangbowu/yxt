@@ -52,7 +52,7 @@
   </view>
   <!-- <button open-type="share"> -->
   <button bindtap='navCanvas'>
-    分享到微信群
+    分享到群有惊喜
   </button>
 </view>
 <view class='mask' wx:if="{{imageUrlCk==true}}" bindtap='navckkk'>

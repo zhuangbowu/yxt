@@ -202,18 +202,35 @@ Page({
     }
   },
   fowarMoney: function () {
-    this.setData({
-      inputMoney: this.data.wholeMoney
-    })
+    var wholeMoney = this.data.wholeMoney
+    if (wholeMoney < 1000) {
+      var texts = '可提现金额最低额度为￥1000'
+      this.setData({
+        inputMoney: wholeMoney,
+        wholeText: texts,
+        wholeFprwar: true
+      })
+    } else {
+      var numMoney = (Number(wholeMoney) * 0.1) / 100;
+      var texts = '扣除￥' + numMoney.toFixed(2) + '手续费（费率0.1%）'
+      this.setData({
+        inputMoney: wholeMoney,
+        wholeText: texts,
+        wholeFprwar: true
+      })
+    }
+    // this.setData({
+    //   inputMoney: this.data.wholeMoney
+    // })
   },
   addressTextlputt2:function(){
     this.setData({
-      addressTextlput:false
+      addressTextlput: true
     })
   },
   addressCancel: function () {
     this.setData({
-      addressTextlput: false
+      addressTextlput: true
     })
   },
   addressIifting2:function(){
