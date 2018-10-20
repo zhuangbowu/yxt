@@ -1,0 +1,44 @@
+/* pages/group/groupgenerate/groupgenerate.wxss */
+.checkbox-group{
+  margin-bottom: 100rpx;
+}
+.checkbox{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  font-size: 28rpx;
+  color:#333;
+  line-height: 60rpx;
+  width: calc(100% - 40rpx);
+  margin: 10rpx 20rpx;
+}
+.checkbox>image{
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0rpx 20rpx;
+}
+.post{
+  position: fixed;
+  bottom:0px;
+  left: 200rpx;
+  width: calc(100% - 200rpx);
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 36rpx;
+  background-color: #44a0b7;
+  color: #fff;
+}
+.posts{
+ position: fixed;
+  bottom:0px;
+  left: 0px;
+  width: 180rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 36rpx;
+  background-color: #44a0b7;
+  color: #fff;
+}

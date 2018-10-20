@@ -1,0 +1,9 @@
+<!--pages/group/groupfriends/groupfriends.wxml-->
+<view class='conter'>
+  <painter palette="{{template}}" bind:imgOK="onImgOK" bind:imgErr="onImgErr" style="margin-top:20px;"/>
+</view>
+<!-- style='position: absolute;left:800px;top:0px' -->
+<image src='{{imgUrl}}' style='width:500rpx;height:500rpx;'></image>
+<view class='post' bindtap='navShares'>
+  保存
+</view>

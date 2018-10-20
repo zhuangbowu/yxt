@@ -1,0 +1,9 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "分享朋友圈",
+  "backgroundColor": "#fff",
+  "usingComponents": {
+    "painter": "/components/painter/painter"
+  }
+}

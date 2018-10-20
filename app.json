@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/group/groupfriends/groupfriends",
+    "pages/group/groupgenerate/groupgenerate",
     "pages/group/browse/browse",
     "pages/purposeshare/purposeshare",
     "pages/group/groupshares/groupshares",

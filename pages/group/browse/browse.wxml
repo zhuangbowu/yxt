@@ -17,8 +17,11 @@
             <image src='{{item.avatar}}' mode='widthFix'></image>
             <text>{{item.user_name}}</text>
           </view>
-          <view wx:if="{{item.src_id==1||item.src_id==2}}">
-            老王八
+          <view wx:if="{{item.src_id==1}}">
+            好友分享进入
+          </view>
+          <view wx:if="{{item.src_id==2}}">
+            朋友圈
           </view>
           <view wx:if="{{item.src_id==0}}">
             <open-data type="groupName" open-gid="{{item.openGId}}"></open-data>
@@ -47,8 +50,11 @@
             <image src='{{item.avatar}}' mode='widthFix'></image>
             <text>{{item.user_name}}</text>
           </view>
-          <view wx:if="{{item.src_id==1||item.src_id==2}}">
-            老王八
+          <view wx:if="{{item.src_id==1}}">
+            好友分享进入
+          </view>
+          <view wx:if="{{item.src_id==2}}">
+            朋友圈
           </view>
           <view wx:if="{{item.src_id==0}}">
             <open-data type="groupName" open-gid="{{item.openGId}}"></open-data>

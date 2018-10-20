@@ -12,6 +12,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // console.log(`
+    // 为毛还不发工资、
+    // 都快饿死了、
+    // 老板就是不发工资怎么办啊、
+    // `);
     var thad = this;
     wx.getUserInfo({
       withCredentials: true,
