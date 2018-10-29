@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -65,6 +65,39 @@
 					"pathName": "pages/members/membersDetails/membersDetails",
 					"query": "id=41",
 					"scene": "1007"
+				},
+				{
+					"id": 3,
+					"name": "军团分享进入",
+					"pathName": "pages/group/groupEdit/groupEdit",
+					"query": "group_id=25",
+					"scene": "1044",
+					"shareInfo": {
+						"groupName": "测试模拟群0",
+						"shareName": "zAwSv60yS0-uU10493fpk3c7x6F-6cdHGVA8XLy_JCs@cr4dev",
+						"shareKey": "YFmVq7V1D2CYDXq5Owp_vmcu3HDbmMw9UxuyfOYitDAAHi2sDZfevK2nwVNqpvlqPBX4UbA02HrLtaOEnk16mg~~"
+					}
+				},
+				{
+					"id": 4,
+					"name": "二维码进入",
+					"pathName": "pages/group/membersDetailsTwo/membersDetailsTwo",
+					"query": "scene=201809252001006918394",
+					"scene": "1011"
+				},
+				{
+					"id": 5,
+					"name": "购买",
+					"pathName": "pages/members/membersDetails/membersDetails",
+					"query": "id=32",
+					"scene": "1011"
+				},
+				{
+					"id": 6,
+					"name": "申请团长",
+					"pathName": "pages/members/membersTobe/membersTobe",
+					"query": "id=1&num=1",
+					"scene": "1011"
 				}
 			]
 		}

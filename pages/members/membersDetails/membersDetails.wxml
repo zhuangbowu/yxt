@@ -36,6 +36,14 @@
         <image src='../../../img/WechatIMG21.png' catchtap='shopPlus' data-hi='{{index}}'></image>
       </view>
     </view>
+    <view class='posi' wx:if="{{item.remain==0}}">
+      已售罄
+    </view>
+    <block  wx:if="item.remain!==0">
+        <view class='posis' wx:if="{{item.tag_name!==''}}">
+          {{item.tag_name}}
+        </view>
+    </block>
   </view>
 </view>
 <view class='group-cot' wx:if="{{shopData.sale_detail.is_show==1}}" wx:key>
@@ -107,7 +115,7 @@
     我要当团长
   </view>
   <form bindsubmit="navMembersPurchase" report-submit='true'>
-    <button form-type="submit">
+    <button form-type="submit" disabled="{{oofs}}">
       立即购买 (￥{{newNum}})
     </button>
   </form>
@@ -118,4 +126,16 @@
       立即购买 (￥{{newNum}})
     </button>
   </form>
+</view>
+<view class='mesk' hidden='{{oof}}'>
+  <view class='mesk-no' bindtap='tables'></view>
+  <view class='mesk-content'>
+  <view class='mesk-title'>
+    授权提示
+  </view>
+  <view class='mesk-text'>
+  暂未获得授权是否进行授权
+  </view>
+  <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" lang="zh_CN">授权登录</button>
+  </view>
 </view>

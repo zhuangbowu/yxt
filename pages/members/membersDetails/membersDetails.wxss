@@ -134,6 +134,33 @@ page{
   line-height: 36rpx;
   font-weight: bold;
 }
+.group-content-list>.posi{
+  position: absolute;
+  top:40rpx;
+  left: 20rpx;
+  font-size: 30rpx;
+  border-top-right-radius: 25rpx;
+  border-bottom-right-radius: 25rpx;
+  color:#fff;
+  line-height: 50rpx;
+  padding: 0rpx 18rpx;
+  /* background-color:#ffcd00; */
+  background-color: #666;
+}
+.group-content-list>.posis{
+  position: absolute;
+  top:40rpx;
+  left: 20rpx;
+  font-size: 30rpx;
+  border-top-right-radius: 25rpx;
+  border-bottom-right-radius: 25rpx;
+  color:#fff;
+  line-height: 50rpx;
+  padding: 0rpx 18rpx;
+  background-color:#ffcd00;
+  /* background-color: #666; */
+}
+
 .group-content-list>view:nth-child(2)>view:nth-child(1){
   /* white-space: nowrap;
   overflow: hidden;
@@ -347,4 +374,52 @@ page{
 .post>image{
   width: 100%;
   height: 100%;
+}.mesk{
+  z-index: 5;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+}
+.mesk-no{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.mesk-content{
+  position: absolute;
+  border-radius: 10rpx;
+  top:400rpx;
+  left: 50%;
+  margin-left: -300rpx;
+  width: 600rpx;
+  height: 500rpx;
+  background-color: #fff;
+}
+.mesk-title{
+  height: 100rpx;
+  width: 100%;
+  text-align: center;
+  line-height: 100rpx;
+  color:#000;
+  border-bottom: 2rpx solid #eee;
+}
+.mesk-text{
+  width: 100%;
+  font-size: 38rpx;
+  text-align: center;
+  line-height: 100rpx;
+  color:#333;
+}
+.mesk-content>button{
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  bottom: 0px;
+  background: #01bbec;
+  color:#fff;
+  border-top-left-radius: 0rpx;
+  border-top-right-radius: 0rpx;
 }

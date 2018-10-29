@@ -16,11 +16,12 @@ Page({
     var thad=this;
     wx.request({
       url: app.globalData.networkAddress + '/wapp/User/getOrderList',
-      method: "post",
+      method: "post", 
       data: {
         "user_id": app.globalData.information.id
       },
       success: res => {
+        console.log(res);
         if (res.data.code == 1) {
           thad.setData({
             listData:res.data.data

@@ -163,3 +163,15 @@
     </view>
   </view>
 </view>
+<view class='mesk' hidden='{{oof}}'>
+  <view class='mesk-no' bindtap='tables'></view>
+  <view class='mesk-content'>
+  <view class='mesk-title'>
+    授权提示
+  </view>
+  <view class='mesk-text'>
+  暂未获得授权是否进行授权
+  </view>
+  <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" lang="zh_CN">授权登录</button>
+  </view>
+</view>

@@ -69,6 +69,12 @@
       </view>
     </view>
     <view class='commodity-num'>
+      <view>商品标签</view>
+      <view class='selset' bindtap='selset' data-hi='{{index}}'>
+        {{item.tag_name}}
+      </view>
+    </view>
+    <view class='commodity-num'>
       <view>团限购</view>
       <input type='number' placeholder='请输入团购数量' confirm-type='next' value='{{item.group_limit}}' bindinput='bindshopGroup' data-hi='{{index}}'></input>
     </view>

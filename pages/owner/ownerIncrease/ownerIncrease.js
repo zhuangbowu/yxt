@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    objects: new Object(),
+    selsetData:new Array(),
+    objects: new Array(),
     shopregiment: 0,
     mainTitle: '',
     dispatch_info: '',
@@ -84,7 +85,23 @@ Page({
         }
       }
     })
-
+    wx.request({
+      url: app.globalData.networkAddress + '/wapp/Header/getTagName',
+      method: 'post',
+      data: {
+        "header_id": app.globalData.owner.header_id
+      },
+      success: function (res) {
+        if (res.data.code == 1) {
+          thad.data.selsetData=res.data.data;
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+      }
+    })
 
   },
 
@@ -116,25 +133,27 @@ Page({
     if (JSON.stringify(objss) == '{}') {
       // console.log('无数据不渲染');
     } else {
-      var obj = new Object();
-      obj.id = 0,
-      obj.base_id = objss.base_id,
-      obj.product_name = objss.product_name;
-      obj.group_limit = objss.group_limit;
-      obj.self_limit = objss.self_limit;
-      obj.market_price = objss.market_price;
-      obj.purchase_price = objss.purchase_price;
-      obj.group_price = objss.group_price;
-      obj.commission = objss.commission;
-      obj.remain = objss.remain;
-      obj.img_list = objss.img_list;
-      obj.product_desc = objss.product_desc;
-      obj.modifyShop = true;
-      that.data.product_list.push(obj);
-      that.setData({
-        product_list: that.data.product_list
-      });
-      that.data.objects = {};
+      for (var i = 0; i < objss.length; i++) {
+        var obj = new Object();
+        obj.id = 0,
+        obj.base_id = objss[i].base_id,
+        obj.product_name = objss[i].product_name;
+        obj.group_limit = objss[i].group_limit;
+        obj.self_limit = objss[i].self_limit;
+        obj.market_price = objss[i].market_price;
+        obj.purchase_price = objss[i].purchase_price;
+        obj.group_price = objss[i].group_price;
+        obj.commission = objss[i].commission;
+        obj.remain = objss[i].remain;
+        obj.img_list = objss[i].img_list;
+        obj.product_desc = objss[i].product_desc;
+        obj.modifyShop = true;
+        obj.tag_name = '请选择商品标签';
+        that.data.product_list.push(obj);
+        that.setData({
+          product_list: that.data.product_list
+        });
+      }
     }
 
   },
@@ -370,8 +389,8 @@ Page({
         if (res.tapIndex == 0) {
           var obj = new Object();
           obj.id = 0,
-            obj.base_id = 0,
-            obj.product_name = '';
+          obj.base_id = 0,
+          obj.product_name = '';
           obj.group_limit = 0;
           obj.self_limit = 0;
           obj.market_price = '';
@@ -382,6 +401,7 @@ Page({
           obj.img_list = [];
           obj.product_desc = '';
           obj.modifyShop = true;
+          obj.tag_name = '请选择商品标签';
           that.data.product_list.push(obj);
           that.setData({
             product_list: that.data.product_list
@@ -788,6 +808,11 @@ Page({
       dispatch_arr.push(thad.addressTextArr[j].id)
     }
     if (oObjj == 1) {
+      for (var i = 0; i < thad.product_list.length; i++) {
+        if (thad.product_list[i].tag_name == "请选择商品标签") {
+          thad.product_list[i].tag_name = '';
+        }
+      }
       var objj = new Object();
       objj = {
         "group_id": 0,
@@ -802,6 +827,11 @@ Page({
         "product_list": thad.product_list
       }
     } else if (oObjj == 2) {
+      for (var i = 0; i < thad.product_list.length; i++) {
+        if (thad.product_list[i].tag_name == "请选择商品标签") {
+          thad.product_list[i].tag_name = '';
+        }
+      }
       thad.dispatch_info = dispatch_arr.toString();
       var objj = new Object();
       objj = {
@@ -863,6 +893,11 @@ Page({
       dispatch_arr.push(thad.addressTextArr[j].id)
     }
     if (oObjj == 1) {
+      for (var i = 0; i < thad.product_list.length; i++) {
+        if (thad.product_list[i].tag_name == "请选择商品标签") {
+          thad.product_list[i].tag_name = '';
+        }
+      }
       var objj = new Object();
       objj = {
         "group_id": 0,
@@ -877,6 +912,11 @@ Page({
         "product_list": thad.product_list
       }
     } else if (oObjj == 2) {
+      for (var i = 0; i < thad.product_list.length; i++) {
+        if (thad.product_list[i].tag_name == "请选择商品标签") {
+          thad.product_list[i].tag_name = '';
+        }
+      }
       thad.dispatch_info = dispatch_arr.toString();
       var objj = new Object();
       objj = {
@@ -1015,14 +1055,14 @@ Page({
           if (thad.product_list[i].purchase_price == '') {
             return '请输入商品进价';
           }
-          if (thad.product_list[i].purchase_price < 1) {
-            return '商品进价不能小于1';
+          if (thad.product_list[i].purchase_price < 0) {
+            return '商品进价不能小于0';
           }
           if (thad.product_list[i].market_price == '') {
             return '请输入市场价';
           }
-          if (thad.product_list[i].market_price < 1) {
-            return '市场价不能小于1';
+          if (thad.product_list[i].market_price < 0) {
+            return '市场价不能小于0';
           }
           if (thad.product_list[i].group_price == '') {
             return '请输入团购价';
@@ -1068,14 +1108,14 @@ Page({
       if (thad.product_list[i].purchase_price == '') {
         return '请输入商品进价';
       }
-      if (thad.product_list[i].purchase_price < 1) {
-        return '商品进价不能小于1';
+      if (thad.product_list[i].purchase_price < 0) {
+        return '商品进价不能小于0';
       }
       if (thad.product_list[i].market_price == '') {
         return '请输入市场价';
       }
-      if (thad.product_list[i].market_price < 1) {
-        return '市场价不能小于1';
+      if (thad.product_list[i].market_price < 0) {
+        return '市场价不能小于0';
       }
       if (thad.product_list[i].group_price == '') {
         return '请输入团购价';
@@ -1097,5 +1137,26 @@ Page({
       }
     }
     return 1;
-  }
+  },
+  selset: function (e) {
+    var thad=this;
+    wx.showActionSheet({
+      itemList: thad.data.selsetData,
+      success:res=>{
+        if(res.tapIndex==0){
+          var indexs = e.currentTarget.dataset.hi;
+          var up = 'product_list[' + indexs + '].tag_name';
+          thad.setData({
+            [up]: thad.data.selsetData[res.tapIndex]
+          })
+        }else{
+          var indexs = e.currentTarget.dataset.hi;
+          var up = 'product_list[' + indexs + '].tag_name';
+          thad.setData({
+            [up]: thad.data.selsetData[res.tapIndex]
+          })
+        }
+      }
+    })
+  },
 })

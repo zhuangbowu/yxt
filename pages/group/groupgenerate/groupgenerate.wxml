@@ -3,9 +3,6 @@
         <checkbox value="{{item.id}}" checked="{{item.checked}}"/><image src='{{item.product_img[0].urlImg}}'></image>{{item.product_name}}
     </label>
 </checkbox-group>
-<image src='{{imgUrl}}' style='width:500rpx;height:500rpx;position: absolute;left:800px;top:0px'></image>
-<image src='{{userImgUrl}}' style='width:500rpx;height:500rpx;position: absolute;left:800px;top:0px'></image>
-<painter palette="{{template}}" bind:imgOK="onImgOK" bind:imgErr="onImgErr" style='position: absolute;left:-80000px;top:-99999px'/>
 
 <view class='posts' bindtap='navquanxuan'>
 <checkbox-group bindchange="checkboxChanges">

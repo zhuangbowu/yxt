@@ -6,6 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    oof: true,
+    oofs:false,
     page: 0,
     num: 10,
     pageLis: 0,
@@ -95,6 +97,7 @@ Page({
                     thad.setData({
                       shopData: res.data.data
                     })
+                    console.log(thad.data.shopData);
                     for (var i = 0; i < thad.data.shopData.product_list.length; i++) {
                       thad.data.shopNum[i] = 0;
                       thad.setData({
@@ -158,25 +161,28 @@ Page({
         })
       },
       fail: function() {
-        wx.showModal({
-          title: '警告',
-          content: '尚未进行授权，请点击确定跳转到授权页面进行授权。',
-          success: function(res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '../../tologin/tologin',
-              })
-            }
-            if (res.cancel) {
-              // thad.onLoad();
-              wx.showModal({
-                title: '提示框',
-                content: '对不起您已取消授权登录信息，无法进行下一步操作',
-                showCancel: false
-              })
-            }
-          }
+        thad.setData({
+          oof: false
         })
+        // wx.showModal({
+        //   title: '警告',
+        //   content: '尚未进行授权，请点击确定跳转到授权页面进行授权。',
+        //   success: function(res) {
+        //     if (res.confirm) {
+        //       wx.navigateTo({
+        //         url: '../../tologin/tologin',
+        //       })
+        //     }
+        //     if (res.cancel) {
+        //       // thad.onLoad();
+        //       wx.showModal({
+        //         title: '提示框',
+        //         content: '对不起您已取消授权登录信息，无法进行下一步操作',
+        //         showCancel: false
+        //       })
+        //     }
+        //   }
+        // })
       }
     })
   },
@@ -185,7 +191,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    wx.hideShareMenu();
+    // wx.hideShareMenu();
   },
 
   /**
@@ -286,8 +292,8 @@ Page({
    */
   onShareAppMessage: function() {
     return {
-      title: '分享本页面',
-      path: '/pages/index/index'
+      title: this.data.shopData.title,
+      path: 'pages/members/membersDetails/membersDetails?id='+this.data.group_id
     }
   },
   navDetails: function(e) {
@@ -381,6 +387,9 @@ Page({
         icon: 'none'
       })
     } else {
+      thad.setData({
+        oofs:true
+      })
       wx.request({
         url: app.globalData.networkAddress + '/wapp/User/checkOrder',
         method: 'post',
@@ -398,6 +407,9 @@ Page({
               title: '库存提示',
               content: res.data.msg,
               showCancel: false
+            })
+            thad.setData({
+              oofs: false
             })
           }
         }
@@ -456,4 +468,37 @@ Page({
       url: '../membersOrder/membersOrder'
     })
   },
+  bindGetUserInfo: function (e) {
+    var that = this;
+    //此处授权得到userInfo
+    var objj = e.detail.userInfo;
+    //接下来写业务代码
+    wx.request({
+      url: app.globalData.networkAddress + '/wapp/Pub/loginByWapp',
+      data: {
+        open_id: app.globalData.openId,
+        user_name: objj.nickName,
+        avatar: objj.avatarUrl,
+        gender: objj.gender,
+        city: objj.city,
+        province: objj.province,
+        country: objj.country
+      },
+      success: function (res) {
+        app.globalData.information = res.data.data;
+        that.setData({
+          oof: true
+        })
+      }
+    })
+    var options = new Object();
+    options.id = that.data.group_id;
+    //最后，记得返回刚才的页面
+    that.onLoad(options);
+  },
+  tables: function () {
+    this.setData({
+      oof: true
+    })
+  }
 })

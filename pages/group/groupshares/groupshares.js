@@ -14,10 +14,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (!options.groupId || options.groupId=='undefined'){
+      wx.showToast({
+        title: '分享内容获取失败请重新进入',
+      })
+    }
     var groupId = options.groupId;
     var thad=this;
     wx.request({
-      url: app.globalData.networkAddress + '/wapp/Leader/groupDetail',
+      url: app.globalData.networkAddress + '/wapp/Leader/groupDetail', 
       method:'post',
       data: {
         "leader_id": app.globalData.information.id,

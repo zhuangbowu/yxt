@@ -401,3 +401,17 @@ page{
   color:red;
   margin-left: 20rpx;
 }
+.selset{
+  width: 537rpx;
+  margin-left:20rpx;
+  font-size: 28rpx;
+  color:#333;
+  line-height: 80rpx;
+}
+.selsetPost{
+  position: absolute;
+  top:80rpx;
+  left: 175rpx;
+  width: 537rpx;
+  border:2rpx solid #e2e2e2;
+}

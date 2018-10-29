@@ -15,7 +15,7 @@
             销量
           </view>
         </view>
-        <view class='contnent' wx:for="{{shopData.product_list}}" wx:key>
+        <view class='contnent' wx:for="{{shopData.product_list}}" wx:if="{{item.sell_num>0}}" wx:key>
           <view>
             {{item.product_name}}
           </view>

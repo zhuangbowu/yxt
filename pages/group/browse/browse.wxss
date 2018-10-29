@@ -66,6 +66,9 @@
   justify-content:center;
   align-items: center;
 }
+.content>view>open-data{
+  width: 100%;
+}
 .content>view:nth-child(1)>text{
   display: inline-block;
   text-align: left;

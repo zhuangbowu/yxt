@@ -21,7 +21,7 @@
             好友分享进入
           </view>
           <view wx:if="{{item.src_id==2}}">
-            朋友圈
+            扫描二维码
           </view>
           <view wx:if="{{item.src_id==0}}">
             <open-data type="groupName" open-gid="{{item.openGId}}"></open-data>
@@ -54,7 +54,7 @@
             好友分享进入
           </view>
           <view wx:if="{{item.src_id==2}}">
-            朋友圈
+            扫描二维码
           </view>
           <view wx:if="{{item.src_id==0}}">
             <open-data type="groupName" open-gid="{{item.openGId}}"></open-data>

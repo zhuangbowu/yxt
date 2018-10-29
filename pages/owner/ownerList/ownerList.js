@@ -179,6 +179,7 @@ Page({
           thad.setData({
             shopData: aaa
           })
+          console.log(thad.data.shopData);
           thad.setData({
             shopNum: []
           })

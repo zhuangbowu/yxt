@@ -159,13 +159,6 @@ page{
   text-align: right;
   width: 200rpx;
 }
-.refund{
-  text-align: right;
-  font-size: 28rpx;
-  padding: 10rpx 20rpx;
-  color:#666;
-  line-height: 40rpx;
-}
 .footer{
   position: fixed;
   bottom:0rpx;
@@ -199,4 +192,23 @@ page{
   height: 80rpx;
   text-align: center;
   width: 100%;
+}
+.refund{
+  width: calc(100% - 40rpx);
+  margin: 10rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.refund>view:nth-child(1){
+  width: 50%;
+  text-align: left;
+  color:#333;
+  font-size: 28rpx;
+}
+.refund>view:nth-child(2){
+  width: 50%;
+  text-align: right;
+  font-size: 28rpx;
+  color:#666;
 }

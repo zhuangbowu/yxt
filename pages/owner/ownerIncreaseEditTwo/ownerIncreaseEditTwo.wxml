@@ -17,19 +17,20 @@
   <view class='goods-title'>团长取货方式</view>
   <radio-group class="radio-group" bindchange="radioChange">
     <label class="radio" wx:for="{{items}}" wx:key>
-        <radio value="{{index+1}}" checked="{{item.checked}}"/>{{item.value}}<text>{{item.judge}}</text>
+      <radio value="{{index+1}}" checked="{{item.checked}}" />{{item.value}}
+      <text>{{item.judge}}</text>
     </label>
   </radio-group>
-  <image src='../../../img/Increase2.png' bindtap="modalinput"></image> 
+  <image src='../../../img/Increase2.png' bindtap="modalinput"></image>
   <view class='address' wx:if='{{modeDistribution==2}}'>
     <checkbox-group bindchange="checkboxChange">
-        <label class="checkbox" wx:for-items="{{addressText}}" wx:for-index="indess"  wx:key>
-            <checkbox value="{{indess}}" checked="{{item.checked}}"/>{{item.name}}：{{item.address}}-{{item.address_det}}
-            <view>
-              <text catchtap='addressEdit' data-hi='{{indess}}'>编辑</text>
-              <text catchtap='addressNo' data-hi='{{indess}}'>删除</text>
-            </view>
-        </label>
+      <label class="checkbox" wx:for-items="{{addressText}}" wx:for-index="indess" wx:key>
+        <checkbox value="{{indess}}" checked="{{item.checked}}" />{{item.name}}：{{item.address}}-{{item.address_det}}
+        <view>
+          <text catchtap='addressEdit' data-hi='{{indess}}'>编辑</text>
+          <text catchtap='addressNo' data-hi='{{indess}}'>删除</text>
+        </view>
+      </label>
     </checkbox-group>
   </view>
 </view>
@@ -38,8 +39,8 @@
     允许团长结束团购
   </view>
   <view class="body-view">
-    <switch checked bindchange="switch1Change" wx:if="{{mainDetailNum==1}}"/>
-    <switch bindchange="switch1Change" wx:if="{{mainDetailNum==0}}"/>
+    <switch checked bindchange="switch1Change" wx:if="{{mainDetailNum==1}}" />
+    <switch bindchange="switch1Change" wx:if="{{mainDetailNum==0}}" />
   </view>
 </view>
 <view class='group-time lncrease-bottom'>
@@ -60,6 +61,12 @@
     <view class='commodity-num'>
       <view>商品名称</view>
       <input type='text' placeholder='请输入商品名称' confirm-type='next' value='{{item.product_name}}' bindinput='bindShopName' data-hi='{{index}}'></input>
+    </view>
+    <view class='commodity-num'>
+      <view>商品标签</view>
+      <view class='selset' bindtap='selset' data-hi='{{index}}'>
+        {{item.tag_name}}
+      </view>
     </view>
     <view class='commodity-num'>
       <view>团限购</view>
@@ -100,7 +107,7 @@
           </view>
         </block>
         <view class='commodity-upload-add'>
-          <image src='../../../img/Increase3.png' bindtap="showImgChoose"  data-hi="{{index}}" mode='widthFix'></image>
+          <image src='../../../img/Increase3.png' bindtap="showImgChoose" data-hi="{{index}}" mode='widthFix'></image>
         </view>
       </view>
     </view>

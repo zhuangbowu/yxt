@@ -35,6 +35,7 @@ Page({
           thad.setData({
             shopData: res.data.data
           })
+          console.log(thad.data.shopData);
           for(var i=0;i<thad.data.shopData.length;i++){
             var aaa = 'shopData['+i+'].checked'
             thad.setData({
@@ -100,18 +101,23 @@ Page({
   
   },
   checkboxChange: function (e) {
-    if (e.detail.value.length>0){
-      var thad = this;
-      var indexArr = e.detail.value;
-      var arr = [];
-      for (var i = 0; i < thad.data.shopData.length; i++) {
-        arr.push(thad.data.shopData[indexArr[i]].leader_id);
-      }
-      arr = arr.join(',');
-      thad.setData({
-        dataArray: arr
-      })
-    }
+    var aaa = e.detail.value.join(',');
+    this.setData({
+      dataArray: aaa
+    })
+    // if (e.detail.value.length>0){
+    //   var thad = this;
+    //   var indexArr = e.detail.value;
+    //   var arr = [];
+    //   for (var i = 0; i < thad.data.shopData.length; i++) {
+    //     console.log(indexArr[i]);
+    //     arr.push(thad.data.shopData[indexArr[i]].leader_id);
+    //   }
+    //   arr = arr.join(',');
+    //   thad.setData({
+    //     dataArray: arr
+    //   })
+    // }
   },
   wholeGrant:function(){
     var thad = this;

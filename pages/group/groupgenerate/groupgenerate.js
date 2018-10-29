@@ -1,5 +1,4 @@
 var app = getApp();
-import Card from '../../../palette/card';
 // pages/group/groupgenerate/groupgenerate.js
 Page({
 
@@ -10,13 +9,11 @@ Page({
     groupId: 41,
     shopList: new Object(),
     sharesList: new Array(),
-    template: {},
     indexs: 0,
     imgUrl: '',
     userImgUrl: '',
     userName: '',
-    title:'',
-    off:true
+    off: true
   },
 
   /**
@@ -27,52 +24,6 @@ Page({
     var thad = this;
     thad.setData({
       groupId: groupId
-    })
-    wx.getImageInfo({
-      src: app.globalData.information.avatar,
-      success: function(res) {
-        thad.setData({
-          userImgUrl: res.path,
-          userName: app.globalData.information.user_name,
-        })
-      },
-      fail: function (res) {
-        wx.showToast({
-          title: '用户头像下载失败',
-          icon: 'none'
-        })
-      }
-    })
-    wx.request({
-      url: app.globalData.networkAddress + '/wapp/User/getPickQrcode',
-      method: "post",
-      data: {
-        "scene": thad.data.groupId,
-        "page": 'pages/members/membersDetails/membersDetails'
-      },
-      success: res => {
-        if (res.data.code == 1) {
-          wx.getImageInfo({
-            src: res.data.data.data,
-            success: function(res) {
-              thad.setData({
-                imgUrl: res.path,
-              })
-            },
-            fail: function (res) {
-              wx.showToast({
-                title: '生成失败，请重新进入',
-                icon: 'none'
-              })
-            }
-          })
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none'
-          })
-        }
-      }
     })
     wx.request({
       url: app.globalData.networkAddress + '/wapp/Leader/groupDetail',
@@ -85,7 +36,6 @@ Page({
         if (res.data.code == 1) {
           thad.setData({
             shopList: res.data.data,
-            title: res.data.data.title
           })
         } else {
           wx.showToast({
@@ -100,9 +50,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    // this.setData({
-    //   template: new Card().palette(),
-    // });
+
   },
   /**
    * 生命周期函数--监听页面显示
@@ -145,19 +93,19 @@ Page({
   onShareAppMessage: function() {
 
   },
-  navquanxuan:function(){
+  navquanxuan: function() {
 
   },
-  checkboxChanges: function (e) {
+  checkboxChanges: function(e) {
     var thad = this;
     var off = e.detail.value[0];
-    if (off){
-      for (var i = 0; i < thad.data.shopList.product_list.length;i++){
-        thad.data.shopList.product_list[i].checked=true;
+    if (off) {
+      for (var i = 0; i < thad.data.shopList.product_list.length; i++) {
+        thad.data.shopList.product_list[i].checked = true;
       }
       thad.setData({
-        ['shopList.product_list']:thad.data.shopList.product_list,
-        sharesList:thad.data.shopList.product_list
+        ['shopList.product_list']: thad.data.shopList.product_list,
+        sharesList: thad.data.shopList.product_list
       });
     } else {
       for (var i = 0; i < thad.data.shopList.product_list.length; i++) {
@@ -185,63 +133,73 @@ Page({
     });
   },
   navShares: function() {
-    if (this.data.sharesList.length==0){
+    if (this.data.sharesList.length == 0) {
       wx.showToast({
         title: '请选择生成海报的商品',
       })
       return
     }
-    wx.showLoading({
-      mask: true,
-      title: '海报生成中',
-    });
     var thad = this;
     var index = thad.data.indexs;
-    var maxindex = thad.data.sharesList.length-1;
+    var maxindex = thad.data.sharesList.length - 1;
     var aaa = thad.data.sharesList[index];
+    if (index <= maxindex){
+      wx.showLoading({
+        mask: true,
+        title: '生成第' + (index + 1) + '张海报',
+      });
+    }
     if (index <= maxindex) {
-      wx.getImageInfo({
-        src: thad.data.sharesList[index].product_img[0].urlImg,
-        success: function (res) {
-          thad.setData({
-            template: new Card().palette(thad.data.userName, res.path, thad.data.imgUrl, thad.data.userImgUrl, aaa, thad.data.title),
-          });
-          thad.data.indexs= thad.data.indexs + 1;
-          setTimeout(function(){
-            thad.navShares();
-          },500);
+      console.log(thad.data.sharesList);
+      wx.request({
+        url: app.globalData.networkAddress + '/wapp/Leader/drawImage',
+        method: 'post',
+        data: {
+          "leader_id": app.globalData.information.id,
+          "product_id": thad.data.sharesList[index].id,
+          "group_id": thad.data.groupId
         },
-        fail: function (res) {
-          wx.showToast({
-            title: '商品图片下载失败',
-            icon: 'none'
-          })
+        success: res => {
+          thad.data.indexs = thad.data.indexs + 1;
+          if (res.data.code == 1) {
+            wx.hideLoading();
+            wx.downloadFile({
+              url: res.data.data.imgUrl,
+              success: function(res) {
+                if (res.statusCode === 200) {
+                  wx.playVoice({
+                    filePath: res.tempFilePath
+                  })
+                }
+                wx.saveImageToPhotosAlbum({
+                  filePath: res.tempFilePath,
+                  success: function(data) {
+                    wx.showToast({
+                      title: '保存成功',
+                    })
+                    thad.navShares();
+                  },
+                  fail:function(){
+                    wx.showToast({
+                      title: '保存失败',
+                    })
+                    thad.navShares();
+                  }
+                })
+              }
+            })
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+            thad.navShares();
+          }
         }
       })
     } else {
-      thad.data.indexs = 0
+      wx.hideLoading();
+      thad.data.indexs = 0;
     }
-  },
-  onImgOK:function(e) {
-    this.imagePath = e.detail.path;
-    wx.saveImageToPhotosAlbum({
-      filePath: this.imagePath,
-      success: res => {
-        wx.hideLoading();
-        wx.showToast({
-          title: '保存成功',
-        })
-      },
-      fail: res => {
-        wx.hideLoading();
-        wx.showToast({
-          title: '保存失败',
-          icon: 'none'
-        })
-      }
-    });
-  },
-  onImgErr(e){
-    console.log(e);
   }
 })

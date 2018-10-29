@@ -1,8 +1,20 @@
 <image src='../../img/index-head.jpg' class='index-head' mode='widthFix'></image>
 <view class='index-link'>
   <view class='index-owner' open-type="getUserInfo" bindtap='navOwner'>城主</view>
-  <view class='index-group' open-type="getUserInfo" bindtap='navGroup' wx:if="{{indexDataL.role_status==2}}">团长</view>
-  <view class='index-members' open-type="getUserInfo" bindtap='navMembers' wx:if="{{indexDataL.role_status==1}}">团员</view>
-  <!-- <view class='index-group' open-type="getUserInfo" bindtap='navGroup'>团长</view>
-  <view class='index-members' open-type="getUserInfo" bindtap='navMembers'>团员</view> -->
+  <!-- <view class='index-group' open-type="getUserInfo" bindtap='navGroup' wx:if="{{indexDataL.role_status==2}}">团长</view>
+  <view class='index-members' open-type="getUserInfo" bindtap='navMembers' wx:if="{{indexDataL.role_status==1}}">团员</view> -->
+  <view class='index-group' open-type="getUserInfo" bindtap='navGroup'>团长</view>
+  <view class='index-members' open-type="getUserInfo" bindtap='navMembers'>团员</view>
+</view>
+<view class='mesk' hidden='{{oof}}'>
+  <view class='mesk-no' bindtap='tables'></view>
+  <view class='mesk-content'>
+  <view class='mesk-title'>
+    授权提示
+  </view>
+  <view class='mesk-text'>
+  暂未获得授权是否进行授权
+  </view>
+  <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" lang="zh_CN">授权登录</button>
+  </view>
 </view>

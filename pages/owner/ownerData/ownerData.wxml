@@ -2,7 +2,7 @@
   <checkbox-group bindchange="checkboxChange">
     <view class='data-list' wx:for="{{shopData}}" wx:key>
         <view class="checkbox">
-            <checkbox checked="{{item.checked}}" value='{{index}}'/>
+            <checkbox checked="{{item.checked}}" value='{{item.leader_id}}'/>
         </view>
         <view>
           {{item.user_name}}

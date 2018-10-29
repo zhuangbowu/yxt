@@ -16,7 +16,7 @@ Page({
     shopListL: new Object(),
     mysrc: new Array(),
     userImages: '',
-    shopData:new Object(),
+    shopData: new Object(),
   },
 
   /**
@@ -237,23 +237,30 @@ Page({
       url: '../membersSeeOne/membersSeeOne?id=' + thad.data.group_id,
     })
   },
-  navDingdan2: function () {
+  navDingdan2: function() {
     var thad = this;
     wx.redirectTo({
       url: '../browse/browse?id=' + thad.data.group_id,
     })
   },
   shares: function() {
-    var thad=this;
+    var thad = this;
     wx.showActionSheet({
       itemList: ['一键生成海报', '分享至好友或群'],
       success: function(res) {
-        if(res.tapIndex==1){
-          wx.navigateTo({
-            url: '../groupshares/groupshares?groupId=' + thad.data.group_id,
-          })
+        if (res.tapIndex == 1) {
+          if (thad.data.group_id == 'undefined' || thad.data.group_id == '') {
+            wx.showToast({
+              title: '团购商品获取失败、请重新进入页面',
+            })
+          } else {
+            wx.navigateTo({
+              url: '../groupshares/groupshares?groupId=' + thad.data.group_id,
+            })
+          }
         }
         if (res.tapIndex == 0) {
+
           wx.navigateTo({
             url: '../groupgenerate/groupgenerate?groupId=' + thad.data.group_id,
           })

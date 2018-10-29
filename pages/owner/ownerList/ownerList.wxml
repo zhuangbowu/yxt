@@ -2,8 +2,8 @@
 <view class='Order'>
   <view bindtap='controlSwitch'>
     {{orderText}}
-  <image src='../../../img/drop-down.png' wx:if='{{controlSwitchSrc}}'></image>
-  <image src='../../../img/drop-down2.png' wx:else></image>
+    <image src='../../../img/drop-down.png' wx:if='{{controlSwitchSrc}}'></image>
+    <image src='../../../img/drop-down2.png' wx:else></image>
   </view>
   <view bindtap='seniorSwit'>
     高级搜索
@@ -33,8 +33,7 @@
     <view class='shopList-one'>
       <view>
         <text class='textone' wx:if="{{item.status==1}}">【进行中】</text>
-        <text class='texttwo' wx:if="{{item.status==2}}">【已结束】</text>
-        {{item.group_title}}
+        <text class='texttwo' wx:if="{{item.status==2}}">【已结束】</text> {{item.group_title}}
       </view>
       <view>
         在线支付
@@ -65,7 +64,15 @@
       </view>
     </view>
     <view class='refund'>
+      <view class='colorsss' wx:if='{{item.commission_status==0}}'>
+        佣金未发放
+      </view>
+      <view class='colorsss' wx:if='{{item.commission_status==1}}'>
+        佣金已发放
+      </view>
+      <view>
       已退款：￥{{item.sale_detail.sum_refund}}
+      </view>
     </view>
   </view>
 </view>
@@ -76,16 +83,16 @@
   订单已全部加载完成
 </view>
 <view class='footer'>
-    <view bindtap='navIndex'>
-      <image src='../../../img/index-img1.png'></image>
-      <view>首页</view>
-    </view>
-    <view>
-      <image src='../../../img/bill2.png'></image>
-      <view style='color:#d81e06;'>列表</view>
-    </view>
-    <view bindtap='navgroup'>
-      <image src='../../../img/user1.png'></image>
-      <view>我</view>
-    </view>
+  <view bindtap='navIndex'>
+    <image src='../../../img/index-img1.png'></image>
+    <view>首页</view>
+  </view>
+  <view>
+    <image src='../../../img/bill2.png'></image>
+    <view style='color:#d81e06;'>列表</view>
+  </view>
+  <view bindtap='navgroup'>
+    <image src='../../../img/user1.png'></image>
+    <view>我</view>
+  </view>
 </view>

@@ -36,7 +36,7 @@
   </view>
 </view>
 <button class='post' open-type='share'>
-  点击分享至好友或群
+  分享到群有惊喜
 </button>
 <view class='msak' hidden='{{envelopesOff}}' bindtap='btnEnvelopeOff'>
 <image src='{{envelopes}}' mode='widthFix' catchtap='btnEnvelope'></image>

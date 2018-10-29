@@ -8,5 +8,5 @@
   <input type='text' placeholder='请输入您的密码' value='{{password}}' password="true" bindinput='password'></input>
 </view>
 <view class='sign-in' bindtap='sign'>
-登陆
+登录
 </view>

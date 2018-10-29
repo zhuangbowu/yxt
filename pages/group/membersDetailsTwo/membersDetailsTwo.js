@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    oof: true,
     checkeds: false,
     shopData: new Object(),
     order:''
@@ -73,6 +74,7 @@ Page({
                 },
                 success: res => {
                   if (res.data.code == 1) {
+                    wx.hideLoading();
                     thad.setData({
                       shopData: res.data.data
                     })
@@ -95,25 +97,29 @@ Page({
         })
       },
       fail: function () {
-        wx.showModal({
-          title: '警告',
-          content: '尚未进行授权，请点击确定跳转到授权页面进行授权。',
-          success: function (res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '../../tologin/tologin',
-              })
-            }
-            if (res.cancel) {
-              // thad.onLoad();
-              wx.showModal({
-                title: '提示框',
-                content: '对不起您已取消授权登录信息，无法进行下一步操作',
-                showCancel: false
-              })
-            }
-          }
+        wx.hideLoading();
+        thad.setData({
+          oof: false
         })
+        // wx.showModal({
+        //   title: '警告',
+        //   content: '尚未进行授权，请点击确定跳转到授权页面进行授权。',
+        //   success: function (res) {
+        //     if (res.confirm) {
+        //       wx.navigateTo({
+        //         url: '../../tologin/tologin',
+        //       })
+        //     }
+        //     if (res.cancel) {
+        //       // thad.onLoad();
+        //       wx.showModal({
+        //         title: '提示框',
+        //         content: '对不起您已取消授权登录信息，无法进行下一步操作',
+        //         showCancel: false
+        //       })
+        //     }
+        //   }
+        // })
       }
     })
   },
@@ -212,6 +218,39 @@ Page({
     var thad = this;
     wx.navigateTo({
       url: '../groupRefund/groupRefund?indexs=' + e.currentTarget.dataset.index + '&order=' + thad.data.shopData.order_no,
+    })
+  },
+  bindGetUserInfo: function (e) {
+    var that = this;
+    //此处授权得到userInfo
+    var objj = e.detail.userInfo;
+    //接下来写业务代码
+    wx.request({
+      url: app.globalData.networkAddress + '/wapp/Pub/loginByWapp',
+      data: {
+        open_id: app.globalData.openId,
+        user_name: objj.nickName,
+        avatar: objj.avatarUrl,
+        gender: objj.gender,
+        city: objj.city,
+        province: objj.province,
+        country: objj.country
+      },
+      success: function (res) {
+        app.globalData.information = res.data.data;
+        that.setData({
+          oof: true
+        })
+      }
+    })
+    var options = new Object();
+    options.scene = that.data.order;
+    //最后，记得返回刚才的页面
+    that.onLoad(options);
+  },
+  tables: function () {
+    this.setData({
+      oof: true
     })
   }
 })

@@ -8,12 +8,12 @@
   <text bindtap='seachCondFalse'>取消</text>
 </view>
 
-<radio-group bindchange="checkboxChange">
-  <view class='period' wx:for="{{creat}}" wx:key>
+<radio-group bindchange="checkboxChange" wx:for="{{creat}}" wx:key>
+  <view class='period'>
     <view class='period-list'>
       <view>
         <label class="checkbox">
-          <radio value="{{index}}" />
+          <radio value="{{index}}" disabled="{{item.disabled}}" />
         </label>
       </view>
       <view>
@@ -35,7 +35,7 @@
     </view>
     <view class='period-list-list' hidden='{{item.shopSelect}}' wx:for='{{item.record_list}}' wx:for-item='itemData' wx:for-index='itemIndex' wx:key>
       <view>
-        <image src='{{itemData.pastUrl}}'></image>
+        <image src='{{itemData.img_list[0].urlImg}}'></image>
       </view>
       <view>
         <view>{{itemData.product_name}}</view>
@@ -44,15 +44,14 @@
       </view>
       <view>
         <label>
-          <radio value="{{index}},{{itemIndex}}" checked="{{itemData.checked}}" />
+          <radio value="{{index}},{{itemIndex}}" disabled="{{itemData.disabled}}" />
         </label>
       </view>
     </view>
   </view>
 </radio-group>
-
 <view class='navgengduo' bindtap='navgengduo' wx:if='{{pageLis==0}}'>
-  点击加载更多
+  上滑加载更多
 </view>
 <view wx:if='{{pageLis==1}}' class='navgengduo'>
   商品已全部加载完成
