@@ -154,5 +154,10 @@ Page({
         }
       }
     })
-  }
+  },
+  Printing: function () {
+    wx.navigateTo({
+      url: '../../ownerPrinting/index?id=' + this.data.id,
+    })
+  },
 })

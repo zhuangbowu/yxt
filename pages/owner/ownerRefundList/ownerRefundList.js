@@ -9,7 +9,8 @@ Page({
     hiddenmodalput: true,
     userName:new Object(),
     inputEject:'',
-    sId:''
+    sId:'',
+    oofs:false
   },
 
   /**
@@ -135,6 +136,9 @@ Page({
     })
   },
   wxAgree: function (e) {
+    this.setData({
+      oofs:true
+    })
     var status = e.currentTarget.dataset.hi;
     var thad=this;
     wx.request({

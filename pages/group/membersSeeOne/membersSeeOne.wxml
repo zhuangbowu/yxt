@@ -6,7 +6,7 @@
 
   <view class="tab-right">
     <view class="right-item {{tabArr.curBdIndex=='0'? 'active' : ''}}">
-      <view bindtap='navDdelallsda'>
+      <view>
         <view class='title'>
           <view>
             商品
@@ -34,6 +34,9 @@
       </view>
     </view>
     <view class="right-item {{tabArr.curBdIndex=='1'? 'active' : ''}}">
+      <view class='posts' bindtap='Printing'>
+        <image src='../../../img/xiazai.png'></image>
+      </view>
       <view class='league-bak'>
         <view class='league-embers' bindtap='navDetails' wx:for="{{listData}}" data-hi='{{index}}' wx:key>
           <view>

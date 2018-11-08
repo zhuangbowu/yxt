@@ -37,9 +37,9 @@
       </view>
     </view>
     <view class='posi' wx:if="{{item.remain==0}}">
-      已售罄
+      已抢光
     </view>
-    <block  wx:if="item.remain!==0">
+    <block wx:if="{{item.remain!==0}}">
         <view class='posis' wx:if="{{item.tag_name!==''}}">
           {{item.tag_name}}
         </view>
@@ -122,7 +122,7 @@
 </view>
 <view class='group-fixed1' wx:if='{{role_status==2}}'>
   <form bindsubmit="navMembersPurchase" report-submit='true'>
-    <button form-type="submit">
+    <button form-type="submit" disabled="{{oofs}}">
       立即购买 (￥{{newNum}})
     </button>
   </form>

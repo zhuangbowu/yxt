@@ -1,0 +1,29 @@
+<!--pages/blueTooth/index.wxml-->
+<checkbox-group bindchange="checkboxChange">
+  <label class="checkbox" wx:for-items="{{listData}}" wx:key>
+    <checkbox value="{{item.order_no}}">
+    </checkbox>
+    <view>
+      {{item.user_name}}
+    </view>
+    <view>
+      {{item.user_telephone}}
+    </view>
+    <view wx:if="{{item.pick_status==0}}">未取货</view>
+    <view wx:if="{{item.pick_status==1}}">已取货</view>
+    <view>
+      {{item.order_money}}
+    </view>
+  </label>
+</checkbox-group>
+<view class='post' hidden='{{offs}}' bindtap='toConnectoff'>
+  <view class='hasBluetooth' wx:for="{{devices}}" wx:key>
+    <view>
+      {{item.devices[0].name}}
+    </view>
+    <view catchtap='toConnect' data-device="{{item.devices[0].deviceId}}">
+      连接>>
+    </view>
+  </view>
+</view>
+<button class='searchBlueTooth' bindtap='toSearch'>{{eachs}}</button>

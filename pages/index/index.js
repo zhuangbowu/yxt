@@ -6,18 +6,13 @@ Page({
    */
   data: {
     indexDataL: new Object(),
-    oof:true,
+    oof: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // console.log(`
-    // 为毛还不发工资、
-    // 都快饿死了、
-    // 老板就是不发工资怎么办啊、
-    // `);
     var thad = this;
     wx.getUserInfo({
       withCredentials: true,
@@ -81,7 +76,7 @@ Page({
       },
       fail: function() {
         thad.setData({
-          oof:false
+          oof: false
         })
         // wx.showModal({
         //   title: '警告',
@@ -169,8 +164,8 @@ Page({
     wx.navigateTo({
       url: '../members/members/members',
     });
-  }, 
-  bindGetUserInfo: function (e) {
+  },
+  bindGetUserInfo: function(e) {
     var that = this;
     //此处授权得到userInfo
     var objj = e.detail.userInfo;
@@ -186,17 +181,17 @@ Page({
         province: objj.province,
         country: objj.country
       },
-      success: function (res) {
+      success: function(res) {
         app.globalData.information = res.data.data;
         that.setData({
-          oof:true
+          oof: true
         })
       }
     })
     //最后，记得返回刚才的页面
     that.onLoad();
   },
-  tables:function(){
+  tables: function() {
     this.setData({
       oof: true
     })

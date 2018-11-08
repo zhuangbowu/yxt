@@ -64,7 +64,7 @@
   background-color:#ffcd00;
   color: #fff;
 }
-.group-fixed>view:nth-child(2){
+.group-fixed>button:nth-child(2){
   background-color:#44a0b7;
   color: #fff;
   width: 50%;

@@ -97,7 +97,6 @@ Page({
                     thad.setData({
                       shopData: res.data.data
                     })
-                    console.log(thad.data.shopData);
                     for (var i = 0; i < thad.data.shopData.product_list.length; i++) {
                       thad.data.shopNum[i] = 0;
                       thad.setData({
@@ -198,6 +197,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.setData({
+      oofs: false,
+    })
     if (this.data.objects == 0) {
       // console.log('返回数量为0，不渲染');
     } else {
@@ -267,6 +269,7 @@ Page({
           var aaa = thad.data.listData.record_list.concat(res.data.data.record_list);
           thad.setData({
             ['listData.record_list']: aaa,
+            ['listData.order_sum']: res.data.data.order_sum,
             role_status: app.globalData.information.role_status
           })
           // var mumms = thad.data.listData.order_sum + 1;
@@ -390,17 +393,32 @@ Page({
       thad.setData({
         oofs:true
       })
+      wx.showLoading({
+        title: '排队中，请稍后',
+        mask:true
+      })
       wx.request({
         url: app.globalData.networkAddress + '/wapp/User/checkOrder',
         method: 'post',
-        data: {
+        data: { 
           "user_id": app.globalData.information.id,
           "product_list": product_list
         },
         success: res => {
+          wx.hideLoading();
           if (res.data.code == 1) {
             wx.navigateTo({
               url: '../membersPurchase/membersPurchase?group_id=' + thad.data.group_id + '&num=' + thad.data.shopNum + '&order=' + res.data.data.order_no,
+            })
+          } else if (res.statusCode!==200){
+            wx.showToast({
+              title: '对不起、排队人数较多、请稍后',
+              icon: 'none',
+              duration:3000,
+              mask:true
+            });
+            thad.setData({
+              oofs: falsev
             })
           } else {
             wx.showModal({
@@ -412,6 +430,21 @@ Page({
               oofs: false
             })
           }
+        },
+        fail:res=>{
+          wx.hideLoading();
+          console.log(1);
+          console.log(res);
+          wx.showToast({
+            title: '对不起、排队人数较多、请稍后',
+            icon:'none'
+          });
+          thad.setData({
+            oofs: false
+          })
+        },
+        complete:res=>{
+          // console.log(res);
         }
       })
       wx.request({
@@ -450,8 +483,7 @@ Page({
     //         })
     //       }
     //       var aaa = thad.data.listData.concat(res.data.data);
-    //       thad.setData({
-    //         listData: aaa,
+    //       thad.setData({    //         listData: aaa,
     //         role_status: app.globalData.information.role_status
     //       })
     //     } else {

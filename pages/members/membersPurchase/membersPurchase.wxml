@@ -103,7 +103,7 @@
       <input placeholder='选填（如有其他要求填入这里）' bindinput='userother2'></input>
     </view>
   </view>
-  <button class='footer' bindtap='userSubmission2'>
+  <button class='footer' disabled='{{Nums}}' bindtap='userSubmission2'>
     提交
   </button>
 </view>

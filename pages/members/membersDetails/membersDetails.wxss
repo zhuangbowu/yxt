@@ -334,7 +334,7 @@ page{
   color: #fff;
   width: 100%;
   line-height: 80rpx;
-  font-size: 36rpx;
+  font-size: 34rpx;
   border-radius: 0rpx;
 }
 .navgengduo{

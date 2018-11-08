@@ -101,9 +101,7 @@ App({
               }
             }
           })
-
         })
-
         // 小程序有新版本，会主动触发下载操作（无需开发者触发）
         wx.getUpdateManager().onUpdateFailed(function () {//当新版本下载失败，会进行回调
           wx.showModal({
@@ -114,10 +112,43 @@ App({
         })
       }
     });
+    var aaa = setInterval(function () {
+      if (thad.globalData.information.id) {
+        clearInterval(aaa);
+        wx.request({
+          url: thad.globalData.networkAddress + '/wapp/Leader/getReadyGroup',
+          method: 'post',
+          data: {
+            "leader_id": thad.globalData.information.id
+          },
+          success: res => {
+            if (res.data.code == 1) {
+              var objjs = res.data.data.group_id;
+              wx.showModal({
+                title: '温馨提示',
+                content: '您当前有未编辑的团购、是否前往编辑',
+                success: res => {
+                  if (res.confirm) {
+                    wx.redirectTo({
+                      url: '/pages/group/groupEdit/groupEdit?group_id=' + objjs
+                    })
+                  }
+                }
+              })
+            } else {
+              // wx.showToast({
+              //   title: res.data.msg,
+              //   icon: 'none'
+              // })
+            }
+          }
+        })
+      }
+    }, 500)
   },
   globalData: {
     appCode: null,
-    networkAddress: 'http://192.168.3.64',
+    networkAddress: 'https://www.ybt9.com',
     openId: null,
     information: new Object(),
     owner: new Object(),

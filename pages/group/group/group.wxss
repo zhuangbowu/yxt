@@ -242,3 +242,16 @@
   text-align: center;
   width: 100%;
 }
+.post{
+  position: fixed;
+  right: 20rpx;
+  bottom: 200rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  overflow: hidden;
+}
+.post>image{
+  width: 100rpx;
+  height: 100rpx;
+}

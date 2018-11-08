@@ -8,10 +8,11 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.3.0",
+	"libVersion": "2.3.1",
 	"appid": "wx867e1f8696515384",
 	"projectname": "%E4%BC%98%E9%B2%9C%E5%9B%A2",
 	"isGameTourist": false,
@@ -33,7 +34,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -70,7 +71,7 @@
 					"id": 3,
 					"name": "军团分享进入",
 					"pathName": "pages/group/groupEdit/groupEdit",
-					"query": "group_id=25",
+					"query": "group_id=31",
 					"scene": "1044",
 					"shareInfo": {
 						"groupName": "测试模拟群0",
@@ -98,6 +99,13 @@
 					"pathName": "pages/members/membersTobe/membersTobe",
 					"query": "id=1&num=1",
 					"scene": "1011"
+				},
+				{
+					"id": 7,
+					"name": "模拟更新",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": "1001"
 				}
 			]
 		}

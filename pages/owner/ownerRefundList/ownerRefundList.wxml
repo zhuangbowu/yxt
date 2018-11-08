@@ -46,13 +46,13 @@
     <view wx:if="{{userName.status==2}}">{{userName.group_detail.refuse_reason}}</view>
   </view>
 </view>
-<view class='group-fixed' wx:if="{{userName.status==0}}">
+<view class='group-fixed' wx:if="{{userName.status==1}}">
   <view bindtap='wxEject'>
     拒绝
   </view>
-  <view bindtap='wxAgree' data-hi='1'>
+  <button bindtap='wxAgree' disabled="{{oofs}}" data-hi='1'>
     同意
-  </view>
+  </button>
 </view>
 <view class='msak' hidden='{{hiddenmodalput}}'>
   <view class='msak-no' bindtap='modalinput2'></view>

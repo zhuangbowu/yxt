@@ -4,13 +4,13 @@
       {{item.product_name}}：
     </view>
     <view>
-      销售额:￥{{item.group_price*item.sell_num}}
+      销售额:￥{{item.numPrice}}
     </view>
     <view>
       佣金比例:{{item.commission}}%
     </view>
     <view>
-      佣金:￥{{((item.group_price*item.sell_num)*item.commission)/100}}
+      佣金:￥{{item.numMission}}
     </view>
   </view>
 </view>

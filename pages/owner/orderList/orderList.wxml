@@ -19,7 +19,7 @@
     <view class='order-shop'>
       销售数量
     </view>
-    <block wx:for="{{item.product_list}}" wx:for-item="lists" wx:key>
+    <block wx:for="{{item.product_list}}" wx:for-item="lists" wx:if="{{!lists.sell_num==0}}" wx:key>
       <view class='order-shop2'>
         {{lists.product_name}}
       </view>
@@ -40,4 +40,8 @@
 </view>
 <view class='owner-fixed' bindtap='navPage'>
   <image src='../../../img/data.png'></image>
+</view>
+
+<view class='posts' bindtap='Printing'>
+  <image src='../../../img/xiazai.png'></image>
 </view>

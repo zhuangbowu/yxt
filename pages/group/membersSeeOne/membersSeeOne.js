@@ -216,7 +216,8 @@ Page({
     wx.navigateTo({
       url: '../membersDetails/membersDetails?order=' + order,
     })
-  }, outMessage: function (e) {
+  }, 
+  outMessage: function (e) {
     var order = this.data.listData[e.currentTarget.dataset.hi].order_no;
     wx.showModal({
       title: '确认框',
@@ -292,6 +293,11 @@ Page({
     var Numbers = e.currentTarget.dataset.hi;
     wx.makePhoneCall({
       phoneNumber: Numbers
+    })
+  },
+  Printing:function(){
+    wx.navigateTo({
+      url: '../../Printing/index?id='+this.data.id,
     })
   },
 })

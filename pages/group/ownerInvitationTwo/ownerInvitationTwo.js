@@ -27,6 +27,13 @@ Page({
           thad.setData({
             shopData: res.data.data
           })
+          for(var i=0;i<thad.data.shopData.length;i++){
+            thad.data.shopData[i].numPrice = (thad.data.shopData[i].group_price * thad.data.shopData[i].sell_num).toFixed(2);
+            thad.data.shopData[i].numMission = ((thad.data.shopData[i].numPrice * thad.data.shopData[i].commission) / 100).toFixed(2);
+          }
+          thad.setData({
+            shopData: thad.data.shopData
+          })
         } else {
           wx.showToast({
             title: res.data.msg,

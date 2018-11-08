@@ -150,7 +150,6 @@ Page({
       });
     }
     if (index <= maxindex) {
-      console.log(thad.data.sharesList);
       wx.request({
         url: app.globalData.networkAddress + '/wapp/Leader/drawImage',
         method: 'post',
@@ -160,6 +159,7 @@ Page({
           "group_id": thad.data.groupId
         },
         success: res => {
+          console.log(res);
           thad.data.indexs = thad.data.indexs + 1;
           if (res.data.code == 1) {
             wx.hideLoading();

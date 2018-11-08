@@ -84,3 +84,6 @@
       <view>我</view>
     </view>
 </view>
+<view class='post' bindtap='postaaa'>
+  <image src='../../../img/imgFlist.png'></image>
+</view>

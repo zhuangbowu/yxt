@@ -7,7 +7,7 @@ Page({
    */
   data: {
     oof:true,
-    group_id: 32,
+    group_id: 88,
     shopNa: new Object(),
     shopregiment: 0,
     mainTitle: '这是城主标题',
@@ -138,6 +138,7 @@ Page({
                           "group_id": thad.data.group_id
                         },
                         success: res => {
+                          console.log(res);
                           if (res.data.code == 1) {
                             var data = res.data.data;
                             thad.setData({

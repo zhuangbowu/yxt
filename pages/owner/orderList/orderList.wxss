@@ -120,3 +120,15 @@ page{
   width: 120rpx;
   height: 120rpx;
 }
+.posts{
+  position: fixed;
+  bottom:120rpx;
+  width: 120rpx;
+  height:120rpx;
+  border-radius:60rpx;
+  left: 40rpx;
+}
+.posts>image{
+  width: 120rpx;
+  height: 120rpx;
+}
