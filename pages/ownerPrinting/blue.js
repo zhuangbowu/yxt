@@ -147,6 +147,7 @@ const printTemplate = (deviceId, serviceId, characteristicId, arrData) => {
     painting('商品名称        ', '        商品数量');
     for (var j = 0; j < arrData[i].product_list.length; j++) {
       var widthLength = arrData[i].product_list[j].product_name;
+      
       console.log(widthLength.length);
       if (widthLength.length>18){
         var objsss = '';

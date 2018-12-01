@@ -1,12 +1,24 @@
 .searchBlueTooth{
   position: fixed;
   bottom: 0rpx;
-  left: 0rpx;
-  width: 100%;
+  left: 200rpx;
+  width: calc(100% - 200rpx);
   height: 100rpx;
   line-height: 100rpx;
   background-color: #26b543;
   color:#fff;
+}
+.searchBlueTooths{
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  width: 200rpx;
+  background-color: #26b543;
+  color:#fff;
+  border-radius: 10rpx;
 }
 .hasBluetooth{
   background-color: #fff;

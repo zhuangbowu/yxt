@@ -127,7 +127,7 @@ Page({
   },
   navEdit: function() {
     var shop_id = this.data.shopListL.group_id;
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../groupEdits/groupEdits?id=' + shop_id
     })
   },

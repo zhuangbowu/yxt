@@ -26,6 +26,7 @@
   color:#333;
   line-height: 80rpx;
   height: 80rpx;
+  display: inline-block;
 }
 .sign-in{
   position: fixed;

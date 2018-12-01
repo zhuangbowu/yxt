@@ -37,6 +37,7 @@ Page({
             ownerNmae: app.globalData.owner.nick_name,
             ownerImage: app.globalData.owner.head_image
           })
+          console.log(thad.data.shop);
         }else{
           wx.showToast({
             title: res.data.msg,

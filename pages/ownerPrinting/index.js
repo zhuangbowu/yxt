@@ -211,7 +211,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+ 
   },
 
   /**
@@ -263,9 +263,10 @@ Page({
   toSearch: function() {
     var that = this;
     if (that.data.characteristicId !== '') {
-      if (this.data.arrData.length == 0) {
+      if (that.data.arrData.length == 0) {
         wx.showToast({
           title: '打印内容不能为空',
+          icon:'none'
         })
       } else {
         printTemplate(that.data.deviceId, that.data.serviceId, that.data.characteristicId, that.data.arrData);

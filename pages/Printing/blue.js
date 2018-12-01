@@ -162,6 +162,7 @@ const printTemplate = (deviceId, serviceId, characteristicId, arrData) => {
     paintingNums('收货人  :' + arrData[i].user_name)
     paintingNums('联系方式:' + arrData[i].user_telephone)
     paintingNums('收货地址:' + arrData[i].pick_address)
+    paintingNums('备注信息:' + arrData[i].remarks)
     for (var h = 0; h < 2; h++) {
       painting(' ', ' ');
     }

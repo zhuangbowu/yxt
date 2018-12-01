@@ -77,6 +77,7 @@ Page({
           thad.setData({
             ['shopData.product_list']: arrList
           })
+          console.log(thad.data.shopData.dispatch_type);
           if (thad.data.shopData.dispatch_type == 2) {
             wx.request({
               url: app.globalData.networkAddress + '/wapp/User/getDispatchSites',
@@ -98,6 +99,7 @@ Page({
                       "user_id": app.globalData.information.id
                     },
                     success: res => {
+                      console.log(res);
                       if (res.data.code == 1) {
                         thad.setData({
                           ['userDistribution.userName']: res.data.data.user_name,
@@ -112,6 +114,30 @@ Page({
                         })
                       }
                     }
+                  })
+                } else {
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none'
+                  })
+                }
+              }
+            })
+          }else{
+            wx.request({
+              url: app.globalData.networkAddress + '/wapp/User/getLastAddress',
+              method: 'post',
+              data: {
+                "user_id": app.globalData.information.id
+              },
+              success: res => {
+                console.log(res);
+                if (res.data.code == 1) {
+                  thad.setData({
+                    ['userDistribution.userName']: res.data.data.user_name,
+                    ['userSelflifting.userName']: res.data.data.user_name,
+                    ['userDistribution.userContact']: res.data.data.user_telephone,
+                    ['userSelflifting.userContact']: res.data.data.user_telephone,
                   })
                 } else {
                   wx.showToast({
@@ -313,6 +339,10 @@ Page({
         icon: 'none'
       })
     } else {
+      wx.showLoading({
+        title: '支付中请勿退出',
+        mask:true
+      })
       var thad = this.data;
       var tad = this;
       var objjs = new Object();
@@ -396,10 +426,11 @@ Page({
                 // }
               },
               'complete': function(res) {
-
+                wx.hideLoading();
               }
             })
           } else {
+            wx.hideLoading();
             tad.setData({
               Nums: false
             })
@@ -413,9 +444,6 @@ Page({
     }
   },
   userSubmission2: function() {
-    this.setData({
-      Nums: true
-    })
     var objj = this.data.userSelflifting;
     if (this.data.dataTotal <= 0) {
       wx.showToast({
@@ -432,12 +460,16 @@ Page({
         title: '请输入您的联系方式',
         icon: 'none'
       })
-    } else if (!(/^1[34578]\d{9}$/.test(objj.userContact))) {
+    } else if (!(/^1[345789]\d{9}$/.test(objj.userContact))) {
       wx.showToast({
         title: '请输入正确的联系方式',
         icon: 'none'
       })
     } else {
+      wx.showLoading({
+        title: '支付中请勿退出',
+        mask: true
+      })
       var thad = this.data;
       var tad = this;
       var objjs = new Object();
@@ -456,6 +488,9 @@ Page({
         "remarks": objj.userOther,
         "product_list": thad.shopData.product_list
       }
+      this.setData({
+        Nums: true
+      })
       wx.request({
         url: app.globalData.networkAddress + '/wapp/User/makeOrder',
         method: 'post',
@@ -518,10 +553,11 @@ Page({
                 // }
               },
               'complete': function(res) {
-
+                wx.hideLoading();
               }
             })
           } else {
+            wx.hideLoading();
             tad.setData({
               Nums: false
             })

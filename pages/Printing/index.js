@@ -21,7 +21,8 @@ Page({
     deviceId: '',
     serviceId: '',
     characteristicId: '',
-    eachs:'搜索打印机'
+    eachs:'搜索打印机',
+    quanxuan:true
   },
 
   /**
@@ -53,7 +54,7 @@ Page({
           thad.setData({
             listData: res.data.data
           })
-          console.log(thad.data.listData);
+          // console.log(thad.data.listData);
         } else {
           wx.showToast({
             title: res.data.msg,
@@ -218,7 +219,29 @@ Page({
   onReady: function() {
     wx.hideShareMenu();
   },
-
+  checkboxChanges:function(e){
+    var aaa=e.detail.value[0];
+    // console.log(aaa);
+    if(aaa){
+      this.data.arrData = this.data.listData;
+      for (var i = 0; i < this.data.listData.length; i++) {
+        this.data.listData[i].checkeds=true;
+      }
+      console.log(this.data.listData);
+      this.setData({
+        listData: this.data.listData
+      })
+    }else{
+      this.data.arrData = [];
+      for (var i = 0; i < this.data.listData.length; i++) {
+        this.data.listData[i].checkeds = false;
+      }
+      console.log(this.data.arrData);
+      this.setData({
+        listData: this.data.listData
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面显示
    */

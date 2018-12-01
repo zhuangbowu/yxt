@@ -232,18 +232,29 @@ page{
   flex-direction: row;
   flex-wrap: nowrap;
 }
+.group-content-list .group-modifys{
+  position: absolute;
+  font-size: 28rpx;
+  bottom:20rpx;
+  right: 20rpx;
+  line-height: 60rpx;
+  padding: 0rpx 20rpx;
+  background-color: #ffcd00;
+  color:#fff;
+  border-radius: 30rpx;
+}
 .group-modify>image:nth-child(1){
-  width: 64rpx;
-  height: 64rpx;
+  width: 84rpx;
+  height: 84rpx;
 }
 .group-modify>view:nth-child(2){
   text-align: center;
-  line-height: 64rpx;
+  line-height: 84rpx;
   font-size: 36rpx;
 }
 .group-modify>image:nth-child(3){
-  width: 64rpx;
-  height: 64rpx;
+  width: 84rpx;
+  height: 84rpx;
 }
 .group-cot{
   border-top:8rpx solid #e2e2e2;

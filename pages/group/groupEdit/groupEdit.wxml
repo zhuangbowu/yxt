@@ -80,7 +80,7 @@
   <view class='commodity lncrease-bottom' wx:for="{{shopNa.product_list}}" wx:key>
     <view class='commodity-num'>
       <view>商品名称</view>
-      <input type='text' placeholder='请输入商品名称' confirm-type='next' value='{{item.product_name}}' disabled='true'></input>
+      <text>{{item.product_name}}{{item.attr}}<block wx:if="{{item.attr.length>0}}">*</block>{{item.num}}{{item.unit}}/份</text>
     </view>
     <view class='commodity-num'>
       <view>团员限购</view>

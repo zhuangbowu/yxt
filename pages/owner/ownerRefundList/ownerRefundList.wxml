@@ -46,7 +46,7 @@
     <view wx:if="{{userName.status==2}}">{{userName.group_detail.refuse_reason}}</view>
   </view>
 </view>
-<view class='group-fixed' wx:if="{{userName.status==1}}">
+<view class='group-fixed' wx:if="{{userName.status==0}}">
   <view bindtap='wxEject'>
     拒绝
   </view>

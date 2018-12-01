@@ -203,6 +203,13 @@ page{
   color:#333;
   margin-top:13rpx;
 }
+.commodity-num>text{
+  width: 557rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  color:#333;
+  margin-top:13rpx;
+}
 .commodity-num>textarea{
   width: 557rpx;
   font-size: 28rpx;

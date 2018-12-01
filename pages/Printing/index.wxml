@@ -1,7 +1,7 @@
 <!--pages/blueTooth/index.wxml-->
 <checkbox-group bindchange="checkboxChange">
   <label class="checkbox" wx:for-items="{{listData}}" wx:key>
-    <checkbox value="{{item.order_no}}">
+    <checkbox value="{{item.order_no}}" checked='{{item.checkeds}}'>
     </checkbox>
     <view>
       {{item.user_name}}
@@ -16,6 +16,7 @@
     </view>
   </label>
 </checkbox-group>
+<view style='height:100rpx;width:100%'></view>
 <view class='post' hidden='{{offs}}' bindtap='toConnectoff'>
   <view class='hasBluetooth' wx:for="{{devices}}" wx:key>
     <view>
@@ -26,4 +27,11 @@
     </view>
   </view>
 </view>
-<button class='searchBlueTooth' bindtap='toSearch'>{{eachs}}</button>
+<view>
+  <checkbox-group class="searchBlueTooths" bindchange="checkboxChanges">
+    <label>
+      <checkbox value='{{quanxuan}}'>全选</checkbox>
+    </label>
+  </checkbox-group>
+  <button class='searchBlueTooth' bindtap='toSearch'>{{eachs}}</button>
+</view>

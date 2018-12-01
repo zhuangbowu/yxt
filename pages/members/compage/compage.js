@@ -165,7 +165,7 @@ Page({
       })
     }
   },
-  shopPlus: function() {
+  shopPlus: function() { 
     var thad = this;
     var Num = thad.data.num;
     ++Num;

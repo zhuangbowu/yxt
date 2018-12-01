@@ -25,7 +25,7 @@
   <view class='address' wx:if='{{modeDistribution==2}}'>
     <checkbox-group bindchange="checkboxChange">
       <label class="checkbox" wx:for-items="{{addressText}}" wx:for-index="indess" wx:key>
-        <checkbox value="{{indess}}" checked="{{item.checked}}" />{{item.name}}：{{item.address}}-{{item.address_det}}
+        <checkbox value="{{item.id}}" checked="{{item.checked}}" />{{item.name}}：{{item.address}}-{{item.address_det}}
         <view>
           <text catchtap='addressEdit' data-hi='{{indess}}'>编辑</text>
           <text catchtap='addressNo' data-hi='{{indess}}'>删除</text>
@@ -39,8 +39,17 @@
     允许团长结束团购
   </view>
   <view class="body-view">
-    <switch checked bindchange="switch1Change" wx:if="{{mainDetailNum==1}}" />
-    <switch bindchange="switch1Change" wx:if="{{mainDetailNum==0}}" />
+    <switch disabled="true" checked bindchange="switch1Change" wx:if="{{mainDetailNum==1}}" />
+    <switch disabled="true" bindchange="switch1Change" wx:if="{{mainDetailNum==0}}" />
+  </view>
+</view>
+<view class='end-group lncrease-bottom'>
+  <view>
+    是否为限时抢购
+  </view>
+  <view class="body-view">
+    <switch disabled="true" checked bindchange="switch1Change2" wx:if="{{mainDetailNums==1}}"/>
+    <switch disabled="true" bindchange="switch1Change2" wx:if="{{mainDetailNums==0}}"/>
   </view>
 </view>
 <view class='group-time lncrease-bottom'>
@@ -48,10 +57,10 @@
     自动截团时间
   </view>
   <view class='group-time-content'>
-    <picker mode="date" value="" start="{{myData}}" end="2080-09-01" bindchange="bindDateChange">
+    <picker mode="date" value="{{myData}}" start="{{myData}}" end="2080-09-01" bindchange="bindDateChange" disabled="true">
       <view class='picker'>{{modeDate}}</view>
     </picker>
-    <picker mode="time" value="{{modeTime}}" start="00:00" end="23:59" bindchange="bindTimeChange">
+    <picker mode="time" value="{{modeTime}}" start="00:00" end="23:59" bindchange="bindTimeChange" disabled="true">
       <view class='picker picker-left'>{{modeTime}}</view>
     </picker>
   </view>
@@ -93,8 +102,16 @@
       <input type='digit' placeholder='请输入0~100的佣金比例' confirm-type='next' value='{{item.commission}}' bindinput='bindshopCommission' data-hi='{{index}}'></input>
     </view>
     <view class='commodity-num'>
-      <view>库存</view>
-      <input type='number' placeholder='请输入库存数量' confirm-type='next' value='{{item.remain}}' bindinput='bindshopStock' data-hi='{{index}}'></input>
+      <view>序号</view>
+      <input type='number' placeholder='请输入序号' confirm-type='next' value='{{item.ord}}' bindinput='bindshopStockord' data-hi='{{index}}'></input>
+    </view>
+    <view class='commodity-num'>
+      <view>商品限量</view>
+      <input type='number' placeholder='请输入数量' confirm-type='next' value='{{item.remain}}' bindinput='bindshopStock' data-hi='{{index}}'></input>
+    </view>
+    <view class='commodity-num'>
+      <view>商品销量</view>
+      <input type='number' disabled='true' placeholder='请输入数量' confirm-type='next' value='{{item.sell_num}}' bindinput='bindshopStocks' data-hi='{{index}}'></input>
     </view>
     <view class='commodity-upload'>
       <view>图片上传</view>
@@ -115,16 +132,17 @@
       <view>描述</view>
       <input type='text' placeholder='请输入商品描述' confirm-type='done' value='{{item.product_desc}}' bindinput='bindshopDescribe' data-hi="{{index}}"></input>
     </view>
+    <view class='submit' bindtap='singleSubmit' data-index='{{index}}'>保存修改</view>
   </view>
 </view>
-<view class='add-list'>
+<!-- <view class='add-list'>
   <view bindtap='addShop'>添加商品</view>
-</view>
-<view class='group-fixed'>
+</view> -->
+<!-- <view class='group-fixed'>
   <view bindtap='Preservation' data-hi='1'>
     保存团购
   </view>
-</view>
+</view> -->
 <view class='msak' hidden='{{hiddenmodalput}}'>
   <view class='msak-no' bindtap='modalinput2'></view>
   <view class='msak-content'>

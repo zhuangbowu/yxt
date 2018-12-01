@@ -27,6 +27,7 @@ Page({
         "page_num": 5,
       },
       success:function(res){
+        console.log(res);
         if (res.data.code==1) {
           var data = res.data.data;
           var nnmm = data.length;
@@ -83,7 +84,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
+    // wx.showNavigationBarLoading() //在标题栏中显示加载
 
+    // //模拟加载
+    // setTimeout(function () {
+    //   // complete
+    //   wx.hideNavigationBarLoading() //完成停止加载
+    //   wx.stopPullDownRefresh() //停止下拉刷新
+    // }, 1500);
   },
 
   /**

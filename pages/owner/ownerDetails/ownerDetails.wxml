@@ -1,3 +1,4 @@
+<wxs module="filters" src="../../../utils/util.wxs"></wxs>
 <view class='group-header'>
   <view>
     <image src='{{ownerImage}}'></image>
@@ -24,9 +25,17 @@
   <view class='group-content-list' bindtap='navDetails' data-hi='{{index}}' wx:for='{{shop.product_list}}' wx:key>
     <image src='{{item.img_list[0].urlImg}}' mode='aspectFill' wx:if="{{item.img_list[0].types==1}}"></image>
     <video src='{{item.img_list[0].urlImg}}' mode='aspectFill' wx:if="{{item.img_list[0].types==2}}"></video>
+    <block wx:if="{{!item.product_img[0].urlImg}}">
+      <image></image>
+    </block>
     <view>
       <view>
-        <text wx:if="{{item.remain!=-1}}">[限量,剩余{{item.remain}}]</text>{{item.product_name}}</view>
+        <text wx:if="{{item.remain!=-1}}">[限量,剩余{{item.remain}}]</text> {{item.product_name}}{{item.attr}}
+        <block wx:if="{{item.attr.length>0}}">*</block>
+        <block wx:if="{{item.unit=='kg'}}">{{item.num*1000}}克</block>
+        <block wx:if="{{item.unit!=='kg'}}">{{filters.toFix(item.num)}}{{item.unit}}</block>
+        /份
+      </view>
       <!-- <view>{{item.product_desc}}</view> -->
       <view>佣金比列：{{item.commission}}%</view>
       <view style='color:red;'>￥{{item.group_price}}

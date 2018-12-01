@@ -1,3 +1,4 @@
+// const qiniuUploader = require("../../../utils/qiniuUploader");
 var app = getApp();
 // pages/ownerIncrease/ownerIncrease.js
 Page({
@@ -6,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    selsetData:new Array(),
+    selsetData: new Array(),
     objects: new Array(),
     shopregiment: 0,
     mainTitle: '',
@@ -15,6 +16,7 @@ Page({
     noticeNum: 0,
     mainDetail: false,
     mainDetailNum: 0,
+    mainDetailNums:0,
     modeDistribution: 1,
     modeDateTime: '',
     modeDate: '2016-09-01',
@@ -91,9 +93,9 @@ Page({
       data: {
         "header_id": app.globalData.owner.header_id
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.code == 1) {
-          thad.data.selsetData=res.data.data;
+          thad.data.selsetData = res.data.data;
         } else {
           wx.showToast({
             title: res.data.msg,
@@ -117,7 +119,7 @@ Page({
     myTime4 = myTime4 > 9 ? myTime4 : "0" + myTime4;
     var myTime2 = myTime3 + ':' + myTime4;
     this.setData({
-      myData: myDate2,
+      myData: myDate2, 
       modeDate: myDate2,
       myTime: myTime2,
       modeTime: myTime2
@@ -136,8 +138,8 @@ Page({
       for (var i = 0; i < objss.length; i++) {
         var obj = new Object();
         obj.id = 0,
-        obj.base_id = objss[i].base_id,
-        obj.product_name = objss[i].product_name;
+          obj.base_id = objss[i].base_id,
+          obj.product_name = objss[i].product_name;
         obj.group_limit = objss[i].group_limit;
         obj.self_limit = objss[i].self_limit;
         obj.market_price = objss[i].market_price;
@@ -192,7 +194,7 @@ Page({
   onShareAppMessage: function() {
 
   },
-  switch1Change: function(e) {
+  switch1Change: function (e) {
     this.data.mainDetail = e.detail.value;
     this.setData({
       mainDetail: this.data.mainDetail
@@ -204,6 +206,21 @@ Page({
     } else {
       this.setData({
         mainDetailNum: 1
+      })
+    }
+  },
+  switch1Change2:function(e){
+    this.data.mainDetail = e.detail.value;
+    this.setData({
+      mainDetail: this.data.mainDetail
+    })
+    if (this.data.mainDetail == false) {
+      this.setData({
+        mainDetailNums: 0
+      })
+    } else {
+      this.setData({
+        mainDetailNums: 1
       })
     }
   },
@@ -226,9 +243,9 @@ Page({
     //     duration: 2000
     //   });
     // } else if (deta > myTime1) {
-      this.setData({
-        modeTime: e.detail.value
-      });
+    this.setData({
+      modeTime: e.detail.value
+    });
     // } else if (deta == myTime1) {
     //   if (deta2 > myTime2) {
     //     this.setData({
@@ -256,6 +273,36 @@ Page({
             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
             success: function(res) {
               // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+
+              // 交给七牛上传
+              // qiniuUploader.upload(res.tempFilePaths[0], (res) => {
+              //   // 每个文件上传成功后,处理相关的事情
+              //   // 其中 info 是文件上传成功后，服务端返回的json，形式如
+              //   // {
+              //   //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+              //   //    "key": "gogopher.jpg"
+              //   //  }
+              //   // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
+              //   that.setData({
+              //     'imageURL': res.imageURL,
+              //   });
+              // }, (error) => {
+              //   console.log('error: ' + error);
+              // }, {
+              //   region: 'ECN',
+              //   domain: 'bzkdlkaf.bkt.clouddn.com', // // bucket 域名，下载资源时用到。如果设置，会在 success callback 的 res 参数加上可以直接使用的 ImageURL 字段。否则需要自己拼接
+              //   key: 'customFileName.jpg', // [非必须]自定义文件 key。如果不设置，默认为使用微信小程序 API 的临时文件名
+              //   // 以下方法三选一即可，优先级为：uptoken > uptokenURL > uptokenFunc
+              //   uptoken: '[yourTokenString]', // 由其他程序生成七牛 uptoken
+              //   uptokenURL: 'UpTokenURL.com/uptoken', // 从指定 url 通过 HTTP GET 获取 uptoken，返回的格式必须是 json 且包含 uptoken 字段，例如： {"uptoken": "[yourTokenString]"}
+              //   uptokenFunc: function() {
+              //     return '[yourTokenString]';
+              //   }
+              // }, (res) => {
+              //   console.log('上传进度', res.progress)
+              //   console.log('已经上传的数据长度', res.totalBytesSent)
+              //   console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+              // });
               wx.uploadFile({
                 url: app.globalData.networkAddress + '/wapp/Pub/uploadImg', //仅为示例，非真实的接口地址
                 filePath: res.tempFilePaths[0],
@@ -389,8 +436,8 @@ Page({
         if (res.tapIndex == 0) {
           var obj = new Object();
           obj.id = 0,
-          obj.base_id = 0,
-          obj.product_name = '';
+            obj.base_id = 0,
+            obj.product_name = '';
           obj.group_limit = 0;
           obj.self_limit = 0;
           obj.market_price = '';
@@ -822,6 +869,7 @@ Page({
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": "",
         "is_close": thad.mainDetailNum,
+        'is_sec': thad.mainDetailNums,
         "close_time": thad.close_time,
         "status": thad.shopregiment,
         "product_list": thad.product_list
@@ -842,6 +890,7 @@ Page({
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": thad.dispatch_info,
         "is_close": thad.mainDetailNum,
+        'is_sec': thad.mainDetailNums,
         "close_time": thad.close_time,
         "status": thad.shopregiment,
         "product_list": thad.product_list
@@ -907,6 +956,7 @@ Page({
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": "",
         "is_close": thad.mainDetailNum,
+        'is_sec': thad.mainDetailNums,
         "close_time": thad.close_time,
         "status": thad.shopregiment,
         "product_list": thad.product_list
@@ -927,6 +977,7 @@ Page({
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": thad.dispatch_info,
         "is_close": thad.mainDetailNum,
+        'is_sec': thad.mainDetailNums,
         "close_time": thad.close_time,
         "status": thad.shopregiment,
         "product_list": thad.product_list
@@ -1138,18 +1189,18 @@ Page({
     }
     return 1;
   },
-  selset: function (e) {
-    var thad=this;
+  selset: function(e) {
+    var thad = this;
     wx.showActionSheet({
       itemList: thad.data.selsetData,
-      success:res=>{
-        if(res.tapIndex==0){
+      success: res => {
+        if (res.tapIndex == 0) {
           var indexs = e.currentTarget.dataset.hi;
           var up = 'product_list[' + indexs + '].tag_name';
           thad.setData({
             [up]: thad.data.selsetData[res.tapIndex]
           })
-        }else{
+        } else {
           var indexs = e.currentTarget.dataset.hi;
           var up = 'product_list[' + indexs + '].tag_name';
           thad.setData({

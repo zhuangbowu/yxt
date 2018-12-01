@@ -144,6 +144,7 @@ Page({
                             thad.setData({
                               shopNa: data
                             })
+                            console.log(thad.data.shopNa);
                             if (thad.data.shopNa.dispatch_type == 1) {
                               wx.request({
                                 url: app.globalData.networkAddress + '/wapp/Leader/getLastAddress',
@@ -559,8 +560,10 @@ Page({
       shopregiment: indexNum
     });
     var thad = this.data;
+    console.log(thad.pick_address)
     var oObjj = this.Verification();
     if (oObjj == 1) {
+      console.log(1);
       var datas = new Object();
       datas = {
         "group_id": 0,
@@ -572,12 +575,14 @@ Page({
         "pay_type": thad.modepayment,
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": '',
+        'is_sec': thad.shopNa.is_sec,
         "pick_type": thad.shopNa.dispatch_type,
         "pick_address": thad.pick_address.id,
         "status": thad.shopregiment,
         "product_list": thad.shopNa.product_list
       }
     } else if (oObjj == 2) {
+      console.log(2);
       var datas = new Object();
       datas = {
         "group_id": 0,
@@ -589,8 +594,9 @@ Page({
         "pay_type": thad.modepayment,
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": thad.dispatch_info.id,
+        'is_sec': thad.shopNa.is_sec,
         "pick_type": thad.shopNa.dispatch_type,
-        "pick_address": thad.pick_address.id,
+        "pick_address": thad.pick_address.id.id,
         "status": thad.shopregiment,
         "product_list": thad.shopNa.product_list
       }
@@ -601,6 +607,7 @@ Page({
       })
       return;
     }
+    console.log(datas);
     wx.request({
       url: app.globalData.networkAddress + '/wapp/Leader/saveGroup',
       method: 'post',
@@ -627,6 +634,7 @@ Page({
     var thad = this.data;
     var oObjj = this.Verification();
     if (oObjj == 1) {
+      console.log(1);
       var datas = new Object();
       datas = {
         "group_id": 0,
@@ -638,12 +646,14 @@ Page({
         "pay_type": thad.modepayment,
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": '',
+        'is_sec': thad.shopNa.is_sec,
         "pick_type": thad.shopNa.dispatch_type,
         "pick_address": thad.pick_address.id,
         "status": thad.shopregiment,
         "product_list": thad.shopNa.product_list
       }
     } else if (oObjj == 2) {
+      console.log(2);
       var datas = new Object();
       datas = {
         "group_id": 0,
@@ -655,8 +665,9 @@ Page({
         "pay_type": thad.modepayment,
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": thad.dispatch_info.id,
+        'is_sec': thad.shopNa.is_sec,
         "pick_type": thad.shopNa.dispatch_type,
-        "pick_address": thad.pick_address.id,
+        "pick_address": thad.pick_address.id.id,
         "status": thad.shopregiment,
         "product_list": thad.shopNa.product_list
       }
@@ -667,6 +678,7 @@ Page({
       })
       return;
     }
+    console.log(datas);
     wx.request({
       url: app.globalData.networkAddress + '/wapp/Leader/saveGroup',
       method: 'post',

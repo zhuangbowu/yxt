@@ -16,6 +16,7 @@ Page({
     noticeNum: 0,
     mainDetail: false,
     mainDetailNum: 0,
+    mainDetailNums: 0,
     modeDistribution: 1,
     modeDateTime: '',
     modeDate: '2016-09-01',
@@ -110,6 +111,7 @@ Page({
                   modeDistribution: res.data.data.dispatch_type,
                   dispatch_info2: res.data.data.dispatch_info,
                   mainDetailNum: res.data.data.is_close,
+                  mainDetailNums: res.data.data.is_sec,
                   modeDateTime: res.data.data.close_time,
                   product_list: res.data.data.product_list
                 })
@@ -134,12 +136,15 @@ Page({
                     addressTextArr: thads
                   })
                   for (var i = 0; i < thad.data.addressText.length; i++) {
-                    if (thad.data.addressText[i].id == thads[i]) {
-                      var objj = 'addressText[' + i +'].checked';
-                      thad.setData({
-                        [objj]:true
-                      })
+                    for (var j = 0; j < thads.length;j++){
+                      if (thad.data.addressText[i].id == thads[j]) {
+                        var objj = 'addressText[' + i + '].checked';
+                        thad.setData({
+                          [objj]: true
+                        })
+                      }
                     }
+
                   }
                 }
                 for (var i = 0; i < thad.data.product_list.length; i++) {
@@ -284,6 +289,21 @@ Page({
     } else {
       this.setData({
         mainDetailNum: 1
+      })
+    }
+  },
+  switch1Change2: function (e) {
+    this.data.mainDetail = e.detail.value;
+    this.setData({
+      mainDetail: this.data.mainDetail
+    })
+    if (this.data.mainDetail == false) {
+      this.setData({
+        mainDetailNums: 0
+      })
+    } else {
+      this.setData({
+        mainDetailNums: 1
       })
     }
   },
@@ -853,8 +873,28 @@ Page({
         [up]: e.detail.value
       })
     }
+  }, 
+  bindshopStockord: function (e) {
+    if (isNaN(e.detail.value)) {
+      wx.showToast({
+        title: '格式输入错误请重新输入',
+        icon: 'none',
+        duration: 2000
+      })
+      var indexs = e.currentTarget.dataset.hi;
+      var up = 'product_list[' + indexs + '].ord';
+      this.setData({
+        [up]: 1
+      })
+    } else {
+      var indexs = e.currentTarget.dataset.hi;
+      var up = 'product_list[' + indexs + '].ord';
+      this.setData({
+        [up]: e.detail.value
+      })
+    }
   },
-  bindshopStock: function(e) {
+  bindshopStock: function (e) {
     if (isNaN(e.detail.value)) {
       wx.showToast({
         title: '格式输入错误请重新输入',
@@ -869,6 +909,26 @@ Page({
     } else {
       var indexs = e.currentTarget.dataset.hi;
       var up = 'product_list[' + indexs + '].remain';
+      this.setData({
+        [up]: e.detail.value
+      })
+    }
+  },
+  bindshopStocks: function (e) {
+    if (isNaN(e.detail.value)) {
+      wx.showToast({
+        title: '格式输入错误请重新输入',
+        icon: 'none',
+        duration: 2000
+      })
+      var indexs = e.currentTarget.dataset.hi;
+      var up = 'product_list[' + indexs + '].sell_num';
+      this.setData({
+        [up]: 1
+      })
+    } else {
+      var indexs = e.currentTarget.dataset.hi;
+      var up = 'product_list[' + indexs + '].sell_num';
       this.setData({
         [up]: e.detail.value
       })
@@ -898,6 +958,7 @@ Page({
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": "",
         "is_close": thad.mainDetailNum,
+        'is_sec': thad.mainDetailNums,
         "close_time": thad.close_time,
         "status": thad.shopregiment,
         "product_list": thad.product_list
@@ -918,6 +979,7 @@ Page({
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": addressTextArrs,
         "is_close": thad.mainDetailNum,
+        'is_sec': thad.mainDetailNums,
         "close_time": thad.close_time,
         "status": thad.shopregiment,
         "product_list": thad.product_list
@@ -929,6 +991,7 @@ Page({
       })
       return;
     }
+    console.log(objj);
     wx.showLoading({
       title: '加载中',
     })
@@ -979,6 +1042,7 @@ Page({
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": "",
         "is_close": thad.mainDetailNum,
+        'is_sec': thad.mainDetailNums,
         "close_time": thad.close_time,
         "status": thad.shopregiment,
         "product_list": thad.product_list
@@ -999,6 +1063,7 @@ Page({
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": addressTextArrs,
         "is_close": thad.mainDetailNum,
+        'is_sec': thad.mainDetailNums,
         "close_time": thad.close_time,
         "status": thad.shopregiment,
         "product_list": thad.product_list
@@ -1010,6 +1075,7 @@ Page({
       })
       return;
     }
+    console.log(objj);
     wx.showLoading({
       title: '加载中',
     })
@@ -1082,12 +1148,12 @@ Page({
   checkboxChange: function(e) {
     var thad = this;
     var indexs = e.detail.value;
-    thad.data.addressTextArr=[];
-    for (var i = 0; i < thad.data.addressText.length;i++){
-      thad.data.addressTextArr.push(thad.data.addressText[i].id)
-    }
+    // thad.data.addressTextArr=[];
+    // for (var i = 0; i < thad.data.addressText.length;i++){
+    //   thad.data.addressTextArr.push(thad.data.addressText[i].id)
+    // }
     thad.setData({
-      addressTextArr: thad.data.addressTextArr
+      addressTextArr: indexs
     })
   },
   Verification: function() {
@@ -1230,4 +1296,48 @@ Page({
       }
     })
   },
+  singleSubmit: function (e) {
+    wx.showLoading({});
+    let data = this.data.product_list[e.currentTarget.dataset.index];
+    console.log(data);
+    wx.request({
+      url: app.globalData.networkAddress + '/wapp/Header/saveProduct',
+      method:'post',
+      data:{
+        "header_id": app.globalData.owner.header_id,
+        "pid": data.id ,
+        "product": {
+          "product_name": data.product_name,
+          "header_group_id": data.header_group_id ,
+          "base_id": data.base_id,
+          "tag_name": data.tag_name,
+          "attr": data.attr,
+          "num": data.num,
+          "unit": data.unit,
+          "remain": data.remain,
+          "commission": data.commission,
+          "purchase_price": data.purchase_price,
+          "market_price": data.market_price,
+          "group_price": data.group_price,
+          "group_limit": data.group_limit,
+          "self_limit": data.self_limit,
+          "ord": data.ord,
+          "product_desc": data.product_desc
+        }
+      },
+      success:res=>{
+        wx.hideLoading();
+        if(res.data.code==1){
+          wx.showToast({
+            title: '修改成功',
+          })
+        }else{
+          wx.showToast({
+            title: res.data.msg,
+            icon:'none'
+          })
+        }
+      }
+    })
+  }
 })

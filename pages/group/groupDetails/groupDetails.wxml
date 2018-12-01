@@ -1,3 +1,4 @@
+<wxs module="filters" src="../../../utils/util.wxs"></wxs>
 <view class='group-header'>
   <view>
     <image src='{{userImage}}'></image>
@@ -37,16 +38,27 @@
   </view>
 </view> -->
 <view class='group-content'>
-    <view class='group-content-list' wx:for='{{shopListL.product_list}}' bindtap='navDetails' data-hi='{{index}}' wx:key>
-      <image src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==1}}"></image>
-      <video src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==2}}"></video>
-      <view>
-        <view class='docName'>{{item.product_name}}</view>
-        <!-- <view>{{item.product_desc}}</view> -->
-        <view style='color:red;'>￥{{item.group_price}} <text class='docc'>￥{{item.market_price}}</text></view>
-        <!-- <view class='docc'>￥{{item.market_price}}</view> -->
+  <view class='group-content-list' wx:for='{{shopListL.product_list}}' bindtap='navDetails' data-hi='{{index}}' wx:key>
+    <image src='{{item.product_img[0].urlImg}}?imageView2/2/w/200/' mode='aspectFill' wx:if="{{item.product_img[0].types==1}}"></image>
+    <video src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==2}}"></video>
+    <block wx:if="{{!item.product_img[0].urlImg}}">
+      <image></image>
+    </block>
+    <view>
+      <view class='docName'>
+        {{item.product_name}}{{item.attr}}
+        <block wx:if="{{item.attr.length>0}}">*</block>
+        <block wx:if="{{item.unit=='kg'}}">{{item.num*1000}}克</block>
+        <block wx:if="{{item.unit!=='kg'}}">{{filters.toFix(item.num)}}{{item.unit}}</block>
+        /份
       </view>
+      <!-- <view>{{item.product_desc}}</view> -->
+      <view style='color:red;'>￥{{item.group_price}}
+        <text class='docc'>￥{{item.market_price}}</text>
+      </view>
+      <!-- <view class='docc'>￥{{item.market_price}}</view> -->
     </view>
+  </view>
 </view>
 <view class='posts' bindtap='navDingdan2'>
   <image src='../../../img/userdingdan2.png'></image>

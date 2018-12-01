@@ -57,6 +57,7 @@ Page({
         "keywords": thad.data.navSeace
       },
       success: res => {
+        console.log(res);
         if (res.data.code == 1) {
           var nnmm = res.data.data.length;
           if (nnmm < 5) {

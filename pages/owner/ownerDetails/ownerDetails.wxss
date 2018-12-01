@@ -124,32 +124,32 @@ page{
   height: 220rpx;
   position: absolute;
 }
-.group-content-list>view:nth-child(2){
+.group-content-list>view{
   width: calc(100% - 240rpx);
   margin-left: 240rpx;
   height: 220rpx;
   position: relative;
 }
-.group-content-list>view:nth-child(2)>view{
+.group-content-list>view>view{
   font-size: 36rpx;
   color:#333;
   line-height: 36rpx;
   font-weight: bold;
 }
-.group-content-list>view:nth-child(2)>view:nth-child(1){
+.group-content-list>view>view:nth-child(1){
   margin-bottom: 20rpx;
   /* white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; */
 }
-.group-content-list>view:nth-child(2)>view:nth-child(1)>text{
+.group-content-list>view>view:nth-child(1)>text{
   color:red;
 }
-.group-content-list>view:nth-child(2)>view:nth-child(2){
+.group-content-list>view>view:nth-child(2){
   color:#999;
   font-size: 28rpx;
 }
-.group-content-list>view:nth-child(2)>view:nth-child(3){
+.group-content-list>view>view:nth-child(3){
   position: absolute;
   left: 0rpx;
   bottom: 0rpx;
@@ -158,14 +158,14 @@ page{
   font-weight: bold;
   font-style: italic;
 }
-.group-content-list>view:nth-child(2)>view:nth-child(4)>text{
+.group-content-list>view>view:nth-child(4)>text{
   font-size: 32rpx;
   color:#999;
   display: inline-block;
   margin-left: 20rpx;
   text-decoration:line-through;
 }
-.group-content-list>view:nth-child(2)>view:nth-child(2){
+.group-content-list>view>view:nth-child(2){
   width: 100%;
   text-overflow:ellipsis;
   overflow:hidden;
@@ -173,7 +173,7 @@ page{
   -webkit-line-clamp:2;
   -webkit-box-orient:vertical;
 }
-.group-content-list>view:nth-child(2)>view:nth-child(4){
+.group-content-list>view>view:nth-child(4){
   position: absolute;
   bottom: 0rpx;
   right: 20rpx;

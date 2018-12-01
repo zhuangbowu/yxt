@@ -13,6 +13,7 @@
     <view wx:if="{{item.pick_status==1}}">已取货</view>
   </label>
 </checkbox-group>
+<view style='height:100rpx;width:100%'></view>
 <view class='post' hidden='{{offs}}' bindtap='toConnectoff'>
   <view class='hasBluetooth' wx:for="{{devices}}" wx:key>
     <view>

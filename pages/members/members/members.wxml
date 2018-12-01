@@ -41,7 +41,7 @@
     </view>
     <view class='owner-cont-img'>
       <view wx:for="{{item.product_list}}" wx:for-item="productList" wx:key>
-        <image src='{{productList.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{productList.product_img[0].types==1}}"></image>
+        <image src='{{productList.product_img[0].urlImg}}?imageView2/2/w/200/' mode='aspectFill' wx:if="{{productList.product_img[0].types==1}}"></image>
         <video src='{{productList.product_img[0].urlImg}}#t=1'controls mode='aspectFill' wx:if="{{productList.product_img[0].types==2}}"></video>
         <text>￥{{productList.group_price}}</text>
       </view>

@@ -39,6 +39,7 @@ Page({
           thad.setData({
             shopData:res.data.data
           })
+          console.log(this.data.shopData);
         } else {
           wx.showToast({
             title: res.data.msg,

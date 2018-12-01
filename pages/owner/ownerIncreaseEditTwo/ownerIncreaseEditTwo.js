@@ -16,14 +16,11 @@ Page({
     noticeNum: 0,
     mainDetail: false,
     mainDetailNum: 0,
+    mainDetailNums: 0,
     modeDistribution: 1,
     modeDateTime: '',
-    modeDate: '2016-09-01',
-    modeTime: '12:01',
     myData: '',
     myTime: '',
-    close_time: '',
-    close_time2: '',
     addressSwitch: true,
     temporary1: '',
     temporary2: '',
@@ -100,6 +97,7 @@ Page({
               "group_id": options.id
             },
             success: function (res) {
+              console.log(res);
               if (res.data.code == 1) {
                 thad.setData({
                   group_id: options.id
@@ -110,9 +108,10 @@ Page({
                   modeDistribution: res.data.data.dispatch_type,
                   dispatch_info2: res.data.data.dispatch_info,
                   mainDetailNum: res.data.data.is_close,
+                  mainDetailNums:res.data.data.is_sec,
                   modeDateTime: res.data.data.close_time,
                   product_list: res.data.data.product_list
-                })
+                }) 
                 thad.data.modeDate = thad.data.modeDateTime.substring(0, 10);
                 thad.data.modeTime = thad.data.modeDateTime.substring(11, 15);
                 thad.setData({
@@ -130,15 +129,18 @@ Page({
                     ['items[1].checked']: true,
                   })
                   var thads = thad.data.dispatch_info2.split(',');
+                  console.log(thads)
                   thad.setData({
                     addressTextArr: thads
                   })
                   for (var i = 0; i < thad.data.addressText.length; i++) {
-                    if (thad.data.addressText[i].id == thads[i]) {
-                      var objj = 'addressText[' + i + '].checked';
-                      thad.setData({
-                        [objj]: true
-                      })
+                    for (var j = 0; j < thads.length;j++){
+                      if (thad.data.addressText[i].id == thads[j]) {
+                        var objj = 'addressText[' + i + '].checked';
+                        thad.setData({
+                          [objj]: true
+                        })
+                      }
                     }
                   }
                 }
@@ -193,20 +195,7 @@ Page({
    */
   onReady: function () {
     wx.hideShareMenu();
-    var date = new Date();
-    var myDate2 = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
-    var myTime3 = date.getHours();
-    myTime3 = myTime3 > 9 ? myTime3 : "0" + myTime3;
-    var myTime4 = date.getMinutes();
-    myTime4 = myTime4 > 9 ? myTime4 : "0" + myTime4;
-    var myTime2 = myTime3 + ':' + myTime4;
-    this.setData({
-      myData: myDate2,
-      modeDate: myDate2,
-      myTime: myTime2,
-      modeTime: myTime2
-    });
   },
 
   /**
@@ -291,41 +280,20 @@ Page({
       })
     }
   },
-  bindDateChange: function (e) {
+  switch1Change2: function (e) {
+    this.data.mainDetail = e.detail.value;
     this.setData({
-      modeDate: e.detail.value
+      mainDetail: this.data.mainDetail
     })
-  },
-  bindTimeChange: function (e) {
-    // var deta = Number(e.detail.value.substring(0, 2));
-    // var deta2 = Number(e.detail.value.slice(-2));
-    // var myTime = new Date();
-    // var myTime1 = myTime.getHours();
-    // var myTime2 = myTime.getMinutes();
-    // var myTime3 = myTime1 + ':' + myTime2;
-    // if (deta < myTime1) {
-    //   wx.showToast({
-    //     title: '时间选择错误',
-    //     icon: 'success',
-    //     duration: 2000
-    //   });
-    // } else if (deta > myTime1) {
+    if (this.data.mainDetail == false) {
       this.setData({
-        modeTime: e.detail.value
-      });
-    // } else if (deta == myTime1) {
-    //   if (deta2 > myTime2) {
-    //     this.setData({
-    //       modeTime: e.detail.value
-    //     });
-    //   } else {
-    //     wx.showToast({
-    //       title: '时间选择错误',
-    //       icon: 'success',
-    //       duration: 2000
-    //     })
-    //   }
-    // }
+        mainDetailNums: 0
+      })
+    } else {
+      this.setData({
+        mainDetailNums: 1
+      })
+    }
   },
   showImgChoose: function (event) {
     var indexs = event.currentTarget.dataset.hi;
@@ -858,6 +826,26 @@ Page({
       })
     }
   },
+  bindshopStockord: function (e) {
+    if (isNaN(e.detail.value)) {
+      wx.showToast({
+        title: '格式输入错误请重新输入',
+        icon: 'none',
+        duration: 2000
+      })
+      var indexs = e.currentTarget.dataset.hi;
+      var up = 'product_list[' + indexs + '].ord';
+      this.setData({
+        [up]: 1
+      })
+    } else {
+      var indexs = e.currentTarget.dataset.hi;
+      var up = 'product_list[' + indexs + '].ord';
+      this.setData({
+        [up]: e.detail.value
+      })
+    }
+  },
   bindshopStock: function (e) {
     if (isNaN(e.detail.value)) {
       wx.showToast({
@@ -878,12 +866,32 @@ Page({
       })
     }
   },
+  bindshopStocks: function (e) {
+    if (isNaN(e.detail.value)) {
+      wx.showToast({
+        title: '格式输入错误请重新输入',
+        icon: 'none',
+        duration: 2000
+      })
+      var indexs = e.currentTarget.dataset.hi;
+      var up = 'product_list[' + indexs + '].sell_num';
+      this.setData({
+        [up]: 1
+      })
+    } else {
+      var indexs = e.currentTarget.dataset.hi;
+      var up = 'product_list[' + indexs + '].sell_num';
+      this.setData({
+        [up]: e.detail.value
+      })
+    }
+  },
   Preservation: function (event) {
     var indexNum = Number(event.currentTarget.dataset.hi);
     this.setData({
       shopregiment: indexNum,
-      close_time: this.data.modeDate + ' ' + this.data.modeTime,
-      close_time2: this.data.myData + ' ' + this.data.myTime
+      // close_time: this.data.modeDate + ' ' + this.data.modeTime,
+      // close_time2: this.data.myData + ' ' + this.data.myTime
     });
     var thad = this.data;
     var oObjj = this.Verification();
@@ -902,7 +910,8 @@ Page({
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": "",
         "is_close": thad.mainDetailNum,
-        "close_time": thad.close_time,
+        'is_sec': thad.mainDetailNums,
+        "close_time": thad.modeDateTime,
         "status": thad.shopregiment,
         "product_list": thad.product_list
       }
@@ -922,7 +931,8 @@ Page({
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": addressTextArrs,
         "is_close": thad.mainDetailNum,
-        "close_time": thad.close_time,
+        'is_sec': thad.mainDetailNums,
+        "close_time": thad.modeDateTime,
         "status": thad.shopregiment,
         "product_list": thad.product_list
       }
@@ -933,6 +943,7 @@ Page({
       })
       return;
     }
+    console.log(objj)
     wx.showLoading({
       title: '加载中',
     })
@@ -963,8 +974,8 @@ Page({
     var indexNum = Number(event.currentTarget.dataset.hi);
     this.setData({
       shopregiment: indexNum,
-      close_time: this.data.modeDate + ' ' + this.data.modeTime,
-      close_time2: this.data.myData + ' ' + this.data.myTime
+      // close_time: this.data.modeDate + ' ' + this.data.modeTime,
+      // close_time2: this.data.myData + ' ' + this.data.myTime
     });
     var thad = this.data;
     var oObjj = this.Verification();
@@ -983,7 +994,8 @@ Page({
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": "",
         "is_close": thad.mainDetailNum,
-        "close_time": thad.close_time,
+        'is_sec': thad.mainDetailNums,
+        "close_time": thad.modeDateTime,
         "status": thad.shopregiment,
         "product_list": thad.product_list
       }
@@ -1003,7 +1015,8 @@ Page({
         "dispatch_type": thad.modeDistribution,
         "dispatch_info": addressTextArrs,
         "is_close": thad.mainDetailNum,
-        "close_time": thad.close_time,
+        'is_sec': thad.mainDetailNums,
+        "close_time": thad.modeDateTime,
         "status": thad.shopregiment,
         "product_list": thad.product_list
       }
@@ -1014,6 +1027,7 @@ Page({
       })
       return;
     }
+    console.log(objj)
     wx.showLoading({
       title: '加载中',
     })
@@ -1086,13 +1100,10 @@ Page({
   checkboxChange: function (e) {
     var thad = this;
     var indexs = e.detail.value;
-    thad.data.addressTextArr = [];
-    for (var i = 0; i < thad.data.addressText.length; i++) {
-      thad.data.addressTextArr.push(thad.data.addressText[i].id)
-    }
     thad.setData({
-      addressTextArr: thad.data.addressTextArr
+      addressTextArr: indexs
     })
+    console.log(thad.data.addressTextArr);
   },
   Verification: function () {
     var thad = this.data;
@@ -1108,9 +1119,6 @@ Page({
       if (thad.addressTextArr.length == 0) {
         return '请选择自提点';
       } else if (thad.addressTextArr.length !== 0) {
-        if (startTime <= endTime) {
-          return '请选择自动截团时间';
-        }
         for (var i = 0; i < thad.product_list.length; i++) {
           if (thad.product_list[i].product_name == '') {
             return '请输入商品名称';
@@ -1160,9 +1168,6 @@ Page({
         }
         return '2';
       }
-    }
-    if (startTime <= endTime) {
-      return '请选择自动截团时间';
     }
     for (var i = 0; i < thad.product_list.length; i++) {
       if (thad.product_list[i].product_name == '') {
@@ -1234,4 +1239,48 @@ Page({
       }
     })
   },
+  singleSubmit: function (e) {
+    wx.showLoading({});
+    let data = this.data.product_list[e.currentTarget.dataset.index];
+    console.log(data);
+    wx.request({
+      url: app.globalData.networkAddress + '/wapp/Header/saveProduct',
+      method: 'post',
+      data: {
+        "header_id": app.globalData.owner.header_id,
+        "pid": data.id,
+        "product": {
+          "product_name": data.product_name,
+          "header_group_id": data.header_group_id,
+          "base_id": data.base_id,
+          "tag_name": data.tag_name,
+          "attr": data.attr,
+          "num": data.num,
+          "unit": data.unit,
+          "remain": data.remain,
+          "commission": data.commission,
+          "purchase_price": data.purchase_price,
+          "market_price": data.market_price,
+          "group_price": data.group_price,
+          "group_limit": data.group_limit,
+          "self_limit": data.self_limit,
+          "ord": data.ord,
+          "product_desc": data.product_desc
+        }
+      },
+      success: res => {
+        wx.hideLoading();
+        if (res.data.code == 1) {
+          wx.showToast({
+            title: '修改成功',
+          })
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+      }
+    })
+  }
 })

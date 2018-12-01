@@ -16,7 +16,7 @@ Page({
     hasgroupInfo: false,
     groupInfo: {},
     canIUse: wx.canIUse,
-    searchData: ''
+    searchData: '',
   },
 
   /**
@@ -30,7 +30,6 @@ Page({
     })
     thad.navList();
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -129,6 +128,9 @@ Page({
     this.navList();
   },
   navList: function() {
+    wx.showLoading({
+      title: '加载中',
+    })
     var leader_id = app.globalData.information.id;
     var thad = this;
     wx.request({
@@ -152,7 +154,10 @@ Page({
           thad.setData({
             dataList: aaa
           })
+          console.log(thad.data.dataList);
+          wx.hideLoading();
         } else {
+          wx.hideLoading();
           wx.showToast({
             title: res.data.msg,
             icon: 'none'
@@ -180,7 +185,7 @@ Page({
             wx.hideLoading();
             wx.showToast({
               title: '暂无预热图片',
-              icon:'none'
+              icon: 'none'
             })
             return;
           }
@@ -195,6 +200,27 @@ Page({
                     wx.showToast({
                       title: '下载成功',
                     })
+                  }, 
+                  fail: function () {
+                    if (res.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+                      console.log("打开设置窗口");
+                      wx.openSetting({
+                        success(settingdata) {
+                          console.log(settingdata)
+                          if (settingdata.authSetting["scope.writePhotosAlbum"]) {
+                            console.log("获取权限成功，再次点击图片保存到相册")
+                          } else {
+                            console.log("获取权限失败")
+                          }
+                        }
+                      })
+                      thad.navShares();
+                    } else {
+                      wx.showToast({
+                        title: '下载失败',
+                      })
+                      thad.navShares();
+                    }
                   }
                 })
               }
@@ -208,7 +234,7 @@ Page({
           })
         }
       },
-      fail:res=>{
+      fail: res => {
         wx.hideLoading();
         wx.showToast({
           title: '暂无预热图片',

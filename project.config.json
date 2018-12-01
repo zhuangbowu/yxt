@@ -52,7 +52,7 @@
 					"id": 1,
 					"name": "群分享进入",
 					"pathName": "pages/members/membersDetails/membersDetails",
-					"query": "id=41",
+					"query": "id=320",
 					"scene": "1044",
 					"shareInfo": {
 						"groupName": "测试模拟群0",
@@ -61,17 +61,17 @@
 					}
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "好友分享进入",
 					"pathName": "pages/members/membersDetails/membersDetails",
-					"query": "id=41",
+					"query": "id=320",
 					"scene": "1007"
 				},
 				{
 					"id": 3,
 					"name": "军团分享进入",
 					"pathName": "pages/group/groupEdit/groupEdit",
-					"query": "group_id=31",
+					"query": "group_id=52",
 					"scene": "1044",
 					"shareInfo": {
 						"groupName": "测试模拟群0",

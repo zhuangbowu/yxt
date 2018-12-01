@@ -1,6 +1,6 @@
 <checkbox-group class="checkbox-group" bindchange="checkboxChange">
     <label class="checkbox" wx:for="{{shopList.product_list}}" wx:key>
-        <checkbox value="{{item.id}}" checked="{{item.checked}}"/><image src='{{item.product_img[0].urlImg}}'></image>{{item.product_name}}
+        <checkbox value="{{item.id}}" checked="{{item.checked}}"/><image src='{{item.product_img[0].urlImg}}'></image>{{item.product_name}}{{item.attr}}<block wx:if="{{item.attr.length>0}}">*</block>{{item.num}}{{item.unit}}/份
     </label>
 </checkbox-group>
 

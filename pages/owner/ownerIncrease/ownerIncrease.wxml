@@ -41,6 +41,14 @@
     <switch bindchange="switch1Change"/>
   </view>
 </view>
+<view class='end-group lncrease-bottom'>
+  <view>
+    是否为限时抢购
+  </view>
+  <view class="body-view">
+    <switch bindchange="switch1Change2"/>
+  </view>
+</view>
 <view class='group-time lncrease-bottom'>
   <view class='group-time-title'>
     自动截团时间
@@ -123,9 +131,9 @@
     </view>
   </view>
 </view>
-<view class='add-list'>
+<!-- <view class='add-list'>
   <view bindtap='addShop'>添加商品</view>
-</view>
+</view> -->
 <view class='group-fixed'>
   <view bindtap='Preservation' data-hi='0'>
     保存团购

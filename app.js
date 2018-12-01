@@ -24,7 +24,7 @@ App({
     var thad = this;
     setTimeout(function(){
       if (options.path == 'pages/members/membersDetails/membersDetails') {
-        // console.log(options);
+        console.log(options);
         if (options.scene == 1044) {
           wx.getShareInfo({
             shareTicket: options.shareTicket,

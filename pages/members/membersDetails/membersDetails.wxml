@@ -1,3 +1,4 @@
+<wxs module="filters" src="../../../utils/util.wxs"></wxs>
 <view class='group-header'>
   <view>
     <image src='{{shopData.avatar}}'></image>
@@ -16,36 +17,79 @@
 </view>
 <view class='group-nocite'>
   <view>
-    <image src='../../../img/bell.png'></image>
+    <image src='../../../img/bell.png' lazy-load='true'></image>
   </view>
   <view>公告：{{shopData.notice}}</view>
 </view>
 <view class='group-content'>
-  <view class='group-content-list' wx:for='{{shopData.product_list}}' bindtap='navDetails' data-hi='{{index}}' wx:key>
-    <image src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==1}}"></image>
-    <video src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==2}}"></video>
+  <view class='group-content-list' wx:for='{{shopData.product_list}}' wx:key>
+    <block wx:if="{{shopData.is_sec==1}}">
+      <image src='{{item.product_img[0].urlImg}}?imageView2/2/w/200/' lazy-load='true' mode='aspectFill' wx:if="{{item.product_img[0].types==1}}"></image>
+      <video src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==2}}"></video>
+    </block>
+    <block wx:else>
+      <image bindtap='navDetails' data-hi='{{index}}' src='{{item.product_img[0].urlImg}}?imageView2/2/w/200/' lazy-load='true' mode='aspectFill' wx:if="{{item.product_img[0].types==1}}"></image>
+      <video bindtap='navDetails' data-hi='{{index}}' src='{{item.product_img[0].urlImg}}' mode='aspectFill' wx:if="{{item.product_img[0].types==2}}"></video>
+    </block>
+    <block wx:if="{{!item.product_img[0].urlImg}}">
+      <image></image>
+    </block>
     <view>
-      <view>{{item.product_name}}</view>
+      <view>
+        {{item.product_name}}{{item.attr}}
+        <block wx:if="{{item.attr.length>0}}">*</block>
+        <block wx:if="{{item.unit=='kg'}}">{{item.num*1000}}克</block>
+        <block wx:if="{{item.unit!=='kg'}}">{{filters.toFix(item.num)}}{{item.unit}}</block>
+        /份
+      </view>
       <!-- <view>{{item.product_desc}}</view> -->
       <view style='color:red;'>￥{{item.group_price}}
         <text class='docc'> ￥{{item.market_price}} </text>
       </view>
-      <view class='group-modify' wx:if="{{shopData.status==1}}">
-        <image src='../../../img/WechatIMG20.png' catchtap='shopReduce' data-hi='{{index}}'></image>
-        <view>{{shopNum[index]}}</view>
-        <image src='../../../img/WechatIMG21.png' catchtap='shopPlus' data-hi='{{index}}'></image>
-      </view>
+      <block wx:if="{{shopData.is_sec!==1}}">
+        <view class='group-modify' wx:if="{{shopData.status==1}}">
+          <image src='../../../img/WechatIMG20.png' lazy-load='true' catchtap='shopReduce' data-hi='{{index}}'></image>
+          <view>{{shopNum[index]}}</view>
+          <image src='../../../img/WechatIMG21.png' lazy-load='true' catchtap='shopPlus' data-hi='{{index}}'></image>
+        </view>
+      </block>
     </view>
     <view class='posi' wx:if="{{item.remain==0}}">
       已抢光
     </view>
+    <block wx:if="{{shopData.is_sec==1}}">
+      <!-- <form bindsubmit='navMembersPurchases' data-hi='{{index}}' report-submit='true'> -->
+      <button wx:if="{{shopData.status==1}}" class='group-modifys' bindtap='navMembersPurchases' data-hi='{{index}}' form-type="submit" disabled="{{btnOf}}">
+        立即抢购
+      </button>
+      <!-- </form> -->
+    </block>
     <block wx:if="{{item.remain!==0}}">
-        <view class='posis' wx:if="{{item.tag_name!==''}}">
-          {{item.tag_name}}
-        </view>
+      <view class='posis' wx:if="{{item.tag_name!==''}}">
+        {{item.tag_name}}
+      </view>
     </block>
   </view>
 </view>
+<block wx:if="{{shopData.is_sec!==1}}">
+  <view class='group-fixed' wx:if='{{role_status==1}}'>
+    <view bindtap='navMembersTobe'>
+      我要当团长
+    </view>
+    <form bindsubmit="navMembersPurchase" report-submit='true'>
+      <button form-type="submit" disabled="{{oofs}}">
+        立即购买 (￥{{newNum}})
+      </button>
+    </form>
+  </view>
+  <view class='group-fixed1' wx:if='{{role_status==2}}'>
+    <form bindsubmit="navMembersPurchase" report-submit='true'>
+      <button form-type="submit" disabled="{{oofs}}">
+        立即购买 (￥{{newNum}})
+      </button>
+    </form>
+  </view>
+</block>
 <view class='group-cot' wx:if="{{shopData.sale_detail.is_show==1}}" wx:key>
   <view>
     <view>
@@ -82,7 +126,7 @@
         NO:{{(listData.order_sum)-index}}
       </view>
       <view>
-        <image src='{{item.avatar}}'></image>
+        <image lazy-load='true' src='{{item.avatar}}'></image>
       </view>
       <view>
         {{item.user_name}}
@@ -108,34 +152,17 @@
   </block>
 </view>
 <view class='post' bindtap='navDingdan'>
-  <image src='../../../img/userdingdan.png'></image>
-</view>
-<view class='group-fixed' wx:if='{{role_status==1}}'>
-  <view bindtap='navMembersTobe'>
-    我要当团长
-  </view>
-  <form bindsubmit="navMembersPurchase" report-submit='true'>
-    <button form-type="submit" disabled="{{oofs}}">
-      立即购买 (￥{{newNum}})
-    </button>
-  </form>
-</view>
-<view class='group-fixed1' wx:if='{{role_status==2}}'>
-  <form bindsubmit="navMembersPurchase" report-submit='true'>
-    <button form-type="submit" disabled="{{oofs}}">
-      立即购买 (￥{{newNum}})
-    </button>
-  </form>
+  <image lazy-load='true' src='../../../img/userdingdan.png'></image>
 </view>
 <view class='mesk' hidden='{{oof}}'>
   <view class='mesk-no' bindtap='tables'></view>
   <view class='mesk-content'>
-  <view class='mesk-title'>
-    授权提示
-  </view>
-  <view class='mesk-text'>
-  暂未获得授权是否进行授权
-  </view>
-  <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" lang="zh_CN">授权登录</button>
+    <view class='mesk-title'>
+      授权提示
+    </view>
+    <view class='mesk-text'>
+      暂未获得授权是否进行授权
+    </view>
+    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" lang="zh_CN">授权登录</button>
   </view>
 </view>

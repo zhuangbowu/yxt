@@ -7,7 +7,8 @@ Page({
    */
   data: {
     oof: true,
-    oofs:false,
+    oofs: false,
+    btnOf:false,
     page: 0,
     num: 10,
     pageLis: 0,
@@ -30,12 +31,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var group_id='';
+    var group_id = '';
     if (options.scene) {
       group_id = decodeURIComponent(options.scene);
-    }else{
+    } else {
       group_id = options.id;
     }
+    console.log(group_id)
     this.setData({
       group_id: group_id
     })
@@ -51,14 +53,13 @@ Page({
         var data = JSON.parse(res.rawData);
         var developer = (wx.getStorageSync('openId') || []);
         if (typeof developer != 'string' || developer == '' || developer == null || developer == '[]') {
-          wx.hideLoading();
           wx.showModal({
             title: '登录失败',
             content: '用户登录失败点击确定重新登录',
             success: res => {
               if (res.confirm) {
                 wx.redirectTo({
-                  url: '../membersDetails/membersDetails',
+                  url: '../membersDetails/membersDetails?id=' + group_id,
                 })
               }
               if (res.cancel) {
@@ -84,7 +85,9 @@ Page({
           success: function(res) {
             if (res.data.code == 1) {
               app.globalData.information = res.data.data;
-              wx.hideLoading();
+              thad.setData({
+                role_status: app.globalData.information.role_status
+              })
               wx.request({
                 url: app.globalData.networkAddress + '/wapp/User/getGroupDetail',
                 method: "post",
@@ -93,16 +96,17 @@ Page({
                   "group_id": thad.data.group_id
                 },
                 success: res => {
+                  console.log(res);
                   if (res.data.code == 1) {
                     thad.setData({
                       shopData: res.data.data
                     })
                     for (var i = 0; i < thad.data.shopData.product_list.length; i++) {
                       thad.data.shopNum[i] = 0;
-                      thad.setData({
-                        shopNum: thad.data.shopNum
-                      })
                     }
+                    thad.setData({
+                      shopNum: thad.data.shopNum
+                    })
                     wx.request({
                       url: app.globalData.networkAddress + '/wapp/User/getGroupRecord',
                       method: 'post',
@@ -113,6 +117,7 @@ Page({
                         "page_num": thad.data.num
                       },
                       success: res => {
+                        wx.hideLoading();
                         if (res.data.code == 1) {
                           var nnmm = res.data.data.record_list.length;
                           if (nnmm < 10) {
@@ -122,7 +127,6 @@ Page({
                           }
                           thad.setData({
                             listData: res.data.data,
-                            role_status: app.globalData.information.role_status
                           })
                           // var mumms = thad.data.listData.order_sum+1;
                           // for (var i = 0; i < thad.data.listData.record_list.length; i++) {
@@ -197,11 +201,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var thad = this;
     this.setData({
       oofs: false,
     })
     if (this.data.objects == 0) {
-      // console.log('返回数量为0，不渲染');
+      console.log('返回数量为0，不渲染');
     } else {
       var thad = this;
       var objss = thad.data.objects;
@@ -294,9 +299,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+    wx.showShareMenu({
+      withShareTicket: true
+    })
     return {
       title: this.data.shopData.title,
-      path: 'pages/members/membersDetails/membersDetails?id='+this.data.group_id
+      path: 'pages/members/membersDetails/membersDetails?id=' + this.data.group_id
     }
   },
   navDetails: function(e) {
@@ -391,59 +399,63 @@ Page({
       })
     } else {
       thad.setData({
-        oofs:true
+        oofs: true
       })
       wx.showLoading({
         title: '排队中，请稍后',
-        mask:true
+        mask: true
       })
       wx.request({
         url: app.globalData.networkAddress + '/wapp/User/checkOrder',
         method: 'post',
-        data: { 
+        data: {
           "user_id": app.globalData.information.id,
+          "header_group_id": thad.data.shopData.header_group_id,
+          "group_id": thad.data.group_id,
           "product_list": product_list
         },
         success: res => {
-          wx.hideLoading();
           if (res.data.code == 1) {
-            wx.navigateTo({
+            wx.redirectTo({
+              // wx.navigateTo({
               url: '../membersPurchase/membersPurchase?group_id=' + thad.data.group_id + '&num=' + thad.data.shopNum + '&order=' + res.data.data.order_no,
             })
-          } else if (res.statusCode!==200){
+            wx.hideLoading();
+          } else if (res.statusCode !== 200) {
             wx.showToast({
               title: '对不起、排队人数较多、请稍后',
               icon: 'none',
-              duration:3000,
-              mask:true
+              duration: 3000,
+              mask: true
             });
             thad.setData({
-              oofs: falsev
+              oofs: false
             })
+            wx.hideLoading();
           } else {
             wx.showModal({
-              title: '库存提示',
+              title: '提示',
               content: res.data.msg,
               showCancel: false
             })
             thad.setData({
               oofs: false
             })
+            wx.hideLoading();
           }
         },
-        fail:res=>{
+        fail: res => {
           wx.hideLoading();
-          console.log(1);
-          console.log(res);
           wx.showToast({
             title: '对不起、排队人数较多、请稍后',
-            icon:'none'
+            icon: 'none'
           });
           thad.setData({
             oofs: false
           })
+          wx.hideLoading();
         },
-        complete:res=>{
+        complete: res => {
           // console.log(res);
         }
       })
@@ -459,6 +471,102 @@ Page({
         }
       })
     }
+  },
+  navMembersPurchases: function(e) {
+    wx.showLoading({
+      title: '排队中，请稍后',
+      mask: true
+    })
+    this.setData({
+      btnOf: true,
+    })
+    var formId = e.detail.formId;
+    var indexss = e.currentTarget.dataset.hi;
+    var thad = this;
+    var Num = Number(thad.data.shopNum[indexss]);
+    Num=1;
+    thad.data.shopNum[indexss] = Num; 
+    var product_list = new Array();
+    for (var i = 0; i < thad.data.shopData.product_list.length; i++) {
+      thad.data.shopData.product_list[i].num = thad.data.shopNum[i];
+      if (thad.data.shopData.product_list[i].num > 0) {
+        product_list.push(thad.data.shopData.product_list[i]);
+      }
+    }
+    wx.request({
+      url: app.globalData.networkAddress + '/wapp/User/checkOrder',
+      method: 'post',
+      data: {
+        "user_id": app.globalData.information.id,
+        "group_id": thad.data.group_id,
+        "header_group_id": thad.data.shopData.header_group_id,
+        "product_list": product_list
+      },
+      success: res => {
+        if (res.data.code == 1) {
+          wx.redirectTo({
+            // wx.navigateTo({
+            url: '../membersPurchase/membersPurchase?group_id=' + thad.data.group_id + '&num=' + thad.data.shopNum + '&order=' + res.data.data.order_no,
+          })
+        } else if (res.statusCode !== 200) {
+          wx.hideLoading();
+          wx.showToast({
+            title: '对不起、排队人数较多、请稍后',
+            icon: 'none',
+            duration: 1000,
+            mask: true
+          });
+          thad.setData({
+            btnOf: false
+          })
+          for (var i = 0; i < thad.data.shopNum.length;i++){
+            thad.data.shopNum[i]=0;
+          }
+        } else {
+          wx.hideLoading();
+          wx.showModal({
+            title: '提示',
+            content: res.data.msg,
+            showCancel: false
+          })
+          for (var i = 0; i < thad.data.shopNum.length; i++) {
+            thad.data.shopNum[i] = 0;
+          }
+          thad.setData({
+            btnOf: false
+          })
+        }
+      },
+      fail: res => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '对不起、排队人数较多、请稍后',
+          icon: 'none',
+          duration: 1000,
+          mask: true
+        });
+        for (var i = 0; i < thad.data.shopNum.length; i++) {
+          thad.data.shopNum[i] = 0;
+        }
+        thad.setData({
+          btnOf: false
+        })
+      },
+      complete: res => {
+        // console.log(res);
+      }
+    })
+    wx.request({
+      url: app.globalData.networkAddress + '/wapp/User/setFormId',
+      method: 'post',
+      data: {
+        "user_id": app.globalData.information.id,
+        "form_id": formId,
+      },
+      success: res => {
+        // console.log(res);
+      }
+    })
   },
   navgengduo: function() {
     // var thad = this;
@@ -500,7 +608,7 @@ Page({
       url: '../membersOrder/membersOrder'
     })
   },
-  bindGetUserInfo: function (e) {
+  bindGetUserInfo: function(e) {
     var that = this;
     //此处授权得到userInfo
     var objj = e.detail.userInfo;
@@ -516,7 +624,7 @@ Page({
         province: objj.province,
         country: objj.country
       },
-      success: function (res) {
+      success: function(res) {
         app.globalData.information = res.data.data;
         that.setData({
           oof: true
@@ -528,7 +636,7 @@ Page({
     //最后，记得返回刚才的页面
     that.onLoad(options);
   },
-  tables: function () {
+  tables: function() {
     this.setData({
       oof: true
     })

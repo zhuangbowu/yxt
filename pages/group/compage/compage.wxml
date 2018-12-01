@@ -1,5 +1,5 @@
 <view class='descstop'>
-  {{shop.product_name}}
+  {{shop.product_name}}{{shop.attr}}<block wx:if="{{shop.attr.length>0}}">*</block>{{shop.num}}{{shop.unit}}/份
 </view>
 <swiper indicator-dots="{{indicatorDots}}" class='banner' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
   <block wx:for="{{shop.product_img}}" wx:key>

@@ -37,6 +37,7 @@ Page({
           thad.setData({
             shopList: res.data.data,
           })
+          console.log(thad.data.shopList);
         } else {
           wx.showToast({
             title: res.data.msg,
@@ -163,9 +164,11 @@ Page({
           thad.data.indexs = thad.data.indexs + 1;
           if (res.data.code == 1) {
             wx.hideLoading();
+            console.log(2);
             wx.downloadFile({
               url: res.data.data.imgUrl,
               success: function(res) {
+                console.log(res);
                 if (res.statusCode === 200) {
                   wx.playVoice({
                     filePath: res.tempFilePath
@@ -174,18 +177,37 @@ Page({
                 wx.saveImageToPhotosAlbum({
                   filePath: res.tempFilePath,
                   success: function(data) {
+                    console.log(data);
                     wx.showToast({
                       title: '保存成功',
                     })
                     thad.navShares();
                   },
                   fail:function(){
-                    wx.showToast({
-                      title: '保存失败',
-                    })
-                    thad.navShares();
+                    if (res.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+                      console.log("打开设置窗口");
+                      wx.openSetting({
+                        success(settingdata) {
+                          console.log(settingdata)
+                          if (settingdata.authSetting["scope.writePhotosAlbum"]) {
+                            console.log("获取权限成功，再次点击图片保存到相册")
+                          } else {
+                            console.log("获取权限失败")
+                          }
+                        }
+                      })
+                      thad.navShares();
+                    }else{
+                      wx.showToast({
+                        title: '保存失败',
+                      })
+                      thad.navShares();
+                    }
                   }
                 })
+              },
+              fail:function(error){
+                console.log(error);
               }
             })
           } else {

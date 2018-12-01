@@ -1,0 +1,11 @@
+var filters = {
+  toFix: function (value) {
+    if (value){
+      return parseInt(value)
+    }
+    return '';
+  }
+}
+module.exports = {
+  toFix: filters.toFix
+}
